@@ -13,6 +13,7 @@
     "@next/next/no-img-element": "off",
     "react/require-default-props": "off",
     "jsx-a11y/control-has-associated-label": "off",
-    "no-restricted-syntax": "off"
+    "no-restricted-syntax": "off",
+    "jsx-a11y/interactive-supports-focus": "off"
   }
 }

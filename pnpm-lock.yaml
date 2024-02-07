@@ -21,6 +21,7 @@ specifiers:
   postcss: ^8
   react: ^18
   react-dom: ^18
+  react-hook-form: ^7.50.1
   react-lottie-player: ^1.5.6
   recoil: ^0.7.7
   styled-components: ^6.1.8
@@ -36,6 +37,7 @@ dependencies:
   next: 14.1.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.50.1_react@18.2.0
   react-lottie-player: 1.5.6_react@18.2.0
   recoil: 0.7.7_biqbaboplfbrettd7655fr4n2y
   styled-components: 6.1.8_biqbaboplfbrettd7655fr4n2y
@@ -4757,6 +4759,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.50.1_react@18.2.0:
+    resolution: {integrity: sha512-3PCY82oE0WgeOgUtIr3nYNNtNvqtJ7BZjsbxh6TnYNbXButaD5WpjOmTjdxZfheuHKR68qfeFnEDVYoSSFPMTQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
