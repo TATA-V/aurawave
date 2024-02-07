@@ -42,7 +42,6 @@ function MusicCollection() {
         setLoded(true);
       })
       .catch((error) => {
-        console.log(error);
         setLoded(false);
       });
   }, []);

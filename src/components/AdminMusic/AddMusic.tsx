@@ -59,13 +59,13 @@ function AddMusic() {
           if (isAudio) {
             setProgress(progress);
           }
-          console.log(`Upload is ${progress}% done`);
+          // console.log(`Upload is ${progress}% done`);
           switch (snapshot.state) {
             case 'paused':
-              console.log('Upload is paused');
+              // console.log('Upload is paused');
               break;
             case 'running':
-              console.log('Upload is running');
+              // console.log('Upload is running');
               break;
             default:
               break;
@@ -123,7 +123,6 @@ function AddMusic() {
         const id = uuidv4(); // 새로운 uuid 생성
         setUuid(id);
       } catch (error) {
-        console.log(error);
         alert('음악 등록 중에 문제가 발생했습니다.');
       }
     }
