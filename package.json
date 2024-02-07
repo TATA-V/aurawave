@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "app": "pnpm --ignore-workspace-root-check",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
