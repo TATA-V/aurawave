@@ -1,3 +1,15 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true, 
+  "extends": ["next/core-web-vitals", "@tata-v/eslint-config-react"],
+  "parser": "@typescript-eslint/parser",
+  "ignorePatterns": ["node_modules/"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "camelcase": "off",
+    "react/no-danger": "off",
+    "consistent-return": "off",
+    "react/no-unstable-nested-components": "off",
+    "@next/next/no-async-client-component": "off",
+    "@next/next/no-img-element": "off"
+  }
 }
