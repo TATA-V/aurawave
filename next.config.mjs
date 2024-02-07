@@ -5,7 +5,6 @@ const nextConfig = {
   },
   images: {
     loader: 'imgix',
-    path: 'https://aurawave.vercel.app/',
     domains: ['firebasestorage.googleapis.com', 'lh3.googleusercontent.com'],
   },
   webpack(config) {
