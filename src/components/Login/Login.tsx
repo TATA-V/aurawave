@@ -53,7 +53,6 @@ function Login() {
       if (user) {
         const { displayName, photoURL, email } = user;
         const isAdmin = email === process.env.NEXT_PUBLIC_ADMIN_EMAIL; // admin 계정인지 확인
-        console.log(isAdmin);
         setUserState((data) => ({
           ...data,
           username: displayName,
@@ -65,7 +64,6 @@ function Login() {
       router.replace('/');
       setLoading(false);
     } catch (error) {
-      console.log('로그인 실패:', error);
       setLoading(false);
       alert('가입되지 않은 이메일이거나, 잘못된 비밀번호입니다.');
     }
