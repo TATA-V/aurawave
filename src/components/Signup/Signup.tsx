@@ -58,7 +58,6 @@ function Signup() {
       }
     } catch (error) {
       setLoading(false);
-      alert('회원가입 도중에 문제가 발생했습니다.');
     }
   });
 

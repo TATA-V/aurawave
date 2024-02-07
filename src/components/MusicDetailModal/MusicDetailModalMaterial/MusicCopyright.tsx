@@ -34,8 +34,8 @@ function MusicCopyright() {
       </button>
       {showCopyright && (
         <div className="copyright-actual">
-          {linkData.length === 0 && <p className="copyright-actual-txt">{copyright}</p>}
-          {linkData.length !== 0 && (
+          <p className="copyright-actual-txt" dangerouslySetInnerHTML={{ __html: copyright }} />
+          {linkData.length > 1 && (
             <p className="copyright-actual-txt">
               Music by{' '}
               <a href={linkData[0].href} target="_blank" rel="noreferrer">

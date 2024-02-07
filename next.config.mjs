@@ -3,6 +3,11 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    loader: 'imgix',
+    path: 'https://https://aurawave.vercel.app/',
+    domains: ['firebasestorage.googleapis.com', 'lh3.googleusercontent.com'],
+  },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
     config.module.rules.push(

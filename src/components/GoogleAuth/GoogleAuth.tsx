@@ -16,36 +16,32 @@ function GoogleAuth() {
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-      const user = auth.currentUser;
+    await signInWithPopup(auth, provider);
+    const user = auth.currentUser;
 
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        // 리코일에 유저정보 저장
-        if (auth.currentUser) {
-          setUserState((data) => ({
-            ...data,
-            username: displayName,
-            photoURL,
-            isLoggedIn: true,
-          }));
-        }
-        router.replace('/');
-
-        // firestore에 유저 정보 저장
-        if (uid !== null && displayName !== null && email !== null && photoURL !== null) {
-          const userData = {
-            uuid: uid,
-            email,
-            username: displayName,
-            photoURL,
-          };
-          setUserDoc({ uuid: uid, userData });
-        }
+    if (user) {
+      const { uid, email, displayName, photoURL } = user;
+      // 리코일에 유저정보 저장
+      if (auth.currentUser) {
+        setUserState((data) => ({
+          ...data,
+          username: displayName,
+          photoURL,
+          isLoggedIn: true,
+        }));
       }
-    } catch (error) {
-      alert('회원가입 도중에 문제가 발생했습니다.');
+      router.replace('/');
+
+      // firestore에 유저 정보 저장
+      if (uid !== null && displayName !== null && email !== null && photoURL !== null) {
+        const userData = {
+          uuid: uid,
+          email,
+          username: displayName,
+          photoURL,
+        };
+        setUserDoc({ uuid: uid, userData });
+      }
     }
   };
 
