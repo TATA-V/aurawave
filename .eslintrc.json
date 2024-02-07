@@ -10,6 +10,7 @@
     "consistent-return": "off",
     "react/no-unstable-nested-components": "off",
     "@next/next/no-async-client-component": "off",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "react/require-default-props": "off"
   }
 }

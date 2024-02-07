@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
 import RecoilProvider from 'src/components/provider/RecoilProvider';
+import './globals.css';
+import './iconfonts.css';
+import StyledComponentsRegistry from 'src/components/provider/StyledComponentsRegistry';
+import DefaultLayout from 'src/components/Layout/DefaultLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,9 +20,15 @@ export default function RootLayout({
 }>) {
   return (
     <RecoilProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
+      <StyledComponentsRegistry>
+        <html lang="en">
+          <body className={inter.className}>
+            <DefaultLayout>
+              {children}
+            </DefaultLayout>
+          </body>
+        </html>
+      </StyledComponentsRegistry>
     </RecoilProvider>
   );
 }
