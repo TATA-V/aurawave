@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --white-100: #fff;
+  --black-900: #000;
+
+  --gray-30: #f9f9f9;
+  --gray-50: #f0f3f4;
+  --gray-60: #eef2f3;
+  --gray-70: #dde2e4;
+  --gray-100: #e5e5e5;
+  --gray-150: #dadada;
+  --gray-200: #c0c1c1;
+  --gray-250: #b6babc;
+  --gray-300: #879296;
+  --gray-400: #939da0;
+  --gray-500: #8c9598;
+  --gray-800: #62686a;
+
+  --blue-gray-100: #f7f7fa;
+  --blue-gray-200: #e0e5e7;
+  --blue-gray-300: #cdd8dc;
+  --blue-gray-400: #c0c9cc;
+  --blue-gray-500: #b1b7b9;
+  --blue-gray-550: #98a3a6;
+  --blue-gray-600: #939da1;
+  --blue-gray-650: #8b9a9e;
+  --blue-gray-700: #7c8487;
+  --blue-gray-750: #556265;
+  --blue-gray-800: #535d60;
+
+  --sky-blue-300: #c2ced2;
+  --sky-blue-400: #3caab8;
+  --sky-blue-450: #2f99a7;
+  --sky-blue-500: #26a0b0;
+  --sky-blue-600: #71aaaa;
+
+  --blue-500: #4b99c5;
+  --blue-600: #438ea5;
+
+  --pink-100: #f8e8e8;
+  --pink-500: #e26161;
+
+  --red-500: #f55a5a;
+  --red-600: #e62c2c;
+
+  --dark-green-700: #487574;
+
+  --fl-blue-500: #36d6eb;
+
+  --dark-blue-500: #657d85;
+  --dark-blue-600: #586164;
+  --dark-blue-650: #374245;
+  --dark-blue-700: #37474b;
+  --dark-blue-800: #283437;
+  --dark-blue-900: #101d21;
+}

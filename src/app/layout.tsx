@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import RecoilProvider from 'src/components/provider/RecoilProvider';
 import './globals.css';
 import './iconfonts.css';
+import './reset.css';
 import StyledComponentsRegistry from 'src/components/provider/StyledComponentsRegistry';
 import DefaultLayout from 'src/components/Layout/DefaultLayout';
 
