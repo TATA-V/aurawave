@@ -11,6 +11,8 @@
     "react/no-unstable-nested-components": "off",
     "@next/next/no-async-client-component": "off",
     "@next/next/no-img-element": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "no-restricted-syntax": "off"
   }
 }

@@ -24,7 +24,6 @@ function NewMusic() {
         setLoaded(true);
       })
       .catch((error) => {
-        console.log(error);
         setLoaded(false);
       });
   }, []);
