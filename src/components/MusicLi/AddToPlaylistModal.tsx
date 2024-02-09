@@ -2,13 +2,15 @@
 
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { MusicData } from 'src/types/musicTypes';
 import useCloseModal from 'src/hook/useCloseModal';
 import currentTrackState from 'src/atom/currentTrackState';
 import { motion } from 'framer-motion';
+import { getUserInfo } from 'src/firebase/user';
+import userState from 'src/atom/userState';
 
 /**
  * 상위에서 쓰이고 있는 useState
@@ -47,11 +49,17 @@ interface Props {
 }
 function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlaylistModal }: Props) {
   const [soundtrackPage, setSoundtrackPage] = useState(false);
+  const [playlist, setPlaylist] = useState();
   const [currentMusicAndTrack, setCurrentMusicAndTrack] = useRecoilState(currentTrackState); // 리코일
+  // const {  } = useRecoilValue(userState);
   const { playMode, showMusicDetail, currentMusic, currentTrack, suffleTrack } = currentMusicAndTrack;
 
   const modalRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    // getUserInfo()
+  }, []);
 
   // 현재 페이지가 soundtrack이라면
   useEffect(() => {

@@ -41,7 +41,7 @@ export const AudioControlBarBlock = styled.div<HasBottomTab>`
   bottom: ${({ $hasBottomTab }) => ($hasBottomTab ? '55px' : '0')};
   z-index: 1;
 
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 539px) {
     bottom: ${({ $hasBottomTab }) => ($hasBottomTab ? '50px' : '0')};
   }
 `;

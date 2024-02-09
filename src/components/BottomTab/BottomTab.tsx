@@ -28,7 +28,7 @@ function BottomTab() {
   return (
     <FadeInMotion>
       <BottomTabNav
-        className="h-[50px] md:h-[55px] px-[45px] min-w540:px-[60px] py-[14px]"
+        className="h-[50px] min-w540:h-[55px] px-[45px] min-w540:px-[60px] py-[14px]"
         $isShow={isShow}
       >
         <div className="svg-box">

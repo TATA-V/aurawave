@@ -111,17 +111,18 @@ export const GrayLineTxtBox = styled.div`
   }
 
   .gray-line-signup {
-    width: 97px;
+    width: 100%;
     height: 1px;
     background-color: var(--gray-100);
   }
 
   .sns-txt {
-    width: 100%;
+    min-width: 120px;
     color: var(--blue-gray-700);
     font-size: 0.75rem;
     font-weight: 400;
     display: flex;
     justify-content: center;
+    margin: 0 20px 0 20px;
   }
 `;
