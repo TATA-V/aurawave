@@ -40,19 +40,23 @@ function MyPlaylistSection() {
 
           <Ul>
             {myPlaylist?.slice(0, 3).map((el) => (
-              <MyPlaylistLi className="li" key={el.uuid}>
-                <Image
-                  className="image"
-                  width={68}
-                  height={58}
-                  src={String(el.playlistImageUri)}
-                  alt="playlist image"
-                />
-                <div className="details">
-                  <span className="title">{el.playlistTitle}</span>
-                  <span className="description">{el.description}</span>
+              <MyPlaylistLi key={el.uuid} className="li w-full">
+                <div className="flex items-center">
+                  <Image
+                    className="image"
+                    width={68}
+                    height={58}
+                    src={String(el.playlistImageUri)}
+                    alt="playlist image"
+                  />
+                  <div className="details">
+                    <span className="title">{el.playlistTitle}</span>
+                    <span className="description">{el.description}</span>
+                  </div>
                 </div>
-                <i className="i-down" />
+                <div className="i-down-box">
+                  <i className="i-down" />
+                </div>
               </MyPlaylistLi>
             ))}
           </Ul>
@@ -65,7 +69,7 @@ function MyPlaylistSection() {
 export default MyPlaylistSection;
 
 const SectionBlock = styled.section`
-  padding: 62px 18px 0 21px;
+  padding: 62px 20px 0 20px;
 `;
 
 const TopBox = styled.div`
@@ -94,9 +98,12 @@ const MyPlaylistLi = styled.li`
   height: 58px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 17px;
 
   .image {
+    width: 66px;
+    height: 58px;
     object-fit: cover;
     border: 1px solid var(--gray-100);
     border-radius: 8px;
@@ -123,17 +130,19 @@ const MyPlaylistLi = styled.li`
     padding-top: 8px;
   }
 
-  .i-down {
+  .i-down-box {
     font-size: 9px;
     transform: rotate(-90deg);
 
-    &::before {
+    .i-down::before {
       color: var(--blue-gray-650);
     }
   }
 `;
 
 const Ul = styled.ul`
+  display: flex;
+  justify-content: space-between;
   li:last-child {
     margin-bottom: 0;
   }

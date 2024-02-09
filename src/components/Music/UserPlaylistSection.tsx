@@ -47,21 +47,25 @@ function UserPlaylistSection() {
         <Ul>
           {playlistData.slice(0, 5).map((el) => (
             <UserPlaylistLi key={el.uuid}>
-              <Image
-                className="image"
-                width={116}
-                height={99}
-                src={String(el.playlistImageUri)}
-                alt="playlist image"
-              />
-              <div className="details">
-                <p className="title-desc">
-                  <span className="title">{el.playlistTitle}</span>
-                  <span className="description">{el.description}</span>
-                </p>
-                <span className="username">{el.username}</span>
+              <div className="flex items-center">
+                <Image
+                  className="image"
+                  width={116}
+                  height={99}
+                  src={String(el.playlistImageUri)}
+                  alt="playlist image"
+                />
+                <div className="details">
+                  <p className="title-desc">
+                    <span className="title">{el.playlistTitle}</span>
+                    <span className="description">{el.description}</span>
+                  </p>
+                  <span className="username">{el.username}</span>
+                </div>
               </div>
-              <i className="i-down" />
+              <div className="i-down-box">
+                <i className="i-down" />
+              </div>
             </UserPlaylistLi>
           ))}
         </Ul>
@@ -73,7 +77,7 @@ function UserPlaylistSection() {
 export default UserPlaylistSection;
 
 const SectionBlock = styled.section`
-  padding: 57px 21px 0 21px;
+  padding: 57px 20px 0 20px;
 `;
 
 const TopBox = styled.div`
@@ -101,8 +105,11 @@ const UserPlaylistLi = styled.li`
   border-bottom: 1px solid var(--gray-60);
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   .image {
+    width: 116px;
+    height: 99px;
     border: 1px solid var(--gray-100);
     border-radius: 15px;
     object-fit: cover;
@@ -142,11 +149,11 @@ const UserPlaylistLi = styled.li`
     font-weight: 400;
   }
 
-  .i-down {
+  .i-down-box {
     font-size: 11px;
     transform: rotate(-90deg);
 
-    &::before {
+    .i-down::before {
       color: var(--blue-gray-650);
     }
   }

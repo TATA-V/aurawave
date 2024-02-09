@@ -12,6 +12,7 @@ import GoBackHead from 'src/components/GoBackHead/GoBackHead';
 import MusicLi from 'src/components/MusicLi/MusicLi';
 import LoadingLottie from 'src/components/Lottie/LoadingLottie';
 import SkelMusicLi30 from 'src/components/Skeleton/SkelMusicLi30';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 function MusicCollection() {
   const [loaded, setLoded] = useState(false);
@@ -80,11 +81,13 @@ function MusicCollection() {
         {!loaded && <SkelMusicLi30 />}
 
         {/* 모든 음악 */}
-        <MusicUl>
+        <ul>
           {(searchText.trim() !== '' ? findSearchData : data).map((el) => (
-            <MusicLi key={el.uuid} el={el} />
+            <FadeInMotion key={el.uuid}>
+              <MusicLi el={el} />
+            </FadeInMotion>
           ))}
-        </MusicUl>
+        </ul>
       </MusicCollectionBlock>
       {loading && <LoadingLottie />}
       <End ref={endRef} />
@@ -95,9 +98,5 @@ function MusicCollection() {
 export default MusicCollection;
 
 const MusicCollectionBlock = styled.div`
-  padding-top: 61px;
-`;
-
-const MusicUl = styled.ul`
-  padding-left: 21px;
+  padding: 61px 20px 0 20px;
 `;

@@ -9,6 +9,7 @@ import { End } from 'src/styled/frequentlyStyled';
 import { MusicData } from 'src/types/musicTypes';
 import { getAllMusicDocs } from 'src/firebase/music';
 import useInfiniteScroll from 'src/hook/useInfiniteScroll';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import SkelMusicLi8 from 'src/components/Skeleton/SkelMusicLi8';
 
 function RecommendMusic() {
@@ -49,7 +50,7 @@ function RecommendMusic() {
   }, []);
 
   return (
-    <RecommendMusicSection>
+    <section className="px-[20px] pb-[70px]">
       <TopBox>
         <h2 className="section-heading">추천 음악</h2>
         <Link href="/music-collection" className="view-all-btn">
@@ -57,26 +58,24 @@ function RecommendMusic() {
         </Link>
       </TopBox>
       {/* 스켈레톤 => SkeletonRecommendMusic 컴포넌트 */}
-      {!loaded && <SkelMusicLi8 />}
+      {!loaded && <FadeInMotion><SkelMusicLi8 /></FadeInMotion>}
 
       <ul>
         {/* 음악 => MusicLi 컴포넌트 */}
         {data.map((el) => (
-          <MusicLi key={el.uuid} el={el} />
+          <FadeInMotion key={el.uuid}>
+            <MusicLi el={el} />
+          </FadeInMotion>
         ))}
       </ul>
 
       {loading && <LoadingLottie />}
       <End ref={endRef} />
-    </RecommendMusicSection>
+    </section>
   );
 }
 
 export default RecommendMusic;
-
-const RecommendMusicSection = styled.section`
-  padding: 0 0 50px 21px;
-`;
 
 const TopBox = styled.div`
   padding-bottom: 14px;
@@ -94,6 +93,5 @@ const TopBox = styled.div`
     font-size: 0.875rem;
     font-weight: 500;
     text-decoration: none;
-    padding-right: 18px;
   }
 `;

@@ -6,11 +6,12 @@ import * as S from 'src/styled/searchStyled';
 import { getAllMusicDocs } from 'src/firebase/music';
 import { MusicData } from 'src/types/musicTypes';
 import useInfiniteScroll from 'src/hook/useInfiniteScroll';
-import AddMusicAWMusicLi from './AddMusicMusicLi';
-import PlaylistGoBackHead from '../GoBackHead/PlaylistGoBackHead';
 
-import LoadingLottie from '../Lottie/LoadingLottie';
-import SkelMusicLi30 from '../Skeleton/SkelMusicLi30';
+import LoadingLottie from 'src/components/Lottie/LoadingLottie';
+import SkelMusicLi30 from 'src/components/Skeleton/SkelMusicLi30';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
+import PlaylistGoBackHead from 'src/components/GoBackHead/PlaylistGoBackHead';
+import AddMusicAWMusicLi from 'src/components/AddMusicToPlaylist/AddMusicMusicLi';
 
 function AddMusicToPlaylist() {
   const [loaded, setLoded] = useState(false);
@@ -78,11 +79,13 @@ function AddMusicToPlaylist() {
         {!loaded && <SkelMusicLi30 />}
 
         {/* 모든 음악들 */}
-        <MusicUl>
+        <ul>
           {(searchText.trim() !== '' ? findSearchData : data).map((el) => (
-            <AddMusicAWMusicLi key={el.uuid} el={el} />
+            <FadeInMotion key={el.uuid}>
+              <AddMusicAWMusicLi el={el} />
+            </FadeInMotion>
           ))}
-        </MusicUl>
+        </ul>
         {loading && <LoadingLottie />}
       </AddMusicPlaylistblock>
     </>
@@ -92,9 +95,5 @@ function AddMusicToPlaylist() {
 export default AddMusicToPlaylist;
 
 const AddMusicPlaylistblock = styled.div`
-  padding-top: 61px;
-`;
-
-const MusicUl = styled.ul`
-  padding: 0 21px 0 21px;
+  padding: 61px 20px 70px 20px;
 `;

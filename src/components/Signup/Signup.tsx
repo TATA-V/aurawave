@@ -210,9 +210,9 @@ function Signup() {
         {/* 구글 계정으로 로그인 */}
         <S.GoogleBox>
           <S.GrayLineTxtBox>
-            <div className="gray-line-signup" />
+            <hr className="gray-line-signup" />
             <p className="sns-txt">SNS 계정으로 회원가입</p>
-            <div className="gray-line-signup" />
+            <hr className="gray-line-signup" />
           </S.GrayLineTxtBox>
 
           {/* 구글로 signin => GoogleAuth 컴포넌트 */}

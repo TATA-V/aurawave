@@ -7,6 +7,7 @@ import { MusicData } from 'src/types/musicTypes';
 import useMusicPlay from 'src/hook/useMusicPlay';
 import userState from 'src/atom/userState';
 import * as S from 'src/styled/musicLiStyled';
+import { motion } from 'framer-motion';
 import MoreSvg from '../../../public/more.svg';
 
 import AddToPlaylistModal from './AddToPlaylistModal';
@@ -32,8 +33,8 @@ function MusicLi({ el }: Props) {
           <Image
             onClick={() => handleMusicPlay(el)}
             className="image"
-            width={49}
-            height={49}
+            width={50}
+            height={50}
             src={imageUri}
             alt="recommended music"
           />
@@ -51,10 +52,15 @@ function MusicLi({ el }: Props) {
         {/* 더보기 */}
         {isLoggedIn && (
           <S.MoreBox>
-            <button aria-label="더보기" onClick={() => setShowAddToPlaylistModal(true)}>
+            <motion.button
+              whileTap={{ scale: 0.90 }}
+              aria-label="더보기"
+              onClick={() => setShowAddToPlaylistModal(!showAddToPlaylistModal)}
+            >
               <MoreSvg width={19} height={4} fill="#62686A" />
-            </button>
+            </motion.button>
             {/* 플레이리스트에 음악 추가하는 모달 => AddToPlaylistModal 컴포넌트 */}
+            {showAddToPlaylistModal}
             {showAddToPlaylistModal && (
               <AddToPlaylistModal
                 el={el}

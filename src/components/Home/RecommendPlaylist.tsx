@@ -8,10 +8,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { AWPlaylistData } from 'src/types/playlistTypes';
 import { getAwPlaylistDocs } from 'src/firebase/playlist';
 import currentTrackState from 'src/atom/currentTrackState';
+import SkelPlaylist from 'src/components/Skeleton/SkelPlaylist';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import PlayBlue from '../../../public/playBlueSvg.svg';
 import 'swiper/css';
-
-import SkelPlaylist from '../Skeleton/SkelPlaylist';
 
 function RecommendPlaylist() {
   const [loaded, setLoaded] = useState(false);
@@ -21,7 +21,7 @@ function RecommendPlaylist() {
   const resetCurrentTrackState = useResetRecoilState(currentTrackState);
 
   useEffect(() => {
-    getAwPlaylistDocs({ limitNum: 3, orderByField: 'timestamp', orderByDirection: 'desc' })
+    getAwPlaylistDocs({ limitNum: 3, orderByField: 'timestamp', orderByDirection: 'asc' })
       .then((data) => {
         setPlaylistData(data);
         setLoaded(true);
@@ -51,36 +51,54 @@ function RecommendPlaylist() {
       <h2 className="section-heading">추천 플레이리스트</h2>
       {/* 스켈레톤 => SkelPlaylist 컴포넌트 */}
       {!loaded && (
-        <SkelPlaylistBlock>
-          <SkelPlaylist />
-          <SkelPlaylist />
-        </SkelPlaylistBlock>
+        <FadeInMotion>
+          <SkelPlaylistBlock>
+            <SkelPlaylist />
+            <SkelPlaylist />
+            <SkelPlaylist />
+          </SkelPlaylistBlock>
+        </FadeInMotion>
       )}
 
       {loaded && (
-        <StyledSwiper spaceBetween={22} slidesPerView={1.7}>
+        <StyledSwiper
+          spaceBetween={22}
+          slidesPerView={1.7}
+          breakpoints={{
+            539: {
+              slidesPerView: 1.7,
+            },
+            540: {
+              slidesPerView: 2.3,
+            },
+          }}
+        >
           {playlistData.map((el, idx) => (
             <SwiperSlide key={el.uuid}>
-              <PlaylistItem>
-                <div className="playlist-content">
-                  <div className="image-box">
-                    <Image
-                      className="image"
-                      width={186}
-                      height={158}
-                      src={String(el.playlistImageUri)}
-                      alt="recommended playlist"
-                    />
-                  </div>
-                  <div className="details">
-                    <div className="des">
-                      <p className="title">{el.playlistTitle}</p>
-                      <p className="description">{el.description}</p>
+              <FadeInMotion>
+                <PlaylistItem>
+                  <div className="playlist-content">
+                    <div className="image-box">
+                      <Image
+                        className="image"
+                        width={186}
+                        height={158}
+                        src={String(el.playlistImageUri)}
+                        alt="recommended playlist"
+                      />
                     </div>
-                    <PlayBlue onClick={() => handlePlay(idx)} className="paly-blue" />
+                    <div className="details">
+                      <div className="des">
+                        <p className="title truncate">{el.playlistTitle}</p>
+                        <p className="description truncate">{el.description}</p>
+                      </div>
+                      <div>
+                        <PlayBlue onClick={() => handlePlay(idx)} className="play-blue" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </PlaylistItem>
+                </PlaylistItem>
+              </FadeInMotion>
             </SwiperSlide>
           ))}
         </StyledSwiper>
@@ -92,10 +110,10 @@ function RecommendPlaylist() {
 export default RecommendPlaylist;
 
 const SkelPlaylistBlock = styled.div`
-  width: 439px;
-  padding-left: 21px;
+  width: 100%;
+  padding-left: 20px;
   display: flex;
-  justify-content: space-between;
+  gap: 18px;
 `;
 
 const PlaylistSection = styled.section`
@@ -111,18 +129,18 @@ const PlaylistSection = styled.section`
 
 const StyledSwiper = styled(Swiper)`
   margin-top: 14px;
-  padding: 0 21px 0 21px;
+  padding: 0 20px 0 20px;
   height: 259px;
 `;
 
 const PlaylistItem = styled.div`
+  width: 100%;
   .playlist-content {
-    width: 200px;
+    width: 100%;
     height: 243px;
     border: 1px solid var(--gray-100);
     border-radius: 18px;
     padding: 7px 7px 0 7px;
-    box-shadow: 0 2px 8px rgba(16, 29, 33, 0.1);
     background-color: var(--white-100);
 
     display: flex;
@@ -131,7 +149,7 @@ const PlaylistItem = styled.div`
   }
 
   .image-box {
-    width: 186px;
+    width: 100%;
     height: 158px;
     position: relative;
 
@@ -149,21 +167,24 @@ const PlaylistItem = styled.div`
   }
 
   .details {
-    width: 168px;
+    width: 100%;
     height: 78px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 16px 0 16px;
+    padding: 0 7px 0 7px;
   }
 
   .image {
+    width: 100%;
+    height: 158px;
+    object-fit: cover;
     border-radius: 15px;
     cursor: pointer;
   }
 
   .des {
-    width: 160px;
+    width: 100%;
     height: 36px;
     display: flex;
     justify-content: space-between;

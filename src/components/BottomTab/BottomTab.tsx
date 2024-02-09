@@ -5,13 +5,13 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
+import { motion } from 'framer-motion';
 import currentTrackState from 'src/atom/currentTrackState';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import MoonBlueSvg from '../../../public/moonBlueSvg.svg';
 import MoonGraySvg from '../../../public/moonGraySvg.svg';
 import MusicBlueSvg from '../../../public/musicBlueSvg.svg';
 import MusicGraySvg from '../../../public/musicGraySvg.svg';
-import ChatBlueSvg from '../../../public/chatBlueSvg.svg';
-import ChatGraySvg from '../../../public/chatGraySvg.svg';
 import PeopleBlueSvg from '../../../public/peopleBlueSvg.svg';
 import PeopleGraySvg from '../../../public/peopleGraySvg.svg';
 
@@ -19,17 +19,27 @@ function BottomTab() {
   const { isShow } = useRecoilValue(currentTrackState);
   const pathname = usePathname();
 
+  const paths = [
+    { id: 1, path: '/', defaultSvg: <MoonGraySvg />, focusSvg: <MoonBlueSvg /> },
+    { id: 2, path: '/music', defaultSvg: <MusicGraySvg />, focusSvg: <MusicBlueSvg /> },
+    { id: 3, path: '/profile', defaultSvg: <PeopleGraySvg />, focusSvg: <PeopleBlueSvg /> },
+  ];
+
   return (
-    <BottomTabBlock $isShow={isShow}>
-      <div className="svg-box">
-        <Link href="/">{pathname === '/' ? <MoonBlueSvg /> : <MoonGraySvg />}</Link>
-        <Link href="/music">{pathname === '/music' ? <MusicBlueSvg /> : <MusicGraySvg />}</Link>
-        <Link href="/chat">{pathname === '/chat' ? <ChatBlueSvg /> : <ChatGraySvg />}</Link>
-        <Link href="/profile">
-          {pathname === '/profile' ? <PeopleBlueSvg /> : <PeopleGraySvg />}
-        </Link>
-      </div>
-    </BottomTabBlock>
+    <FadeInMotion>
+      <BottomTabNav
+        className="h-[50px] md:h-[55px] px-[45px] min-w540:px-[60px] py-[14px]"
+        $isShow={isShow}
+      >
+        <div className="svg-box">
+          {paths.map(({ id, path, defaultSvg, focusSvg }) => (
+            <motion.div key={id} whileTap={{ scale: 0.90 }}>
+              <Link href={path}>{pathname === path ? focusSvg : defaultSvg}</Link>
+            </motion.div>
+          ))}
+        </div>
+      </BottomTabNav>
+    </FadeInMotion>
   );
 }
 
@@ -39,10 +49,9 @@ interface IsShow {
   $isShow: boolean;
 }
 
-export const BottomTabBlock = styled.nav<IsShow>`
-  width: 390px;
-  height: 50px;
-  padding: 14px 44px;
+export const BottomTabNav = styled.nav<IsShow>`
+  width: 100%;
+  max-width: 540px;
   background-color: var(--white-100);
   box-shadow: ${({ $isShow }) => ($isShow ? null : '0 0 7px rgba(0, 0, 0, 0.12)')};
   position: fixed;
@@ -50,6 +59,7 @@ export const BottomTabBlock = styled.nav<IsShow>`
   z-index: 2;
 
   .svg-box {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;

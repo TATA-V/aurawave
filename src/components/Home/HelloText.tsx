@@ -18,7 +18,7 @@ function HelloText() {
 export default HelloText;
 
 const HelloTextBlock = styled.div`
-  padding: 26px 21px 8px 21px;
+  padding: 26px 20px 8px 20px;
 
   .hello-text {
     color: var(--sky-blue-600);

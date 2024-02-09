@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 export const SearchBox = styled.div`
-  padding: 6px 21px 37px 21px;
+  padding: 6px 0 37px 0;
   position: relative;
 
   .search-input {
@@ -23,14 +23,14 @@ export const SearchBox = styled.div`
       outline: none;
     }
     &:focus ~ .bar::after {
-      width: 348px;
+      width: 100%;
     }
   }
 
   .i-search {
     position: absolute;
     top: 17px;
-    right: 22px;
+    right: 5px;
     font-size: 20px;
   }
 `;
@@ -40,7 +40,7 @@ export const Bar = styled.div`
     content: '';
     position: absolute;
     top: 47px;
-    left: 21px;
+    left: 0;
     width: 0;
     height: 2px;
     background: linear-gradient(to right, #5fc0c0, #7ec5ed);

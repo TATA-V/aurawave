@@ -32,20 +32,26 @@ export const StyledAudio = styled.audio`
 
 export const AudioControlBarBlock = styled.div<HasBottomTab>`
   animation: ${fadeInUp} 0.2s ease-out;
-  width: 390px;
+  width: 100%;
+  max-width: 540px;
   height: ${({ $hasBottomTab }) => ($hasBottomTab ? '60px' : '71px')};
   border-radius: 10px 10px 0 0;
   background: linear-gradient(to right, #648b8b, #e38989);
   position: fixed;
-  bottom: ${({ $hasBottomTab }) => ($hasBottomTab ? '50px' : '0')};
+  bottom: ${({ $hasBottomTab }) => ($hasBottomTab ? '55px' : '0')};
   z-index: 1;
+
+  @media all and (max-width: 767px) {
+    bottom: ${({ $hasBottomTab }) => ($hasBottomTab ? '50px' : '0')};
+  }
 `;
 
 export const ProgressBarBox = styled.div<CurrentTimeWidth>`
   display: flex;
   justify-content: center;
   position: relative;
-  width: 390px;
+  width: 100%;
+  max-width: 540px;
   height: 10px;
   border-radius: 50px 50px 0 0;
   overflow: hidden;
@@ -127,6 +133,8 @@ export const LeftBox = styled.div`
   align-items: center;
 
   .image {
+    width: 38px;
+    height: 38px;
     border-radius: 2px;
     object-fit: cover;
     cursor: pointer;
@@ -201,6 +209,8 @@ export const SimpleMusicPlayer = styled.div`
   align-items: center;
 
   .image {
+    width: 38px;
+    height: 38px;
     border-radius: 2px;
     object-fit: cover;
     cursor: pointer;

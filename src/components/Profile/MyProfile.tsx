@@ -77,13 +77,13 @@ function MyProfile() {
         'state_changed',
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          // console.log(`Upload is ${progress}% done`);
           switch (snapshot.state) {
             case 'paused':
-              console.log('Upload is paused');
+              // console.log('Upload is paused');
               break;
             case 'running':
-              console.log('Upload is running');
+              // console.log('Upload is running');
               break;
             default:
               break;
@@ -177,7 +177,7 @@ export default MyProfile;
 
 const MyProfileBlock = styled.div`
   height: 172px;
-  padding: 53px 22px 18px 22px;
+  padding: 53px 20px 18px 20px;
   display: flex;
   justify-content: space-between;
 `;
@@ -223,7 +223,6 @@ const ChangeNameInput = styled.input`
   color: var(--dark-blue-800);
   font-size: 0.625rem;
   font-weight: 400;
-  text-shadow: 0 0 0 var(--dark-blue-800);
   padding: 6px 26.5px 6px 12px;
   border: 1px solid var(--gray-100);
   border-radius: 5px;
@@ -233,7 +232,6 @@ const ChangeNameInput = styled.input`
 
   &::placeholder {
     color: var(--gray-200);
-    text-shadow: 0 0 0 var(--gray-200);
   }
 
   &:focus {
@@ -274,6 +272,8 @@ const RightBox = styled.div`
   }
 
   .profile-img {
+    width: 86px;
+    height: 86px;
     border-radius: 50%;
     object-fit: cover;
   }

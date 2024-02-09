@@ -2,15 +2,18 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import SkelMusicLi from './SkelMusicLi';
+import SkelMusicLi from 'src/components/Skeleton/SkelMusicLi';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 function SkelMusicLi30() {
   return (
-    <SkeletonMusicCollectionBlock>
-      {[...Array(30)].map((_, i) => (
-        <SkelMusicLi key={i} />
-      ))}
-    </SkeletonMusicCollectionBlock>
+    <FadeInMotion>
+      <SkeletonMusicCollectionBlock>
+        {[...Array(30)].map((_, i) => (
+          <SkelMusicLi key={i} />
+        ))}
+      </SkeletonMusicCollectionBlock>
+    </FadeInMotion>
   );
 }
 

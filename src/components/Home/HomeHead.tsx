@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import userState from 'src/atom/userState';
 import defaultProfileJpg from 'src/assets/jpg-file/default-profile.jpg';
-import { bubblegum } from 'src/fonts/fonts';
 import LogoMoonSvg from '../../../public/logoMoonSvg.svg';
+import LogoSvg from '../../../public/logoSvg.svg';
 
 function HomeHead() {
   const { photoURL, isLoggedIn } = useRecoilValue(userState);
@@ -17,11 +17,12 @@ function HomeHead() {
     <HomeHeadBlock>
       <LeftBox>
         <LogoMoonSvg />
-        <p className={`logo-text ${bubblegum.className}`}>AuraWave</p>
+        <div className="w-[108px] h-[22px]">
+          <LogoSvg />
+        </div>
       </LeftBox>
 
       <RightBox>
-        <i className="i-bell" />
         <Link href="/profile">
           <Image
             className="image"
@@ -40,7 +41,7 @@ export default HomeHead;
 
 const HomeHeadBlock = styled.header`
   height: 61px;
-  padding: 14px 21px;
+  padding: 14px 20px 14px 20px;
   background-color: var(--white-100);
 
   display: flex;
@@ -49,7 +50,7 @@ const HomeHeadBlock = styled.header`
 `;
 
 const LeftBox = styled.div`
-  width: 135;
+  width: 135px;
   display: flex;
   justify-content: space-between;
   align-items: 'center';
@@ -65,7 +66,6 @@ const LeftBox = styled.div`
 
 const RightBox = styled.div`
   display: flex;
-  width: 72.87px;
   justify-content: space-between;
   align-items: center;
 
@@ -76,6 +76,8 @@ const RightBox = styled.div`
   }
 
   .image {
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
     object-fit: cover;
     display: flex;

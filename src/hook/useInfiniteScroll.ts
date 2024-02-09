@@ -28,7 +28,7 @@ const useInfiniteScroll = ({ allData, data, setData, sliceNum, setSliceNum, endR
               setData((prev) => [...prev, ...nextData]);
               setSliceNum((num) => num + 8);
               setLoading(false);
-            }, 1000);
+            }, 700);
           }
         }
       });

@@ -14,6 +14,7 @@ export default MusicHead;
 
 const MusicHeadBlock = styled.div`
   width: 100%;
+  max-width: 540px;
   height: 61px;
   padding-left: 21px;
   background-color: var(--white-100);

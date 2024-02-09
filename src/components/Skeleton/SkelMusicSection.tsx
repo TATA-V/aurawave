@@ -2,29 +2,30 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import SkelMusicLi from './SkelMusicLi';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
+import SkelMusicLi from 'src/components/Skeleton/SkelMusicLi';
 
 function SkelMusicSection() {
   return (
-    <SkelMusicSectionBlock>
-      <div className="first">
-        {[...Array(5)].map((_, i) => (
-          <SkelMusicLi key={i} />
-        ))}
-      </div>
-      <div className="second">
-        {[...Array(5)].map((_, i) => (
-          <SkelMusicLi key={i} />
-        ))}
-      </div>
-    </SkelMusicSectionBlock>
+    <FadeInMotion>
+      <SkelMusicSectionBlock className="flex md:gap-[100px]">
+        <div className="first">
+          {[...Array(5)].map((_, i) => (
+            <SkelMusicLi key={i} />
+          ))}
+        </div>
+        <div className="second">
+          {[...Array(5)].map((_, i) => (
+            <SkelMusicLi key={i} />
+          ))}
+        </div>
+      </SkelMusicSectionBlock>
+    </FadeInMotion>
   );
 }
 
 export default SkelMusicSection;
 
 const SkelMusicSectionBlock = styled.div`
-  padding-left: 21px;
-
-  display: flex;
+  padding-left: 20px;
 `;

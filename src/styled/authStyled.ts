@@ -106,7 +106,7 @@ export const GrayLineTxtBox = styled.div`
 
   .gray-line-login {
     height: 1px;
-    width: 103px;
+    width: 100%;
     background-color: var(--gray-100);
   }
 
@@ -117,8 +117,11 @@ export const GrayLineTxtBox = styled.div`
   }
 
   .sns-txt {
+    width: 100%;
     color: var(--blue-gray-700);
     font-size: 0.75rem;
     font-weight: 400;
+    display: flex;
+    justify-content: center;
   }
 `;

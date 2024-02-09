@@ -3,21 +3,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { sweep } from 'src/styled/frequentlyStyled';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 function SkelUserPlaylistSection() {
   return (
     <SkelUserPlaylistSectionBlock>
       {[...Array(5)].map((_, i) => (
-        <div className="content" key={i}>
-          <div className="image" />
-          <div className="details">
-            <div className="title-desc">
-              <div className="title" />
-              <div className="description" />
+        <FadeInMotion key={i}>
+          <div className="content">
+            <div className="image" />
+            <div className="details">
+              <div className="title-desc">
+                <div className="title" />
+                <div className="description" />
+              </div>
+              <div className="username" />
             </div>
-            <div className="username" />
           </div>
-        </div>
+        </FadeInMotion>
       ))}
     </SkelUserPlaylistSectionBlock>
   );

@@ -163,9 +163,9 @@ function Login() {
         {/* 구글 계정으로 로그인 */}
         <SnsLoginBox>
           <S.GrayLineTxtBox>
-            <div className="gray-line-login" />
+            <hr className="gray-line-login" />
             <p className="sns-txt">SNS 계정으로 로그인</p>
-            <div className="gray-line-login" />
+            <hr className="gray-line-login" />
           </S.GrayLineTxtBox>
 
           {/* 구글로 signin => GoogleAuth 컴포넌트 */}

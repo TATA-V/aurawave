@@ -5,17 +5,19 @@ import MusicSection from 'src/components/Music/MusicSection';
 import AwPlaylistSection from 'src/components/Music/AwPlaylistSection';
 import MyPlaylistSection from 'src/components/Music/MyPlaylistSection';
 import UserPlaylistSection from 'src/components/Music/UserPlaylistSection';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 function MusicPage() {
   return (
-    <MusicLayout>
-      <MusicHead />
-      <MusicSection />
-      <AwPlaylistSection />
-      <MyPlaylistSection />
-      <UserPlaylistSection />
-      <BottomTab />
-    </MusicLayout>
+    <FadeInMotion>
+      <MusicLayout>
+        <MusicHead />
+        <MusicSection />
+        <AwPlaylistSection />
+        <MyPlaylistSection />
+        <UserPlaylistSection />
+      </MusicLayout>
+    </FadeInMotion>
   );
 }
 

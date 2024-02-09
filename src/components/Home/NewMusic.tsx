@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,8 +8,10 @@ import 'swiper/css';
 import { getMusicDocs } from 'src/firebase/music';
 import { MusicData } from 'src/types/musicTypes';
 import useMusicPlay from 'src/hook/useMusicPlay';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
-import SkelNewMusic from '../Skeleton/SkelNewMusic';
+import SkelNewMusic from 'src/components/Skeleton/SkelNewMusic';
+import LoadingLottie from '../Lottie/LoadingLottie';
 
 function NewMusic() {
   const [loaded, setLoaded] = useState(false);
@@ -37,37 +39,52 @@ function NewMusic() {
       <h2 className="section-heading">최신 음악</h2>
       {/* 스켈레톤 => SkelNewMusic 컴포넌트 */}
       {!loaded && (
-        <SkelNewMusicBlock>
-          {[...Array(4)].map((_, i) => (
-            <SkelNewMusic key={i} />
-          ))}
-        </SkelNewMusicBlock>
+        <FadeInMotion>
+          <SkelNewMusicBlock>
+            {[...Array(5)].map((_, i) => (
+              <SkelNewMusic key={i} />
+            ))}
+          </SkelNewMusicBlock>
+        </FadeInMotion>
       )}
 
       {loaded && (
-        <StyledSwiper spaceBetween={15} slidesPerView={3.1}>
+        <StyledSwiper
+          spaceBetween={15}
+          slidesPerView={3.1}
+          breakpoints={{
+            539: {
+              slidesPerView: 3.1,
+            },
+            540: {
+              slidesPerView: 4.3,
+            },
+          }}
+        >
           {data.map((el) => (
             <SwiperSlide key={el.uuid}>
-              <NewMusicLi>
-                <div className="music-content">
-                  <Image
-                    onClick={() => handleMusicPlay(el)}
-                    className="image"
-                    width={95}
-                    height={95}
-                    src={el.imageUri}
-                    alt="new music"
-                  />
-                  <div className="details">
-                    <p onClick={() => handleMusicPlay(el)} className="title">
-                      {el.title}
-                    </p>
-                    <p onClick={() => handleMusicPlay(el)} className="composer">
-                      {el.composer}
-                    </p>
+              <FadeInMotion>
+                <NewMusicLi>
+                  <div className="music-content">
+                    <Image
+                      onClick={() => handleMusicPlay(el)}
+                      className="image"
+                      width={95}
+                      height={95}
+                      src={el.imageUri}
+                      alt="new music"
+                    />
+                    <div className="details">
+                      <p onClick={() => handleMusicPlay(el)} className="title">
+                        {el.title}
+                      </p>
+                      <p onClick={() => handleMusicPlay(el)} className="composer">
+                        {el.composer}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </NewMusicLi>
+                </NewMusicLi>
+              </FadeInMotion>
             </SwiperSlide>
           ))}
         </StyledSwiper>
@@ -79,12 +96,12 @@ function NewMusic() {
 export default NewMusic;
 
 const SkelNewMusicBlock = styled.div`
-  padding: 14px 21px 0 21px;
+  padding: 14px 20px 0 20px;
   display: flex;
 `;
 
 const NewMusicSection = styled.section`
-  padding-bottom: 50px;
+  padding-bottom: 60px;
 
   .section-heading {
     color: var(--dark-blue-900);
@@ -95,18 +112,18 @@ const NewMusicSection = styled.section`
 `;
 
 const StyledSwiper = styled(Swiper)`
-  padding: 14px 21px 0 21px;
+  padding: 14px 20px 0 20px;
 `;
 
 const NewMusicLi = styled.li`
   .music-content {
-    width: 95px;
+    width: 100%;
     height: 133px;
   }
 
   .image {
-    width: 95px;
-    height: 96px;
+    width: 100%;
+    height: 95px;
     border: 1px solid var(--gray-100);
     border-radius: 4px;
     object-fit: cover;
@@ -122,7 +139,7 @@ const NewMusicLi = styled.li`
   }
 
   .title {
-    width: 95px;
+    width: 100%;
     height: 16px;
     color: var(--dark-blue-900);
     font-size: 0.68rem;
@@ -135,7 +152,7 @@ const NewMusicLi = styled.li`
   }
 
   .composer {
-    width: 95px;
+    width: 100%;
     height: 12px;
     color: var(--gray-400);
     font-size: 0.6rem;

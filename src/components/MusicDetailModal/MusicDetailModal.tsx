@@ -77,7 +77,7 @@ function MusicDetailModal({
             {/* 음악 제목 => MusicTitle 컴포넌트 */}
             <MusicTitle />
             {/* 음악 이미지 */}
-            <Image className="image" width={340} height={340} src={imageUri} alt="album image" unoptimized />
+            <Image className="image" width={340} height={340} src={imageUri} alt="album image" />
             {/* 출처 => MusicCopyright 컴포넌트 */}
             <MusicCopyright />
             {/* 저작권자 */}

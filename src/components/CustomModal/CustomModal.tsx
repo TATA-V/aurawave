@@ -10,6 +10,7 @@ import { auth, storage } from 'src/firebase/config';
 import { deleteUserDoc } from 'src/firebase/user';
 import currentTrackState from 'src/atom/currentTrackState';
 import useCloseModal from 'src/hook/useCloseModal';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 interface Props {
   toggleModal: boolean;
@@ -131,7 +132,7 @@ export default CustomModal;
 const fadeInUp = keyframes`
   from {
     opacity: 0;
-    transform: translateY(70px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -142,7 +143,8 @@ const fadeInUp = keyframes`
 const ModalBlock = styled.div`
   position: fixed;
   top: 0;
-  width: 390px;
+  width: 100%;
+  max-width: 540px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -152,7 +154,7 @@ const ModalBlock = styled.div`
 `;
 
 const Modal = styled.div`
-  animation: ${fadeInUp} 0.33s ease-out;
+  animation: ${fadeInUp} 0.33s ease-in-out;
   width: 315px;
   padding: 6px;
   border-radius: 6px;

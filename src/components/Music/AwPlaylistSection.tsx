@@ -8,8 +8,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { AWPlaylistData } from 'src/types/playlistTypes';
 import { bubblegum } from 'src/fonts/fonts';
 import { getAwPlaylistDocs } from 'src/firebase/playlist';
+import SkelAwPlaylistSection from 'src/components/Skeleton/SkelAwPlaylistSection';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import 'swiper/css';
-import SkelAwPlaylistSection from '../Skeleton/SkelAwPlaylistSection';
 
 function AwPlaylistSection() {
   const [loaded, setLoaded] = useState(false);
@@ -17,7 +18,7 @@ function AwPlaylistSection() {
 
   useEffect(() => {
     // AuraWave 플레이리스트 가져오기
-    getAwPlaylistDocs({ limitNum: 3, orderByField: 'timestamp', orderByDirection: 'desc' })
+    getAwPlaylistDocs({ limitNum: 3, orderByField: 'timestamp', orderByDirection: 'asc' })
       .then((data) => {
         setPlaylistData(data);
         setLoaded(true);
@@ -40,22 +41,35 @@ function AwPlaylistSection() {
       {!loaded && <SkelAwPlaylistSection />}
 
       {loaded && (
-        <StyledSwiper spaceBetween={11} slidesPerView={2}>
+        <StyledSwiper
+          spaceBetween={11}
+          slidesPerView={2}
+          breakpoints={{
+            539: {
+              slidesPerView: 2,
+            },
+            540: {
+              slidesPerView: 2.5,
+            },
+          }}
+        >
           {playlistData.map((el) => (
             <SwiperSlide key={el.uuid}>
-              <PlaylistItem>
-                <Image
-                  className="image"
-                  width={168}
-                  height={143}
-                  src={String(el.playlistImageUri)}
-                  alt="aurawave playlist"
-                />
-                <div className="details">
-                  <span className="title">{el.playlistTitle}</span>
-                  <span className="description">{el.description}</span>
-                </div>
-              </PlaylistItem>
+              <FadeInMotion>
+                <PlaylistItem>
+                  <Image
+                    className="image"
+                    width={168}
+                    height={143}
+                    src={String(el.playlistImageUri)}
+                    alt="aurawave playlist"
+                  />
+                  <div className="details">
+                    <span className="title">{el.playlistTitle}</span>
+                    <span className="description">{el.description}</span>
+                  </div>
+                </PlaylistItem>
+              </FadeInMotion>
             </SwiperSlide>
           ))}
         </StyledSwiper>
@@ -68,14 +82,13 @@ export default AwPlaylistSection;
 
 const TopBox = styled.div`
   width: 100%;
-  padding: 40px 0 18px 21px;
+  padding: 40px 0 18px 20px;
   display: flex;
   justify-content: space-between;
 
   .aw {
     font-size: 1.1875rem;
     font-weight: 400;
-    text-shadow: 0 0 0 var(--dark-blue-900);
   }
 
   .aw-playlist {
@@ -94,13 +107,15 @@ const TopBox = styled.div`
 `;
 
 const PlaylistItem = styled.div`
-  width: 168px;
+  width: 100%;
   height: 188px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   .image {
+    width: 100%;
+    height: 143px;
     border: 1px solid var(--gray-100);
     border-radius: 15px;
     object-fit: cover;

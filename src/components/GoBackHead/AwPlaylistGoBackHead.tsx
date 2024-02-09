@@ -121,7 +121,8 @@ export default AwPlaylistGoBackHead;
 const GoBackHeadBlok = styled.header`
   position: fixed;
   top: 0;
-  width: 390px;
+  width: 100%;
+  max-width: 540px;
   height: 61px;
   background-color: var(--white-100);
   z-index: 2;

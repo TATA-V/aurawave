@@ -28,9 +28,10 @@ const LandscapeBlock = styled.div`
   opacity: 0.87;
   display: flex;
   justify-content: center;
+  padding: 0 20px 0 20px;
 
   .landscape {
-    width: 348px;
+    width: 100%;
     height: 167px;
     border: 1px solid var(--gray-100);
     border-radius: 7px;
@@ -40,6 +41,9 @@ const LandscapeBlock = styled.div`
   }
 
   .image {
+    width: 100%;
+    height: 167px;
+    object-fit: cover;
     border-radius: 6px;
     display: flex;
     justify-content: center;

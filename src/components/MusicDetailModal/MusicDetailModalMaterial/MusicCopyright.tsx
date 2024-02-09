@@ -3,28 +3,10 @@ import { useRecoilValue } from 'recoil';
 import styled, { keyframes } from 'styled-components';
 import currentTrackState from 'src/atom/currentTrackState';
 
-interface UpdatedLinkData {
-  href: string;
-  text: string;
-}
-
 function MusicCopyright() {
   const [showCopyright, setShowCopyright] = useState(false);
-  const [linkData, setLinkData] = useState<UpdatedLinkData[]>([]);
   const { currentMusic } = useRecoilValue(currentTrackState); // 리코일
   const { copyright } = currentMusic;
-
-  useEffect(() => {
-    const regex = /<a\s+href="([^"]+)"[^>]*>([^<]+)<\/a>/g;
-    const matches = copyright.matchAll(regex);
-    const updatedLinkData = [];
-    for (const match of matches) {
-      const href = match[1];
-      const text = match[2];
-      updatedLinkData.push({ href, text });
-    }
-    setLinkData(updatedLinkData);
-  }, [copyright]);
 
   return (
     <MusicCopyrightBlock>
@@ -35,18 +17,6 @@ function MusicCopyright() {
       {showCopyright && (
         <div className="copyright-actual">
           <p className="copyright-actual-txt" dangerouslySetInnerHTML={{ __html: copyright }} />
-          {linkData.length > 1 && (
-            <p className="copyright-actual-txt">
-              Music by{' '}
-              <a href={linkData[0].href} target="_blank" rel="noreferrer">
-                {linkData[0].text}
-              </a>{' '}
-              from{' '}
-              <a href={linkData[1].href} target="_blank" rel="noreferrer">
-                {linkData[1].text}
-              </a>
-            </p>
-          )}
         </div>
       )}
     </MusicCopyrightBlock>

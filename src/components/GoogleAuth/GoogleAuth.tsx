@@ -47,7 +47,7 @@ function GoogleAuth() {
 
   return (
     <GoogleAuthBlock>
-      <GoogleBtn onClick={handleGoogleLogin}>
+      <GoogleBtn onClick={handleGoogleLogin} className="w-[180px] md:w-[220px] gap-3">
         <GoogleSvg />
         <p className="signin-txt">Sign in with Google</p>
       </GoogleBtn>
@@ -64,14 +64,13 @@ const GoogleAuthBlock = styled.div`
 `;
 
 const GoogleBtn = styled.button`
-  width: 170px;
   height: 43px;
   padding: 0 15px 0 15px;
   border: 1px solid var(--gray-100);
   border-radius: 5px;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   .signin-txt {

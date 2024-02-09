@@ -18,9 +18,10 @@ const LoadingLottieBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
 
   .lottie {
-    width: 120px;
+    width: 100px;
     transform: translateY(-10px);
   }
 `;

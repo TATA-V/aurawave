@@ -1,8 +1,13 @@
 import React from 'react';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import Soundtrack from 'src/components/Soundtrack/Soundtrack';
 
 function SoundtrackPage() {
-  return <Soundtrack />;
+  return (
+    <FadeInMotion>
+      <Soundtrack />
+    </FadeInMotion>
+  );
 }
 
 export default SoundtrackPage;

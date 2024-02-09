@@ -8,37 +8,42 @@ import userState from 'src/atom/userState';
 import PeopleCircleSvg from '../../../public/peopleCircleSvg.svg';
 
 function MyFriendAndMyPlaylist() {
-  const { isAdmin } = useRecoilValue(userState);
+  const { isAdmin, isLoggedIn } = useRecoilValue(userState);
 
   return (
-    <MyFriendAndMyPlaylistBlock>
-      <li className="list-box">
-        <PeopleCircleSvg />
-        <p className="list-text">친구 목록</p>
-      </li>
-      <li className="list-box">
-        <i className="i-list-circle" />
-        <p className="list-text">내 플레이리스트 목록</p>
-      </li>
+    <>
+      {isLoggedIn
+      && (
+        <MyFriendAndMyPlaylistBlock>
+          <li className="list-box">
+            <PeopleCircleSvg />
+            <p className="list-text">친구 목록</p>
+          </li>
+          <li className="list-box">
+            <i className="i-list-circle" />
+            <p className="list-text">내 플레이리스트 목록</p>
+          </li>
 
-      {/* andmin 계정일 때 */}
-      {isAdmin && (
-        <>
-          <li className="list-box">
-            <StyledLink href="/admin-music">
-              <i className="i-plus-circle" />
-              <p className="list-text">음악 등록 & 삭제</p>
-            </StyledLink>
-          </li>
-          <li className="list-box">
-            <StyledLink href="/admin-awplaylist-editor">
-              <i className="i-plus-circle" />
-              <p className="list-text">aurawave 플레이리스트 등록</p>
-            </StyledLink>
-          </li>
-        </>
+          {/* andmin 계정일 때 */}
+          {isAdmin && (
+            <>
+              <li className="list-box">
+                <StyledLink href="/admin-music">
+                  <i className="i-plus-circle" />
+                  <p className="list-text">음악 등록 & 삭제</p>
+                </StyledLink>
+              </li>
+              <li className="list-box">
+                <StyledLink href="/admin-awplaylist-editor">
+                  <i className="i-plus-circle" />
+                  <p className="list-text">aurawave 플레이리스트 등록</p>
+                </StyledLink>
+              </li>
+            </>
+          )}
+        </MyFriendAndMyPlaylistBlock>
       )}
-    </MyFriendAndMyPlaylistBlock>
+    </>
   );
 }
 

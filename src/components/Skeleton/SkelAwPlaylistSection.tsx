@@ -3,26 +3,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import { sweep } from 'src/styled/frequentlyStyled';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 function SkelAwPlaylistSection() {
   return (
-    <SkelAwPlaylistSectionBlock>
-      <div className="content ">
-        <div className="image" />
-        <div className="title" />
-        <div className="description" />
-      </div>
-      <div className="content margin-left">
-        <div className="image" />
-        <div className="title" />
-        <div className="description" />
-      </div>
-      <div className="content margin-left">
-        <div className="image" />
-        <div className="title" />
-        <div className="description" />
-      </div>
-    </SkelAwPlaylistSectionBlock>
+    <FadeInMotion>
+      <SkelAwPlaylistSectionBlock>
+        <div className="content ">
+          <div className="image" />
+          <div className="title" />
+          <div className="description" />
+        </div>
+        <div className="content margin-left">
+          <div className="image" />
+          <div className="title" />
+          <div className="description" />
+        </div>
+        <div className="content margin-left">
+          <div className="image" />
+          <div className="title" />
+          <div className="description" />
+        </div>
+      </SkelAwPlaylistSectionBlock>
+    </FadeInMotion>
   );
 }
 

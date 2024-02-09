@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { MusicData } from 'src/types/musicTypes';
 import useCloseModal from 'src/hook/useCloseModal';
 import currentTrackState from 'src/atom/currentTrackState';
+import { motion } from 'framer-motion';
 
 /**
  * 상위에서 쓰이고 있는 useState
@@ -88,7 +89,12 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
   };
 
   return (
-    <Container $top={top}>
+    <Container
+      $top={top}
+      initial={{ scale: 0, transformOrigin: '100% 0%' }}
+      animate={{ scale: 1 }}
+      transition={{ type: 'spring', duration: 0.7 }}
+    >
       <AddToPlaylistModalBlock ref={modalRef}>
         {soundtrackPage && !showMusicDetail && (
           <ModalTitle onClick={handleDeleteMusic}>
@@ -130,7 +136,7 @@ interface Top {
   $top: string | undefined;
 }
 
-const Container = styled.div<Top>`
+const Container = styled(motion.div)<Top>`
   position: absolute;
   top: ${({ $top }) => ($top ? `${$top}px` : '18px')};
   right: 0;

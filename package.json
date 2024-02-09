@@ -13,6 +13,7 @@
     "@svgr/webpack": "^8.1.0",
     "browser-image-compression": "^2.0.2",
     "firebase": "^10.8.0",
+    "framer-motion": "^11.0.3",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",

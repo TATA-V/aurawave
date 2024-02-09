@@ -51,6 +51,8 @@ export const MusicDetailBox = styled.div<OpenModal>`
   top: 20px;
 
   .image {
+    width: 340px;
+    height: 340px;
     border: 1px solid var(--gray-100);
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

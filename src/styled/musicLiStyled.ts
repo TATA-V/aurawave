@@ -4,9 +4,19 @@ import styled from 'styled-components';
 
 export const MusicLiBlock = styled.li`
   margin-bottom: 17px;
+  padding-right: 3px;
+  width: 100%;
+
+  .i-menu-black {
+    font-size: 14px;
+    cursor: pointer;
+    &::before {
+      color: var(--gray-200);
+    }
+  }
 
   .music-content {
-    width: 346.12px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,6 +28,8 @@ export const MusicLiBlock = styled.li`
   }
 
   .image {
+    width: 50px;
+    height: 50px;
     border: 1px solid var(--gray-100);
     border-radius: 2px;
     object-fit: cover;
@@ -25,7 +37,7 @@ export const MusicLiBlock = styled.li`
   }
 
   .details {
-    width: 225px;
+    width: 100%;
     padding-left: 16px;
     line-height: 1.1rem;
   }

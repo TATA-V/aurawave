@@ -79,7 +79,7 @@ const LogoutAndDeleteAccountBlock = styled.div`
   }
 
   .crayon-img {
-    width: 390px;
+    width: 100%;
     height: auto;
     padding-top: 12px;
   }

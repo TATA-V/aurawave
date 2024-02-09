@@ -5,14 +5,16 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import { getMusicDocs } from 'src/firebase/music';
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import { MusicData } from 'src/types/musicTypes';
 import 'swiper/css';
 
 import SkelMusicSection from 'src/components/Skeleton/SkelMusicSection';
-import SectionMusicLi from './SectionMusicLi';
+import SectionMusicLi from 'src/components/Music/SectionMusicLi';
 
 function MusicSection() {
   const [data, setData] = useState<MusicData[]>([]);
+  const [swiperIdx, setSwiperIdx] = useState<number>();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -27,6 +29,10 @@ function MusicSection() {
       });
   }, []);
 
+  const handleSlideChange = (idx: number) => {
+    setSwiperIdx(idx);
+  };
+
   return (
     <section>
       <TopBox>
@@ -36,31 +42,48 @@ function MusicSection() {
         </Link>
       </TopBox>
       {/* 스켈레톤 => SkelMusicSection 컴포넌트 */}
-      {!loaded && <SkelMusicSection />}
+      {!loaded && <FadeInMotion><SkelMusicSection /></FadeInMotion>}
 
       {loaded && (
-        <StyledSwiper slidesPerView={1}>
-          <SwiperSlide>
-            <ul>
-              {data.slice(0, 5).map((el) => (
-                <SectionMusicLi key={el.uuid} el={el} />
-              ))}
-            </ul>
-          </SwiperSlide>
-          <SwiperSlide>
-            <ul>
-              {data.slice(5, 10).map((el) => (
-                <SectionMusicLi key={el.uuid} el={el} />
-              ))}
-            </ul>
-          </SwiperSlide>
-          <SwiperSlide>
-            <ul>
-              {data.slice(10, 15).map((el) => (
-                <SectionMusicLi key={el.uuid} el={el} />
-              ))}
-            </ul>
-          </SwiperSlide>
+        <StyledSwiper
+          slidesPerView={1}
+          breakpoints={{
+            539: {
+              slidesPerView: 1,
+            },
+            540: {
+              slidesPerView: 1.15,
+            },
+          }}
+          onSlideChange={(e) => handleSlideChange(e.activeIndex)}
+          allowSlideNext={swiperIdx !== 2}
+        >
+          <FadeInMotion>
+            <SwiperSlide>
+              <ul>
+                {data.slice(0, 5).map((el) => (
+                  <SectionMusicLi key={el.uuid} el={el} />
+                ))}
+              </ul>
+            </SwiperSlide>
+            <SwiperSlide>
+              <ul>
+                {data.slice(5, 10).map((el) => (
+                  <SectionMusicLi key={el.uuid} el={el} />
+                ))}
+              </ul>
+            </SwiperSlide>
+            <SwiperSlide>
+              <ul>
+                {data.slice(10, 15).map((el) => (
+                  <SectionMusicLi key={el.uuid} el={el} />
+                ))}
+              </ul>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div />
+            </SwiperSlide>
+          </FadeInMotion>
         </StyledSwiper>
       )}
     </section>
@@ -71,7 +94,7 @@ export default MusicSection;
 
 const TopBox = styled.div`
   width: 100%;
-  padding: 20px 0 18px 21px;
+  padding: 20px 0 18px 20px;
   display: flex;
   justify-content: space-between;
 
@@ -91,6 +114,5 @@ const TopBox = styled.div`
 `;
 
 const StyledSwiper = styled(Swiper)`
-  padding-left: 21px;
-  padding-right: 21px;
+  padding: 0 20px 0 20px;
 `;

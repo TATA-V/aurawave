@@ -8,15 +8,19 @@ import currentTrackState from 'src/atom/currentTrackState';
 import useAuthentication from 'src/hook/useAuthentication';
 import formatDateToYYYYMMDD from 'src/utils/formatDateToYYYYMMDD';
 import playlistDataState from 'src/atom/playlistDataState';
-import AudioControlBar from '../AudioControlBar/AudioControlBar';
+import { usePathname } from 'next/navigation';
+import AudioControlBar from 'src/components/AudioControlBar/AudioControlBar';
+import BottomTab from 'src/components/BottomTab/BottomTab';
 
 interface Props {
   children: React.ReactNode;
 }
 
 function DefaultLayout({ children }: Props) {
-  const { isShow } = useRecoilValue(currentTrackState);
+  const { isShow, showMusicDetail } = useRecoilValue(currentTrackState);
   const setPlaylistData = useSetRecoilState(playlistDataState);
+  const pathname = usePathname();
+  const HideBottomTab = showMusicDetail || ['/soundtrack', '/login', '/signup', '/music-collection'].includes(pathname);
 
   useAuthentication();
 
@@ -31,6 +35,7 @@ function DefaultLayout({ children }: Props) {
       <LayoutStyle $isShow={isShow}>
         {children}
         {isShow && <AudioControlBar />}
+        {!HideBottomTab && <BottomTab />}
       </LayoutStyle>
     </LayoutBlock>
   );
@@ -53,7 +58,7 @@ const LayoutBlock = styled.div`
 `;
 
 const LayoutStyle = styled.div<IsShow>`
-  width: 390px;
+  width: 540px;
   height: 100vh;
   overflow-y: scroll;
   background-color: #fff;

@@ -35,8 +35,8 @@ function CreatePlaylistMusicLi({ el }: Props) {
           <Image
             onClick={handleMusicPlay}
             className="image"
-            width={49}
-            height={49}
+            width={50}
+            height={50}
             src={imageUri}
             alt="recommended music"
           />

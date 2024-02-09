@@ -5,20 +5,16 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import * as S from 'src/styled/playlistEditorStyled';
 import playlistDataState from 'src/atom/playlistDataState';
-import dynamic from 'next/dynamic';
 
 import PlaylistGoBackHead from 'src/components/GoBackHead/PlaylistGoBackHead';
 import PlaylistEditorMusicLi from 'src/components/PlaylistEditor/PlaylistEditorMusicLi';
 import PlaylistLottie from 'src/components/Lottie/PlaylistLottie';
+import PlaylistImage from 'src/components/PlaylistEditor/PlaylistImage';
 
 function PlaylistEditor() {
   const [loading, setLoading] = useState(false);
   const [playlistData, setPlaylistData] = useRecoilState(playlistDataState); // 리코일
   const { isPublic, playlistTitle, description, musicList } = playlistData;
-
-  const PlaylistImage = dynamic(() => import('src/components/PlaylistEditor/PlaylistImage'), {
-    ssr: false,
-  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,7 +29,6 @@ function PlaylistEditor() {
     <>
       <>
         <PlaylistGoBackHead loading={loading} setLoading={setLoading} />
-
         {loading && <PlaylistLottie />}
         {!loading && (
           <CreatePlaylistBlock>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
 import currentTrackState, { CurrentMusic } from 'src/atom/currentTrackState';
+import { Reorder } from 'framer-motion';
 
 import GoBackHead from 'src/components/GoBackHead/GoBackHead';
 import SoundtrackMusicLi from 'src/components/Soundtrack/SoundtrackMusicLi';
@@ -14,10 +15,6 @@ import CheckSvg from '../../../public/checkSvg.svg';
 function Soundtrack() {
   const [loaded, setLoaded] = useState(false);
   const [musicTrack, setMusicTrack] = useState<CurrentMusic[]>([]);
-  const [musicTrackTxt, setMusicTrackTxt] = useState('');
-  // MusicLi 드래그
-  const [dragItemIdx, setDragItemIdx] = useState(0);
-  const [dragOverItemIdx, setDragOverItemIdx] = useState(0);
   // 리코일
   const resetCurrentMusicAndTrack = useResetRecoilState(currentTrackState);
   const [currentMusicAndTrack, setCurrentMusicAndTrack] = useRecoilState(currentTrackState);
@@ -28,7 +25,6 @@ function Soundtrack() {
     const track = playMode === 'shuffle' ? suffleTrack : currentTrack;
     const trackTxt = playMode === 'shuffle' ? 'suffleTrack' : 'currentTrack';
     setMusicTrack(track);
-    setMusicTrackTxt(trackTxt);
   }, [playMode, currentTrack, suffleTrack]);
 
   useEffect(() => {
@@ -43,31 +39,6 @@ function Soundtrack() {
     }
   }, [currentTrack.length, resetCurrentMusicAndTrack, router]);
 
-  // 드래그 시작
-  const handleDragStart = (position: number) => {
-    setDragItemIdx(position);
-  };
-
-  // 드래그 중에 다른 요소 위로 들어갈 때
-  const handelDragEnter = (position: number) => {
-    setDragOverItemIdx(position);
-  };
-
-  // 드래그 작업이 끝났을 때 (마우스 뗐을 때)
-  const handleDragEnd = () => {
-    const newMusicTrack = [...musicTrack];
-    const dragItemValue = newMusicTrack[dragItemIdx];
-    newMusicTrack.splice(dragItemIdx, 1);
-    newMusicTrack.splice(dragOverItemIdx, 0, dragItemValue);
-    setDragItemIdx(0);
-    setDragOverItemIdx(0);
-
-    setCurrentMusicAndTrack((prev) => ({
-      ...prev,
-      [musicTrackTxt]: newMusicTrack,
-    }));
-  };
-
   return (
     <>
       <GoBackHead title="재생목록" />
@@ -80,18 +51,11 @@ function Soundtrack() {
         {/* 스켈레톤 => SkelMusicLi 컴포넌트 */}
         {!loaded && [...Array(musicTrack.length)].map((_, i) => <SkelMusicLi key={i} />)}
 
-        <ul>
-          {musicTrack.map((track, idx) => (
-            <SoundtrackMusicLi
-              key={track.uuid}
-              el={track}
-              idx={idx}
-              handleDragStart={handleDragStart}
-              handelDragEnter={handelDragEnter}
-              handleDragEnd={handleDragEnd}
-            />
+        <Reorder.Group axis="y" values={musicTrack} onReorder={setMusicTrack}>
+          {musicTrack.map((track) => (
+            <SoundtrackMusicLi key={track.uuid} el={track} />
           ))}
-        </ul>
+        </Reorder.Group>
       </SoundtrackBlock>
     </>
   );
@@ -100,10 +64,12 @@ function Soundtrack() {
 export default Soundtrack;
 
 const SoundtrackBlock = styled.div`
-  padding-left: 21px;
+  padding: 0 20px 0 20px;
 `;
 
 const TrackCount = styled.div`
+  display: flex;
+  align-items: center;
   padding: 74px 0 19px 0;
 
   .track-count-txt {
