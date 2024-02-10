@@ -1,23 +1,23 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
-import currentTrackState from 'src/atom/currentTrackState';
 import useAuthentication from 'src/hook/useAuthentication';
 import formatDateToYYYYMMDD from 'src/utils/formatDateToYYYYMMDD';
 import playlistDataState from 'src/atom/playlistDataState';
 import { usePathname } from 'next/navigation';
 import AudioControlBar from 'src/components/AudioControlBar/AudioControlBar';
 import BottomTab from 'src/components/BottomTab/BottomTab';
+import useCurrentTrackSSR from 'src/hook/useCurrentTrackSSR';
 
 interface Props {
   children: React.ReactNode;
 }
 
 function DefaultLayout({ children }: Props) {
-  const { isShow, showMusicDetail } = useRecoilValue(currentTrackState);
+  const [{ isShow, showMusicDetail }, _] = useCurrentTrackSSR();
   const setPlaylistData = useSetRecoilState(playlistDataState);
   const pathname = usePathname();
   const HideBottomTab = showMusicDetail || ['/soundtrack', '/login', '/signup', '/music-collection'].includes(pathname);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { deleteObject, ref } from 'firebase/storage';
 import * as S from 'src/styled/authStyled';

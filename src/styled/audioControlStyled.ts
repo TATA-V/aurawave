@@ -2,6 +2,7 @@
 
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 interface HasBottomTab {
   $hasBottomTab: boolean;
@@ -117,7 +118,7 @@ export const ProgressBar = styled.div<ProgressBarWidth>`
 `;
 
 export const BottomTabMusicPlayer = styled.div`
-  padding: 2.5px 16px 12px 16px;
+  padding: 1.2px 16px 12px 16px;
   display: flex;
   justify-content: space-between;
 
@@ -172,31 +173,12 @@ export const RightBox = styled.div`
   align-items: center;
   position: relative;
 
-  &::after {
-    content: '';
-    position: absolute;
-    right: 116px;
-    height: 58px;
-    width: 17px;
-    background: linear-gradient(to right, transparent, #bf8a8a);
-  }
-  &::before {
-    content: '';
-    position: absolute;
-    right: 101px;
-    height: 58px;
-    width: 17px;
-    background-color: #bd8a8a;
-  }
-
   .i-play {
     font-size: 21px;
   }
-
   .i-next-play {
     font-size: 18px;
   }
-
   .i-menu {
     font-size: 13px;
   }
@@ -268,7 +250,7 @@ interface IsLoop {
   $isLoop: boolean;
 }
 
-export const PlayModeModalBlock = styled.ul<PlayMode & IsLoop>`
+export const PlayModeModalBlock = styled(motion.ul)<PlayMode & IsLoop>`
   position: absolute;
   bottom: 32px;
   right: 0;

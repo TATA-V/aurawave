@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import * as S from 'src/styled/playlistEditorStyled';

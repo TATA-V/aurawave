@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import Link from 'next/link';

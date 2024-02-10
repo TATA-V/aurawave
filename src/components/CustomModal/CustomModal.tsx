@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { EmailAuthProvider, deleteUser, reauthenticateWithCredential } from 'firebase/auth';
@@ -10,7 +10,6 @@ import { auth, storage } from 'src/firebase/config';
 import { deleteUserDoc } from 'src/firebase/user';
 import currentTrackState from 'src/atom/currentTrackState';
 import useCloseModal from 'src/hook/useCloseModal';
-import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 interface Props {
   toggleModal: boolean;

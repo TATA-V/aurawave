@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
@@ -10,6 +10,7 @@ import Image from 'next/image';
 import userState from 'src/atom/userState';
 import { auth, storage } from 'src/firebase/config';
 import { updateUserName, updateUserPhotoURL } from 'src/firebase/user';
+import { motion } from 'framer-motion';
 import compressImage from 'src/utils/compressImage';
 import defaultProfileJpg from 'src/assets/jpg-file/default-profile.jpg';
 
@@ -124,9 +125,9 @@ function MyProfile() {
     <MyProfileBlock>
       <LeftBox>
         <p className="name-text">{isLoggedIn ? username : '로그인 해주세요'}</p>
-        <button className="login-changename-btn" onClick={handleBlueBtnClick}>
+        <motion.button whileTap={{ scale: 0.9 }} className="login-changename-btn" onClick={handleBlueBtnClick}>
           {isLoggedIn ? '닉네임 변경' : '로그인'}
-        </button>
+        </motion.button>
         {openTextInput && (
           <form className="input-form" onSubmit={handleSubmit}>
             <ChangeNameInput
@@ -157,7 +158,7 @@ function MyProfile() {
         />
 
         {isLoggedIn && (
-          <div className="file-box">
+          <motion.div whileTap={{ scale: 0.9 }} className="file-box">
             <input
               onChange={handleUploadImage}
               accept="image/jpeg, image/png"
@@ -166,7 +167,7 @@ function MyProfile() {
               className="file-input"
             />
             <i onClick={() => fileRef.current?.click()} className="i-pen-icon" />
-          </div>
+          </motion.div>
         )}
       </RightBox>
     </MyProfileBlock>

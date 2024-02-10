@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import currentTrackState from 'src/atom/currentTrackState';
@@ -49,7 +49,7 @@ interface IsLoggedIn {
 const MusicTitleBlock = styled.div<IsLoggedIn>`
   width: 100%;
   height: 34px;
-  margin: 19px 0 18px 0;
+  margin: 8px 0 18px 0;
   position: relative;
 
   display: flex;
@@ -57,7 +57,7 @@ const MusicTitleBlock = styled.div<IsLoggedIn>`
   align-items: center;
 
   .left {
-    width: ${({ $isLoggedIn }) => ($isLoggedIn ? '38.12px' : null)};
+    width: ${({ $isLoggedIn }) => ($isLoggedIn ? '30px' : null)};
   }
 
   .more-btn {

@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import styled from 'styled-components';
 import SkelMusicLi from 'src/components/Skeleton/SkelMusicLi';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';

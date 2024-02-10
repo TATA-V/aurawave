@@ -1,4 +1,3 @@
-import React from 'react';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import Soundtrack from 'src/components/Soundtrack/Soundtrack';
 

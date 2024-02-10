@@ -1,17 +1,17 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import * as S from 'src/styled/audioControlStyled';
 import currentTrackState, { CurrentMusic } from 'src/atom/currentTrackState';
 import formatTime from 'src/utils/formatTime';
 import updateProgressBarWidth from 'src/utils/updateProgressBarWidth';
+import PlayModeModal from 'src/components/AudioControlBar/PlayModeModal';
+import MusicDetailModal from 'src/components/MusicDetailModal/MusicDetailModal';
 import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
-
-import PlayModeModal from './PlayModeModal';
-import MusicDetailModal from '../MusicDetailModal/MusicDetailModal';
 
 function AudioControlBar() {
   // 음악 총 시간, 현재 시간
@@ -241,25 +241,25 @@ function AudioControlBar() {
               alt="album image"
             />
             <S.Controls>
-              <button>
+              <motion.button whileTap={{ scale: 0.9 }}>
                 <i onClick={() => handlePrevNextMusic('prev')} className="i-back-music" />
-              </button>
-              <button onClick={handleTogglePlay}>
+              </motion.button>
+              <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay}>
                 {isPlaying ? (
                   <MusicPauseSvg width={26} height={28} fill="white" />
                 ) : (
                   <i className="i-play" />
                 )}
-              </button>
-              <button onClick={() => handlePrevNextMusic()}>
+              </motion.button>
+              <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic()}>
                 <i className="i-next-play" />
-              </button>
+              </motion.button>
             </S.Controls>
 
             <S.Option>
-              <button onClick={() => setPlayModeModal(!playModeModal)}>
+              <motion.button whileTap={{ scale: 0.9 }} onClick={() => setPlayModeModal(!playModeModal)}>
                 <i className="i-setting" />
-              </button>
+              </motion.button>
 
               {/* 재생 모드 모달 => PlayModeModal 컴포넌트 */}
               {playModeModal && (
@@ -294,18 +294,20 @@ function AudioControlBar() {
 
             {/* 음악 컨트롤 */}
             <S.RightBox>
-              <button onClick={handleTogglePlay}>
+              <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay}>
                 {isPlaying ? (
                   <MusicPauseSvg width={19} height={21} fill="white" />
                 ) : (
                   <i className="i-play" />
                 )}
-              </button>
-              <button onClick={() => handlePrevNextMusic()}>
+              </motion.button>
+              <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic()}>
                 <i className="i-next-play" />
-              </button>
+              </motion.button>
               <S.StyledLink href="/soundtrack">
-                <i className="i-menu" />
+                <motion.div whileTap={{ scale: 0.9 }}>
+                  <i className="i-menu" />
+                </motion.div>
               </S.StyledLink>
             </S.RightBox>
           </S.BottomTabMusicPlayer>

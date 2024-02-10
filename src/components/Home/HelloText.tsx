@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import userState from 'src/atom/userState';

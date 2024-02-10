@@ -1,12 +1,12 @@
 'use client';
 
 import { useRecoilValue } from 'recoil';
-import React from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import Link from 'next/link';
 import userState from 'src/atom/userState';
 import defaultProfileJpg from 'src/assets/jpg-file/default-profile.jpg';
+import { motion } from 'framer-motion';
 import LogoMoonSvg from '../../../public/logoMoonSvg.svg';
 import LogoSvg from '../../../public/logoSvg.svg';
 
@@ -22,7 +22,7 @@ function HomeHead() {
         </div>
       </LeftBox>
 
-      <RightBox>
+      <RightBox whileTap={{ scale: 0.9 }}>
         <Link href="/profile">
           <Image
             className="image"
@@ -64,7 +64,7 @@ const LeftBox = styled.div`
   }
 `;
 
-const RightBox = styled.div`
+const RightBox = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   align-items: center;

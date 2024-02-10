@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 
 export interface CurrentMusic {
   uuid: string;
@@ -20,7 +21,7 @@ export interface CurrentTrackState {
   suffleTrack: CurrentMusic[];
 }
 
-const DefaultValue: CurrentTrackState = {
+export const currentTrackDefault: CurrentTrackState = {
   isShow: false,
   isPlaying: false,
   isLoop: false,
@@ -38,9 +39,13 @@ const DefaultValue: CurrentTrackState = {
   suffleTrack: [],
 };
 
+const sessionStorage = typeof window !== 'undefined' ? window.sessionStorage : undefined;
+const { persistAtom } = recoilPersist({ key: 'currentTrack', storage: sessionStorage });
+
 const currentTrackState = atom<CurrentTrackState>({
   key: 'currentTrackState',
-  default: DefaultValue,
+  default: currentTrackDefault,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export default currentTrackState;

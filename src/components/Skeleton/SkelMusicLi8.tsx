@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import SkelMusicLi from './SkelMusicLi';
 
 function SkelMusicLi8() {

@@ -3,6 +3,7 @@
 'use client';
 
 import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
 
 interface OpenModal {
   $openModal: boolean;
@@ -27,7 +28,7 @@ export const fadeInUp = keyframes`
   }
 `;
 
-export const MusicDetailModalBlock = styled.div`
+export const MusicDetailModalBlock = styled(motion.div)`
   width: 100%;
   max-width: 540px;
   height: 100%;
@@ -65,7 +66,7 @@ export const MusicDetailBox = styled.div<OpenModal>`
 
 export const MusicDetail = styled.div`
   min-height: 770px;
-  padding: 11px 25px 30px 25px;
+  padding: 0 25px 30px 25px;
 `;
 
 export const CloseBtnBox = styled.div`
@@ -74,7 +75,7 @@ export const CloseBtnBox = styled.div`
   align-items: center;
 
   .close-btn {
-    padding: 5px 0 5px 0;
+    padding: 16px 0 16px 0;
     display: flex;
     justify-content: center;
     align-items: center;

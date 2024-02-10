@@ -1,9 +1,10 @@
-import React, { SetStateAction } from 'react';
+import { SetStateAction } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { useMusicLoop, useMusicShuffle } from 'src/hook/useMusicControl';
 import currentTrackState from 'src/atom/currentTrackState';
+import { motion } from 'framer-motion';
 
 interface Props {
   setOpenModal: React.Dispatch<SetStateAction<boolean>>;
@@ -23,15 +24,15 @@ function PlaymodeMenu({ setOpenModal }: Props) {
 
   return (
     <PlaymodeMenuBlock $isLoop={isLoop} $playMode={playMode}>
-      <button onClick={handleLoop}>
+      <motion.button whileTap={{ scale: 0.9 }} onClick={handleLoop}>
         <i className="i-loop" />
-      </button>
-      <button onClick={handleShuffle}>
+      </motion.button>
+      <motion.button whileTap={{ scale: 0.9 }} onClick={handleShuffle}>
         <i className="i-shuffle" />
-      </button>
-      <button onClick={handleSoundtrack}>
+      </motion.button>
+      <motion.button whileTap={{ scale: 0.9 }} onClick={handleSoundtrack}>
         <i className="i-menu" />
-      </button>
+      </motion.button>
     </PlaymodeMenuBlock>
   );
 }

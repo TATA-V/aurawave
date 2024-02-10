@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import Image from 'next/image';
 import * as S from 'src/styled/musicDetailModalStyled';
 import currentTrackState from 'src/atom/currentTrackState';
 import formatTime from 'src/utils/formatTime';
 import useCloseModal from 'src/hook/useCloseModal';
+import { motion } from 'framer-motion';
 import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
 
 import MusicTitle from './MusicDetailModalMaterial/MusicTitle';
@@ -64,7 +65,11 @@ function MusicDetailModal({
 
   return (
     <>
-      <S.MusicDetailModalBlock>
+      <S.MusicDetailModalBlock
+        drag="y"
+        dragConstraints={{ top: 0, bottom: 0 }}
+        onDragEnd={handleClose}
+      >
         <S.MusicDetailBox $openModal={openModal} ref={modalRef}>
           <S.MusicDetail>
             {/* 닫기 버튼 */}
@@ -112,19 +117,19 @@ function MusicDetailModal({
             <S.Controls>
               {/* 이전 곡 재생 - 곡 재생 ,일시 정지 - 다음 곡 */}
               <S.PlayBox>
-                <button onClick={() => handlePrevNextMusic('prev')}>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic('prev')}>
                   <i className="i-back-music" />
-                </button>
-                <button onClick={() => handleTogglePlay()} className="play-btn">
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={() => handleTogglePlay()} className="play-btn">
                   {isPlaying ? (
                     <MusicPauseSvg width={42} height={44} fill="#283437" />
                   ) : (
                     <i className="i-play" />
                   )}
-                </button>
-                <button onClick={() => handlePrevNextMusic()}>
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic()}>
                   <i className="i-next-play" />
-                </button>
+                </motion.button>
               </S.PlayBox>
 
               {/* 음악 루프 설정, 음악 셔플 모드, soundtrack으로 이동 => PlaymodeMenu 컴포넌트 */}

@@ -1,11 +1,12 @@
 'use client';
 
-import React, { SetStateAction, useRef } from 'react';
+import { SetStateAction, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import currentTrackState from 'src/atom/currentTrackState';
 import * as S from 'src/styled/audioControlStyled';
 import useCloseModal from 'src/hook/useCloseModal';
 import { useMusicLoop, useMusicShuffle } from 'src/hook/useMusicControl';
+import { motion } from 'framer-motion';
 
 interface Props {
   playModeModal: boolean;
@@ -23,15 +24,22 @@ function PlayModeModal({ playModeModal, setPlayModeModal }: Props) {
   useCloseModal({ modalRef, state: playModeModal, setState: setPlayModeModal }); // hook
 
   return (
-    <S.PlayModeModalBlock ref={modalRef} $isLoop={isLoop} $playMode={playMode}>
-      <li onClick={handleLoop} className="option-box border-bottom">
+    <S.PlayModeModalBlock
+      initial={{ scale: 0, transformOrigin: '100% 100%' }}
+      animate={{ scale: 1 }}
+      transition={{ type: 'spring', duration: 0.5 }}
+      ref={modalRef}
+      $isLoop={isLoop}
+      $playMode={playMode}
+    >
+      <motion.li whileTap={{ scale: 0.9 }} onClick={handleLoop} className="option-box border-bottom">
         <i className="i-loop" />
         <span className="option-txt loop">LOOP</span>
-      </li>
-      <li onClick={handleShuffle} className="option-box">
+      </motion.li>
+      <motion.li whileTap={{ scale: 0.9 }} onClick={handleShuffle} className="option-box">
         <i className="i-shuffle" />
         <span className="option-txt shuffle">SHUFFLE</span>
-      </li>
+      </motion.li>
     </S.PlayModeModalBlock>
   );
 }

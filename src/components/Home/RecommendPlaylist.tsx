@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { AWPlaylistData } from 'src/types/playlistTypes';
 import { getAwPlaylistDocs } from 'src/firebase/playlist';
+import { motion } from 'framer-motion';
 import currentTrackState from 'src/atom/currentTrackState';
 import SkelPlaylist from 'src/components/Skeleton/SkelPlaylist';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';
@@ -78,7 +79,7 @@ function RecommendPlaylist() {
               <FadeInMotion>
                 <PlaylistItem>
                   <div className="playlist-content">
-                    <div className="image-box">
+                    <div onClick={() => handlePlay(idx)} className="image-box">
                       <Image
                         className="image"
                         width={186}
@@ -89,12 +90,16 @@ function RecommendPlaylist() {
                     </div>
                     <div className="details">
                       <div className="des">
-                        <p className="title truncate">{el.playlistTitle}</p>
-                        <p className="description truncate">{el.description}</p>
+                        <p onClick={() => handlePlay(idx)} className="title truncate">{el.playlistTitle}</p>
+                        <p onClick={() => handlePlay(idx)} className="description truncate">{el.description}</p>
                       </div>
-                      <div>
-                        <PlayBlue onClick={() => handlePlay(idx)} className="play-blue" />
-                      </div>
+                      <motion.div
+                        onClick={() => handlePlay(idx)}
+                        whileTap={{ scale: 0.9 }}
+                        className="cursor-pointer"
+                      >
+                        <PlayBlue className="play-blue" />
+                      </motion.div>
                     </div>
                   </div>
                 </PlaylistItem>

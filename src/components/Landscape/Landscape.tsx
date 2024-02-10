@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { bubblegum } from 'src/fonts/fonts';
@@ -12,6 +11,8 @@ function Landscape() {
     <LandscapeBlock className="px-[20px]">
       <div className="landscape">
         <Image
+          width={539.87}
+          height={167}
           className="image"
           src={LandscapeJpg}
           placeholder="blur"
@@ -40,11 +41,6 @@ const LandscapeBlock = styled.div`
     align-items: end;
     position: relative;
     overflow: hidden;
-
-    background-image: url('../../assets/jpg-file/landscape.jpg');
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: cover;
   }
 
   .stars-text {

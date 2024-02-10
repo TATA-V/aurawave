@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Lottie from 'react-lottie-player';
 import loadingJson from '../../../public/lottie/playlist_loading.json';

@@ -25,6 +25,7 @@ specifiers:
   react-hook-form: ^7.50.1
   react-lottie-player: ^1.5.6
   recoil: ^0.7.7
+  recoil-persist: ^5.1.0
   styled-components: ^6.1.8
   swiper: ^11.0.6
   tailwindcss: ^3.3.0
@@ -42,6 +43,7 @@ dependencies:
   react-hook-form: 7.50.1_react@18.2.0
   react-lottie-player: 1.5.6_react@18.2.0
   recoil: 0.7.7_biqbaboplfbrettd7655fr4n2y
+  recoil-persist: 5.1.0_recoil@0.7.7
   styled-components: 6.1.8_biqbaboplfbrettd7655fr4n2y
   swiper: 11.0.6
   uuid: 9.0.1
@@ -4838,6 +4840,14 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /recoil-persist/5.1.0_recoil@0.7.7:
+    resolution: {integrity: sha512-sew4k3uBVJjRWKCSFuBw07Y1p1pBOb0UxLJPxn4G2bX/9xNj+r2xlqYy/BRfyofR/ANfqBU04MIvulppU4ZC0w==}
+    peerDependencies:
+      recoil: ^0.7.2
+    dependencies:
+      recoil: 0.7.7_biqbaboplfbrettd7655fr4n2y
+    dev: false
 
   /recoil/0.7.7_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-8Og5KPQW9LwC577Vc7Ug2P0vQshkv1y3zG3tSSkWMqkWSwHmE+by06L8JtnGocjW6gcCvfwB3YtrJG6/tWivNQ==}

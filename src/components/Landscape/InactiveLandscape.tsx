@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import LandscapeJpg from 'src/assets/jpg-file/landscape.jpg';

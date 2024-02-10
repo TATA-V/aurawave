@@ -1,6 +1,6 @@
 'use client';
 
-import React, { SetStateAction, useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { usePathname, useRouter } from 'next/navigation';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';

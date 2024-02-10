@@ -1,7 +1,7 @@
 'use clinet';
 
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -101,7 +101,7 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
       $top={top}
       initial={{ scale: 0, transformOrigin: '100% 0%' }}
       animate={{ scale: 1 }}
-      transition={{ type: 'spring', duration: 0.7 }}
+      transition={{ type: 'spring', duration: 0.5 }}
     >
       <AddToPlaylistModalBlock ref={modalRef}>
         {soundtrackPage && !showMusicDetail && (
@@ -146,7 +146,7 @@ interface Top {
 
 const Container = styled(motion.div)<Top>`
   position: absolute;
-  top: ${({ $top }) => ($top ? `${$top}px` : '18px')};
+  top: ${({ $top }) => ($top ? `${$top}px` : '28px')};
   right: 0;
   width: 130px;
   padding-bottom: 65px;

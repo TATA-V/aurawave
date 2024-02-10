@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import * as S from 'src/styled/searchStyled';
 import { End } from 'src/styled/frequentlyStyled';

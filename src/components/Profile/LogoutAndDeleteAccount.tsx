@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import Image from 'next/image';
@@ -37,7 +37,7 @@ function LogoutAndDeleteAccount() {
           <p className="logout-txt">로그아웃</p>
         </button>
       )}
-      <Image className="crayon-img" src={crayonPng} alt="crayon line" priority />
+      <Image width={540} height={327.69} className="crayon-img" src={crayonPng} alt="crayon line" priority />
 
       {isLoggedIn && (
         <button onClick={() => setToggleModal(true)} className="delete-box">
@@ -76,6 +76,7 @@ const LogoutAndDeleteAccountBlock = styled.div`
     font-size: 0.6875rem;
     display: flex;
     align-items: center;
+    margin-top: -3px;
   }
 
   .crayon-img {
