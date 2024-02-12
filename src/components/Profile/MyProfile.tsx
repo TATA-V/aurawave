@@ -129,7 +129,13 @@ function MyProfile() {
           {isLoggedIn ? '닉네임 변경' : '로그인'}
         </motion.button>
         {openTextInput && (
-          <form className="input-form" onSubmit={handleSubmit}>
+          <motion.form
+            initial={{ scale: 0, transformOrigin: '0% 0%' }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', duration: 0.5 }}
+            className="input-form"
+            onSubmit={handleSubmit}
+          >
             <ChangeNameInput
               className="changename-input"
               defaultValue={changeUsername}
@@ -142,7 +148,7 @@ function MyProfile() {
             <button onClick={handleSubmit} className="submit-btn">
               <i className="i-submit" />
             </button>
-          </form>
+          </motion.form>
         )}
       </LeftBox>
 

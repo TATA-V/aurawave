@@ -28,7 +28,7 @@ export const fadeInUp = keyframes`
   }
 `;
 
-export const MusicDetailModalBlock = styled(motion.div)`
+export const MusicDetailModalBlock = styled.div`
   width: 100%;
   max-width: 540px;
   height: 100%;
@@ -38,7 +38,7 @@ export const MusicDetailModalBlock = styled(motion.div)`
   z-index: 2;
 `;
 
-export const MusicDetailBox = styled.div<OpenModal>`
+export const MusicDetailBox = styled(motion.div)<OpenModal>`
   width: 100%;
   max-width: 540px;
   height: 100%;

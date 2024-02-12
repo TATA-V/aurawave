@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 import useAuthentication from 'src/hook/useAuthentication';
 import formatDateToYYYYMMDD from 'src/utils/formatDateToYYYYMMDD';

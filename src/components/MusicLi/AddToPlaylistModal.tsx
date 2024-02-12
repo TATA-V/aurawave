@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { MusicData } from 'src/types/musicTypes';
@@ -10,7 +10,8 @@ import useCloseModal from 'src/hook/useCloseModal';
 import currentTrackState from 'src/atom/currentTrackState';
 import { motion } from 'framer-motion';
 import { getUserInfo } from 'src/firebase/user';
-import userState from 'src/atom/userState';
+import { auth } from 'src/firebase/config';
+import { UserPlaylistData } from 'src/types/playlistTypes';
 
 /**
  * 상위에서 쓰이고 있는 useState
@@ -49,16 +50,19 @@ interface Props {
 }
 function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlaylistModal }: Props) {
   const [soundtrackPage, setSoundtrackPage] = useState(false);
-  const [playlist, setPlaylist] = useState();
+  const [playlists, setPlaylists] = useState<UserPlaylistData[] | undefined>([]);
   const [currentMusicAndTrack, setCurrentMusicAndTrack] = useRecoilState(currentTrackState); // 리코일
-  // const {  } = useRecoilValue(userState);
   const { playMode, showMusicDetail, currentMusic, currentTrack, suffleTrack } = currentMusicAndTrack;
 
   const modalRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    // getUserInfo()
+    const user = auth.currentUser;
+    if (!user) return;
+    getUserInfo(user.uid).then((data) => {
+      setPlaylists(data.playlists);
+    });
   }, []);
 
   // 현재 페이지가 soundtrack이라면
@@ -114,8 +118,8 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
         </ModalTitle>
 
         <AddToPlaylistUl>
-          {data.map((el) => (
-            <AddToPlaylistLi key={el.id} $num={el.id}>
+          {playlists && playlists.map((el, idx) => (
+            <AddToPlaylistLi key={el.uuid} $num={idx + 1}>
               <div className="playlist-box">
                 <i className="i-plus-music-circle" />
                 <p className="playlist-title">{el.playlistTitle}</p>

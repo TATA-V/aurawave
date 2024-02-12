@@ -40,6 +40,7 @@ function MusicDetailModal({
   const [openModal, setOpenModal] = useState(true);
   // progressBar 위에 마우스가 있는지
   const [isMouseMoveActive, setIsMouseMoveActive] = useState(false);
+  const [modalClientY, setModalClientY] = useState();
 
   const [currentMusicAndTrack, setCurrentMusicAndTrack] = useRecoilState(currentTrackState); // 리코일
   const { isPlaying, showMusicDetail, currentMusic } = currentMusicAndTrack;
@@ -48,7 +49,10 @@ function MusicDetailModal({
 
   // 모달창 닫기
   const handleClose = () => {
-    setOpenModal(false);
+    if (!modalClientY) return;
+    if (modalClientY > 500) {
+      setOpenModal(false);
+    }
   };
 
   useEffect(() => {
@@ -65,16 +69,19 @@ function MusicDetailModal({
 
   return (
     <>
-      <S.MusicDetailModalBlock
-        drag="y"
-        dragConstraints={{ top: 0, bottom: 0 }}
-        onDragEnd={handleClose}
-      >
-        <S.MusicDetailBox $openModal={openModal} ref={modalRef}>
+      <S.MusicDetailModalBlock>
+        <S.MusicDetailBox
+          ref={modalRef}
+          $openModal={openModal}
+          drag="y"
+          onDrag={(e: any) => setModalClientY(e.clientY)}
+          onDragEnd={handleClose}
+          dragConstraints={{ top: 0, bottom: 0 }}
+        >
           <S.MusicDetail>
             {/* 닫기 버튼 */}
             <S.CloseBtnBox>
-              <button onClick={handleClose} className="close-btn">
+              <button onClick={() => setOpenModal(false)} className="close-btn">
                 <div className="close" />
               </button>
             </S.CloseBtnBox>

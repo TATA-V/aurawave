@@ -23,7 +23,6 @@ function Soundtrack() {
 
   useEffect(() => {
     const track = playMode === 'shuffle' ? suffleTrack : currentTrack;
-    const trackTxt = playMode === 'shuffle' ? 'suffleTrack' : 'currentTrack';
     setMusicTrack(track);
   }, [playMode, currentTrack, suffleTrack]);
 
@@ -39,6 +38,14 @@ function Soundtrack() {
     }
   }, [currentTrack.length, resetCurrentMusicAndTrack, router]);
 
+  const handleDragEnd = () => {
+    if (playMode === 'shuffle') {
+      setCurrentMusicAndTrack((prev) => ({ ...prev, suffleTrack: musicTrack }));
+      return;
+    }
+    setCurrentMusicAndTrack((prev) => ({ ...prev, currentTrack: musicTrack }));
+  };
+
   return (
     <>
       <GoBackHead title="재생목록" />
@@ -53,7 +60,7 @@ function Soundtrack() {
 
         <Reorder.Group axis="y" values={musicTrack} onReorder={setMusicTrack}>
           {musicTrack.map((track) => (
-            <SoundtrackMusicLi key={track.uuid} el={track} />
+            <SoundtrackMusicLi handleDragEnd={handleDragEnd} key={track.uuid} el={track} />
           ))}
         </Reorder.Group>
       </SoundtrackBlock>

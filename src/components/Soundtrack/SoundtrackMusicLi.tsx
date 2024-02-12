@@ -9,8 +9,9 @@ import { Reorder } from 'framer-motion';
 
 interface Props {
   el: MusicData;
+  handleDragEnd: () => void;
 }
-function SoundtrackMusicLi({ el }: Props) {
+function SoundtrackMusicLi({ el, handleDragEnd }: Props) {
   const { imageUri, title, composer } = el;
   const musicPlay = useMusicPlay(); // hook
   const pathname = usePathname();
@@ -21,7 +22,7 @@ function SoundtrackMusicLi({ el }: Props) {
   };
 
   return (
-    <Reorder.Item id={el.uuid} value={el}>
+    <Reorder.Item onDragEnd={handleDragEnd} id={el.uuid} value={el}>
       <S.MusicLiBlock>
         <div className="music-content">
           <div className="details-box">
