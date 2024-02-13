@@ -132,6 +132,10 @@ export const BottomTabMusicPlayer = styled.div`
 export const LeftBox = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   .image {
     width: 38px;
@@ -142,6 +146,7 @@ export const LeftBox = styled.div`
   }
 
   .details {
+    width: 100%;
     padding-left: 13px;
     height: 33px;
     display: flex;
@@ -150,6 +155,10 @@ export const LeftBox = styled.div`
   }
 
   .title {
+    width: calc(100% - 20px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     color: var(--white-100);
     font-size: 0.9375rem;
     font-weight: 400;
@@ -272,6 +281,7 @@ export const PlayModeModalBlock = styled(motion.ul)<PlayMode & IsLoop>`
     padding-left: 3px;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 
   .border-bottom {

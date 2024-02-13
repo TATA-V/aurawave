@@ -12,6 +12,7 @@ import formatDateToYYYYMMDD from 'src/utils/formatDateToYYYYMMDD';
 import compressImage from 'src/utils/compressImage';
 import { updateUserPlaylists } from 'src/firebase/user';
 import { auth } from 'src/firebase/config';
+import { motion } from 'framer-motion';
 import userState from 'src/atom/userState';
 
 interface Props {
@@ -61,8 +62,11 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
         musicList,
       };
       // firestore에 저장
-      setUserPlaylistDoc({ uuid, playlistData }); // user_playlist에 플레이리스트 등록
-      updateUserPlaylists({ uuid: user.uid, playlistData }); // 유저 정보에 등록한 플레이리스트 추가
+      const playlist = async () => {
+        await setUserPlaylistDoc({ uuid, playlistData }); // user_playlist에 플레이리스트 등록
+        await updateUserPlaylists({ uuid: user.uid, playlistData }); // 유저 정보에 등록한 플레이리스트 추가
+      };
+      playlist();
       resetPlaylistDataState();
       const id = uuidv4(); // uuid 생성
       setPlaylistData((prev) => ({ ...prev, uuid: id, playlistTitle: formattedDate }));
@@ -70,6 +74,7 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
       if (setLoading) {
         setLoading(false);
       }
+      router.back();
     }
   }, [
     username,
@@ -121,9 +126,9 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
 
   return (
     <GoBackHeadBlok>
-      <div onClick={handleGoBack} role="button" className="back-btn">
+      <motion.div whileTap={{ scale: 0.9 }} onClick={handleGoBack} role="button" className="back-btn">
         <i className="i-back" />
-      </div>
+      </motion.div>
 
       <Title>새 플레이리스트 추가</Title>
 

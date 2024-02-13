@@ -12,35 +12,8 @@ import { motion } from 'framer-motion';
 import { getUserInfo } from 'src/firebase/user';
 import { auth } from 'src/firebase/config';
 import { UserPlaylistData } from 'src/types/playlistTypes';
-
-/**
- * 상위에서 쓰이고 있는 useState
- * const [showAddToPlaylistModal, setShowAddToPlaylistModal] = useState(false);
- */
-
-// 임시 데이터
-const data = [
-  {
-    id: 1,
-    playlistTitle: '여행가서 들으면 좋은 노래 모음',
-  },
-  {
-    id: 2,
-    playlistTitle: '새벽 감성 노래 모음',
-  },
-  {
-    id: 3,
-    playlistTitle: '꽃향기를 닮은 음악',
-  },
-  {
-    id: 4,
-    playlistTitle: '주인장이 좋아하는 감성 힙합',
-  },
-  {
-    id: 5,
-    playlistTitle: '우주를 여행하는 기분',
-  },
-];
+import { addOneMusicToPlaylist } from 'src/firebase/playlist';
+import useToast from 'src/hook/useToast';
 
 interface Props {
   el: MusicData;
@@ -56,6 +29,7 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
 
   const modalRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const { errorToast, successToast } = useToast();
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -100,6 +74,15 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
     }));
   };
 
+  const handleAddMusicToPlaylist = async (uuid: string) => {
+    const exist = await addOneMusicToPlaylist(uuid, el);
+    if (exist) {
+      errorToast('이미 재생 목록에 추가된 음악입니다.');
+      return;
+    }
+    successToast('재생목록에 음악을 추가했습니다.');
+  };
+
   return (
     <Container
       $top={top}
@@ -118,16 +101,16 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
         </ModalTitle>
 
         <AddToPlaylistUl>
-          {playlists && playlists.map((el, idx) => (
-            <AddToPlaylistLi key={el.uuid} $num={idx + 1}>
+          {playlists && playlists.map((item, idx) => (
+            <AddToPlaylistLi onClick={() => handleAddMusicToPlaylist(item.uuid)} key={el.uuid} $num={idx + 1} whileTap={{ scale: 0.9 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               <div className="playlist-box">
                 <i className="i-plus-music-circle" />
-                <p className="playlist-title">{el.playlistTitle}</p>
+                <p className="playlist-title">{item.playlistTitle}</p>
               </div>
             </AddToPlaylistLi>
           ))}
         </AddToPlaylistUl>
-        <AddNewPlaylist>
+        <AddNewPlaylist whileTap={{ scale: 0.9 }}>
           <StyledLink href="/playlist-editor">
             <i className="i-plus-circle" />
             <p className="add-new-playlist">새 플레이리스트 추가</p>
@@ -214,7 +197,7 @@ const AddToPlaylistUl = styled.ul`
   }
 `;
 
-const AddToPlaylistLi = styled.li<Num>`
+const AddToPlaylistLi = styled(motion.li)<Num>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,7 +228,7 @@ const AddToPlaylistLi = styled.li<Num>`
   }
 `;
 
-const AddNewPlaylist = styled.div`
+const AddNewPlaylist = styled(motion.div)`
   width: 100%;
   height: 35px;
   padding-right: 5px;

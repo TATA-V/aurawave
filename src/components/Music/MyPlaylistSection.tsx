@@ -142,7 +142,7 @@ const MyPlaylistLi = styled.li`
 
 const Ul = styled.ul`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   li:last-child {
     margin-bottom: 0;
   }

@@ -108,6 +108,8 @@ export const PlaylistImageBlock = styled.div`
   }
 
   .image {
+    width: 186px;
+    height: 158px;
     border-radius: 15px;
     object-fit: cover;
   }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRouter, usePathname } from 'next/navigation';
 import { bubblegum } from 'src/fonts/fonts';
+import { motion } from 'framer-motion';
 
 interface Props {
   title?: string;
@@ -32,9 +33,9 @@ function GoBackHead({ title }: Props) {
 
   return (
     <GoBackHeadBlok>
-      <div onClick={handleGoBack} role="button" className="back-btn">
+      <motion.div whileTap={{ scale: 0.9 }} onClick={handleGoBack} role="button" className="back-btn">
         {title !== '재생목록' && <i className="i-back" />}
-      </div>
+      </motion.div>
 
       {title && !isAurawaveTxt && <Title>{title}</Title>}
       {title && isAurawaveTxt && (

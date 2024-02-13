@@ -9,6 +9,7 @@ import { serverTimestamp } from 'firebase/firestore';
 import { bubblegum } from 'src/fonts/fonts';
 import playlistDataState from 'src/atom/playlistDataState';
 import { setAwPlaylistDoc } from 'src/firebase/playlist';
+import { motion } from 'framer-motion';
 import uploadImage from 'src/firebase/image';
 import formatDateToYYYYMMDD from 'src/utils/formatDateToYYYYMMDD';
 
@@ -100,9 +101,9 @@ function AwPlaylistGoBackHead() {
 
   return (
     <GoBackHeadBlok>
-      <div onClick={handleGoBack} role="button" className="back-btn">
+      <motion.div whileTap={{ scale: 0.9 }} onClick={handleGoBack} role="button" className="back-btn">
         <i className="i-back" />
-      </div>
+      </motion.div>
       <Title>
         <span className={`aw-txt ${bubblegum.className}`}>AW</span> 플레이리스트 등록
       </Title>

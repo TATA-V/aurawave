@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 import RecoilProvider from 'src/components/provider/RecoilProvider';
 import './globals.css';
 import './iconfonts.css';
@@ -30,6 +31,7 @@ export default function RootLayout({
             <DefaultLayout>
               {children}
             </DefaultLayout>
+            <Toaster />
           </body>
         </html>
       </StyledComponentsRegistry>

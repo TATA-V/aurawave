@@ -8,6 +8,7 @@ import { deleteObject, ref } from 'firebase/storage';
 import { useResetRecoilState } from 'recoil';
 import { auth, storage } from 'src/firebase/config';
 import { deleteUserDoc } from 'src/firebase/user';
+import { motion } from 'framer-motion';
 import currentTrackState from 'src/atom/currentTrackState';
 import useCloseModal from 'src/hook/useCloseModal';
 
@@ -96,7 +97,12 @@ function CustomModal({ toggleModal, setToggleModal, type }: Props) {
   };
 
   return (
-    <ModalBlock>
+    <ModalBlock
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
+      exit={{ opacity: 0 }}
+    >
       <Modal ref={modalRef}>
         <div className="modal-content">
           <p className="modal-text">{message}</p>
@@ -139,7 +145,7 @@ const fadeInUp = keyframes`
   }
 `;
 
-const ModalBlock = styled.div`
+const ModalBlock = styled(motion.div)`
   position: fixed;
   top: 0;
   width: 100%;

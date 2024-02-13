@@ -32,3 +32,8 @@ export interface UpdateUserPlaylists {
   uuid: string;
   playlistData: UserPlaylistData;
 }
+
+export interface UpdateUserAllPlaylists {
+  uuid: string;
+  playlistsData: UserPlaylistData[];
+}

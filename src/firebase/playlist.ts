@@ -2,6 +2,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   limit,
   orderBy,
@@ -21,13 +22,17 @@ import {
   UpdatePlaylistDoc,
   GetPlaylistDocs,
 } from 'src/types/playlistTypes';
-import { firestore } from './config';
+import { MusicData } from 'src/types/musicTypes';
+import { auth, firestore } from './config';
+import { getUserInfo, updateUserAllPlaylists } from './user';
 
 // 새로운 AuraWave 플레이리스트 정보 등록
 // eslint-disable-next-line no-redeclare
 export async function setAwPlaylistDoc({ uuid, awplaylistData }: setAwPlaylistDoc) {
-  const musicRef = doc(firestore, 'aw_playlist', uuid);
-  await setDoc(musicRef, awplaylistData);
+  if (uuid && awplaylistData) {
+    const musicRef = doc(firestore, 'aw_playlist', uuid);
+    await setDoc(musicRef, awplaylistData);
+  }
 }
 
 // AuraWave 플레이리스트 삭제
@@ -75,6 +80,14 @@ export async function getAwPlaylistDocs({
   return playlistArr;
 }
 
+// 하나의 플레이리스트 정보 가져오기
+export async function getOneAwPlaylist(uuid: string) {
+  const awDocRef = doc(firestore, 'aw_playlist', uuid);
+  const awDocSnapshot = await getDoc(awDocRef);
+  const data = awDocSnapshot.data();
+  return data as AWPlaylistData;
+}
+
 // ---------------------------
 // ---------------------------
 
@@ -90,7 +103,7 @@ export async function setUserPlaylistDoc({ uuid, playlistData }: SetUserPlaylist
 // user 플레이리스트 collection 가져오기
 const playlistCol = collection(firestore, 'user_playlist');
 
-// 모든 AuraWave 플레이리스트 가져오기
+// 모든 user 플레이리스트 가져오기
 export async function getAllPlaylistDocs() {
   const playlistArr: PlaylistData[] = [];
 
@@ -121,14 +134,89 @@ export async function getPlaylistDocs({
   return playlistArr;
 }
 
+const user = auth.currentUser;
+
 // user 플레이리스트 삭제
 export async function deletePlaylistDoc(uuid: string) {
   const musicRef = doc(firestore, 'user_playlist', uuid);
   await deleteDoc(musicRef);
+
+  if (!user) return;
+  const userData = await getUserInfo(user.uid);
+  const updateUserData = userData.playlists?.filter((el) => el.uuid !== uuid);
+  if (!updateUserData) return;
+  await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
 }
 
 // user 플레이리스트 수정하기
 export async function updatePlaylistDoc({ uuid, playlistData }: UpdatePlaylistDoc) {
   const musicRef = doc(firestore, 'user_playlist', uuid);
   await updateDoc(musicRef, { data: playlistData });
+
+  if (!user) return;
+  const userData = await getUserInfo(user.uid);
+  const updateUserData = userData.playlists?.map((el) => {
+    if (el.uuid === uuid) {
+      return playlistData;
+    }
+    return el;
+  });
+  if (!updateUserData) return;
+  await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
+}
+
+// 하나의 user 플레이리스트 가져오기
+export async function getOneMusicPlaylist(uuid: string) {
+  const musicRef = doc(firestore, 'user_playlist', uuid);
+  const musicDocSnapshot = await getDoc(musicRef);
+  const musicData = musicDocSnapshot.data();
+  if (!musicData) return;
+  return musicData.musicList;
+}
+
+// user 플레이리스트에 하나의 음악 추가
+export async function addOneMusicToPlaylist(uuid: string, music: MusicData) {
+  const musicRef = doc(firestore, 'user_playlist', uuid);
+  const musicData = await getOneMusicPlaylist(uuid);
+  const exist = musicData.some((item: MusicData) => item.uuid === music.uuid);
+  if (!exist) {
+    await updateDoc(musicRef, { musicList: [...musicData, music] });
+  }
+
+  if (!user) return;
+  const userData = await getUserInfo(user.uid);
+  const updateUserData = userData.playlists?.map((el) => {
+    if (el.uuid === uuid) {
+      const musicList = Array.isArray(el.musicList) ? el.musicList : [];
+      const exist = musicList.some((item) => item.uuid === music.uuid);
+      if (!exist) {
+        return { ...el, musicList: [...musicList, music] };
+      }
+      return el;
+    }
+    return el;
+  });
+  if (!updateUserData) return;
+  await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
+  return exist;
+}
+
+// user 플레이리스트에 하나의 음악 삭제
+export async function deleteOneMusicToPlaylist(uuid: string, music: MusicData) {
+  const musicRef = doc(firestore, 'user_playlist', uuid);
+  const musicData = await getOneMusicPlaylist(uuid);
+  if (!musicData) return;
+  const updateMusicData = musicData.filter((el: MusicData) => el.uuid !== music.uuid);
+  await updateDoc(musicRef, { musicList: updateMusicData });
+
+  if (!user) return;
+  const userData = await getUserInfo(user.uid);
+  const updateUserData = userData.playlists?.map((el) => {
+    if (el.uuid === uuid) {
+      return { ...el, musicList: updateMusicData };
+    }
+    return el;
+  });
+  if (!updateUserData) return;
+  await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
 }

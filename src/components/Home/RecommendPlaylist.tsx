@@ -54,9 +54,7 @@ function RecommendPlaylist() {
       {!loaded && (
         <FadeInMotion>
           <SkelPlaylistBlock>
-            <SkelPlaylist />
-            <SkelPlaylist />
-            <SkelPlaylist />
+            {[...Array(3)].map((_, idx) => (<SkelPlaylist key={idx} />))}
           </SkelPlaylistBlock>
         </FadeInMotion>
       )}

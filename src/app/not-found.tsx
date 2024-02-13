@@ -1,8 +1,11 @@
+import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import NotFound from 'src/components/NotFound/NotFound';
 
 function NotFoundPage() {
   return (
-    <NotFound />
+    <FadeInMotion>
+      <NotFound />
+    </FadeInMotion>
   );
 }
 

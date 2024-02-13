@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,6 +9,7 @@ import { bubblegum } from 'src/fonts/fonts';
 import { getAwPlaylistDocs } from 'src/firebase/playlist';
 import SkelAwPlaylistSection from 'src/components/Skeleton/SkelAwPlaylistSection';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';
+import AwPlaylistItem from 'src/components/common/AwPlaylistItem';
 import 'swiper/css';
 
 function AwPlaylistSection() {
@@ -53,25 +53,15 @@ function AwPlaylistSection() {
             },
           }}
         >
-          {playlistData.map((el) => (
-            <SwiperSlide key={el.uuid}>
-              <FadeInMotion>
-                <PlaylistItem>
-                  <Image
-                    className="image"
-                    width={168}
-                    height={143}
-                    src={String(el.playlistImageUri)}
-                    alt="aurawave playlist"
-                  />
-                  <div className="details">
-                    <span className="title">{el.playlistTitle}</span>
-                    <span className="description">{el.description}</span>
-                  </div>
-                </PlaylistItem>
-              </FadeInMotion>
-            </SwiperSlide>
-          ))}
+          <ul>
+            {playlistData.map((el) => (
+              <SwiperSlide key={el.uuid}>
+                <FadeInMotion>
+                  <AwPlaylistItem key={el.uuid} el={el} />
+                </FadeInMotion>
+              </SwiperSlide>
+            ))}
+          </ul>
         </StyledSwiper>
       )}
     </section>
@@ -103,43 +93,6 @@ const TopBox = styled.div`
     font-weight: 500;
     padding-right: 18px;
     text-decoration: none;
-  }
-`;
-
-const PlaylistItem = styled.div`
-  width: 100%;
-  height: 188px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  .image {
-    width: 100%;
-    height: 143px;
-    border: 1px solid var(--gray-100);
-    border-radius: 15px;
-    object-fit: cover;
-  }
-
-  .details {
-    height: 33px;
-    padding-left: 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .title {
-    color: var(--dark-blue-900);
-    font-size: 0.9375rem;
-    font-weight: 500;
-  }
-
-  .description {
-    height: 12px;
-    color: var(--dark-blue-700);
-    font-size: 0.6875rem;
-    font-weight: 400;
   }
 `;
 

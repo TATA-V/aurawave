@@ -1,6 +1,7 @@
 import { doc, setDoc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
 import {
   SetUserDoc,
+  UpdateUserAllPlaylists,
   UpdateUserDoc,
   UpdateUserName,
   UpdateUserPlaylists,
@@ -35,6 +36,12 @@ export async function updateUserPlaylists({ uuid, playlistData }: UpdateUserPlay
   const playlistDataArr = userData?.playlists || [];
   playlistDataArr.push(playlistData);
   await updateDoc(userDocRef, { playlists: playlistDataArr });
+}
+
+// 유저의 모든 playlists 정보 업데이트
+export async function updateUserAllPlaylists({ uuid, playlistsData }: UpdateUserAllPlaylists) {
+  const userDocRef = doc(firestore, 'user', uuid);
+  await updateDoc(userDocRef, { playlists: playlistsData });
 }
 
 // 현재 유저 정보 가져오기

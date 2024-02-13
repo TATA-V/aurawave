@@ -33,7 +33,7 @@ export interface UserPlaylistData {
 }
 
 export interface setAwPlaylistDoc {
-  uuid: string;
+  uuid?: string;
   awplaylistData: AWPlaylistData;
 }
 
@@ -65,5 +65,5 @@ export interface GetPlaylistDocs {
 
 export interface UpdatePlaylistDoc {
   uuid: string;
-  playlistData: PlaylistData;
+  playlistData: UserPlaylistData;
 }

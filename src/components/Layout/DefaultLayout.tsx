@@ -20,7 +20,8 @@ function DefaultLayout({ children }: Props) {
   const [{ isShow, showMusicDetail }, _] = useCurrentTrackSSR();
   const setPlaylistData = useSetRecoilState(playlistDataState);
   const pathname = usePathname();
-  const HideBottomTab = showMusicDetail || ['/soundtrack', '/login', '/signup', '/music-collection'].includes(pathname);
+  const pathnameArr = pathname.split('/');
+  const HideBottomTab = showMusicDetail || ['soundtrack', 'login', 'signup', 'music-collection', 'playlist-editor'].includes(pathnameArr[1]);
 
   useAuthentication();
 
