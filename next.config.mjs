@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 import createNextPWA from '@ducanh2912/next-pwa';
 
-const withPWA = createNextPWA({ dest: 'public' });
+const withPWA = createNextPWA({ dest: 'public', runtimeCaching: [] });
 
 const nextConfig = {
   compiler: {
