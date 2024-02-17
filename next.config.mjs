@@ -1,16 +1,7 @@
 /** @type {import('next').NextConfig} */
 import createNextPWA from '@ducanh2912/next-pwa';
 
-const withPWA = createNextPWA({
-  cacheOnFrontEndNav: true,
-  aggressiveFrontEndNavCaching: true,
-  reloadOnOnline: true,
-  swcMinify: true,
-  dest: 'public',
-  workboxOptions: {
-    disableDevLogs: true,
-  },
-});
+const withPWA = createNextPWA({ dest: 'public' });
 
 const nextConfig = {
   compiler: {
