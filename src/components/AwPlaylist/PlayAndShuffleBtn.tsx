@@ -34,7 +34,7 @@ function PlayAndShuffleBtn({ data } : Props) {
       return;
     }
     handlePlay();
-    playlistShuffle();
+    setPlayBtnClicked(true);
   };
 
   return (

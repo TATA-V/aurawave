@@ -49,13 +49,9 @@ function MusicCollection() {
 
   // 검색
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const regex = new RegExp(e.target.value, 'gi');
-    const searchResult = allData.reduce((acc, music) => {
-      if ((music.title && music.title.match(regex)) || music.composer.match(regex)) {
-        acc.push(music);
-      }
-      return acc;
-    }, [] as MusicData[]);
+    const searchText = e.target.value.toLowerCase();
+    const searchResult = allData.filter((music) => (music.title && music.title.toLowerCase().includes(searchText))
+    || (music.composer && music.composer.toLowerCase().includes(searchText)));
     setFindSearchData(searchResult);
     setSearchText(e.target.value);
   };

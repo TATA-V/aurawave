@@ -1,4 +1,17 @@
 /** @type {import('next').NextConfig} */
+import createNextPWA from '@ducanh2912/next-pwa';
+
+const withPWA = createNextPWA({
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  dest: 'public',
+  workboxOptions: {
+    disableDevLogs: true,
+  },
+});
+
 const nextConfig = {
   compiler: {
     styledComponents: true,
@@ -38,4 +51,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);

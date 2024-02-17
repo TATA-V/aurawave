@@ -145,7 +145,7 @@ export const ProgressBarBox = styled.div<ProgressBarWidth & CurrentTimeWidth>`
 
     position: absolute;
     top: 9px;
-    left: ${({ $currentTimeWidth }) => $currentTimeWidth - 14}%;
+    left: ${({ $currentTimeWidth }) => $currentTimeWidth - 10}%;
     z-index: 1;
   }
 `;

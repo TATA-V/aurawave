@@ -57,7 +57,9 @@ function AwPlaylistSection() {
             {playlistData.map((el) => (
               <SwiperSlide key={el.uuid}>
                 <FadeInMotion>
-                  <AwPlaylistItem key={el.uuid} el={el} />
+                  <Link href={`/aw-playlist/${el.uuid}`}>
+                    <AwPlaylistItem key={el.uuid} el={el} />
+                  </Link>
                 </FadeInMotion>
               </SwiperSlide>
             ))}

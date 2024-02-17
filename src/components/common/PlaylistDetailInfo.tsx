@@ -13,7 +13,7 @@ function PlaylistDetailInfo({ data } : Props) {
         {data.playlistImageUri
           && <Image src={String(data?.playlistImageUri)} width={152} height={130} alt="aw-playlist" className="image" />}
         <div className="pt-[9px]">
-          <h2 className="text-base text-darkBlue900 font-medium">듣자마자 반하는</h2>
+          <h2 className="text-base text-darkBlue900 font-medium">{data.playlistTitle}</h2>
           <p className="mt-[10px] text-blueGray700 text-sm font-normal">AuraWave</p>
         </div>
       </ImageAndTitle>

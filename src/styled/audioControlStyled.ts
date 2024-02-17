@@ -76,7 +76,8 @@ export const ProgressBarAndTime = styled.div<CurrentTimeWidth>`
 
     position: absolute;
     top: 8px;
-    left: ${({ $currentTimeWidth }) => $currentTimeWidth - 12}%;
+    /* left: ${({ $currentTimeWidth }) => $currentTimeWidth - 12}%; */
+    left: ${({ $currentTimeWidth }) => $currentTimeWidth - 9}%;
     z-index: 1;
   }
 `;

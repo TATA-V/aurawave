@@ -102,7 +102,7 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
 
         <AddToPlaylistUl>
           {playlists && playlists.map((item, idx) => (
-            <AddToPlaylistLi onClick={() => handleAddMusicToPlaylist(item.uuid)} key={el.uuid} $num={idx + 1} whileTap={{ scale: 0.9 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+            <AddToPlaylistLi onClick={() => handleAddMusicToPlaylist(item.uuid)} key={idx} $num={idx + 1} whileTap={{ scale: 0.9 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               <div className="playlist-box">
                 <i className="i-plus-music-circle" />
                 <p className="playlist-title">{item.playlistTitle}</p>
