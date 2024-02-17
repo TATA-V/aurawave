@@ -13,7 +13,7 @@
     }
   ],
   "display": "fullscreen",
-  "start_url": "/",
+  "start_url": "https://aurawave.vercel.app",
   "description": "music",
   "background_color": "white",
   "short_name": "aurawave",
