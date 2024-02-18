@@ -17,8 +17,8 @@ import FadeInMotion from 'src/components/Layout/FadeInMotion';
 function MusicCollection() {
   const [loaded, setLoded] = useState(false);
   // search 음악
-  const [searchText, setSearchText] = useState('');
-  const [findSearchData, setFindSearchData] = useState<MusicData[]>([]);
+  const [search, setSearch] = useState('');
+  const [searchData, setSearchData] = useState<MusicData[]>([]);
   // all 음악
   const [allData, setAllData] = useState<MusicData[]>([]);
   const [data, setData] = useState<MusicData[]>([]);
@@ -48,12 +48,12 @@ function MusicCollection() {
   }, []);
 
   // 검색
-  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchText = e.target.value.toLowerCase();
-    const searchResult = allData.filter((music) => (music.title && music.title.toLowerCase().includes(searchText))
-    || (music.composer && music.composer.toLowerCase().includes(searchText)));
-    setFindSearchData(searchResult);
-    setSearchText(e.target.value);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTxt = e.target.value.toLowerCase();
+    const find = allData.filter((music) => (music.title && music.title.toLowerCase().includes(searchTxt))
+    || (music.composer && music.composer.toLowerCase().includes(searchTxt)));
+    setSearchData(find);
+    setSearch(searchTxt);
   };
 
   return (
@@ -78,7 +78,7 @@ function MusicCollection() {
 
         {/* 모든 음악 */}
         <ul>
-          {(searchText.trim() !== '' ? findSearchData : data).map((el) => (
+          {(search.trim().length !== 0 ? searchData : data).map((el) => (
             <FadeInMotion key={el.uuid}>
               <MusicLi el={el} />
             </FadeInMotion>

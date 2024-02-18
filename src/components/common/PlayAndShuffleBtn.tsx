@@ -4,10 +4,11 @@ import { useMusicShuffle } from 'src/hook/useMusicControl';
 import currentTrackState from 'src/atom/currentTrackState';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { AWPlaylistData } from 'src/types/playlistTypes';
+import { DocumentData } from 'firebase/firestore';
 import { useState } from 'react';
 
 interface Props {
-  data: AWPlaylistData;
+  data: DocumentData;
 }
 
 function PlayAndShuffleBtn({ data } : Props) {

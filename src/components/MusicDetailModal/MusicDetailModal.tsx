@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import Image from 'next/image';
 import * as S from 'src/styled/musicDetailModalStyled';
 import currentTrackState from 'src/atom/currentTrackState';
 import formatTime from 'src/utils/formatTime';
 import useCloseModal from 'src/hook/useCloseModal';
 import { motion } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
 
 import MusicTitle from './MusicDetailModalMaterial/MusicTitle';
@@ -89,7 +89,9 @@ function MusicDetailModal({
             {/* 음악 제목 => MusicTitle 컴포넌트 */}
             <MusicTitle />
             {/* 음악 이미지 */}
-            <Image className="image" width={340} height={340} src={imageUri} alt="album image" />
+            {/* <Image width={340} height={340} className="image" src={imageUri} alt="album image" /> */}
+            {/* <Blurhash width="100%" height={340} className="image" hash="LEHV6nWB2yk8pyo0adR*.7kCMdnj" resolutionX={32} resolutionY={32} punch={1} /> */}
+            <LazyLoadImage effect="blur" width="100%" height={340} className="image" src={imageUri} alt="album image" />
             {/* 출처 => MusicCopyright 컴포넌트 */}
             <MusicCopyright />
             {/* 저작권자 */}

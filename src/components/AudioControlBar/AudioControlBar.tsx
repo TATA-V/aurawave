@@ -4,13 +4,13 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import * as S from 'src/styled/audioControlStyled';
 import currentTrackState, { CurrentMusic } from 'src/atom/currentTrackState';
 import formatTime from 'src/utils/formatTime';
 import updateProgressBarWidth from 'src/utils/updateProgressBarWidth';
 import PlayModeModal from 'src/components/AudioControlBar/PlayModeModal';
 import MusicDetailModal from 'src/components/MusicDetailModal/MusicDetailModal';
+import Image from 'next/image';
 import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
 
 function AudioControlBar() {
@@ -69,7 +69,7 @@ function AudioControlBar() {
 
   useEffect(() => {
     const pathnameArr = pathname.split('/');
-    const hasBottomTabPage = pathname === '/' || ['music', 'chat', 'profile', 'aw-playlist'].includes(pathnameArr[1]);
+    const hasBottomTabPage = pathname === '/' || ['music', 'chat', 'profile', 'aw-playlist', 'user-playlist'].includes(pathnameArr[1]);
 
     // BottomTab 컴포넌트가 있으면
     if (hasBottomTabPage) {
@@ -234,10 +234,10 @@ function AudioControlBar() {
         {!hasBottomTab && (
           <S.SimpleMusicPlayer>
             <Image
-              onClick={handleshowMusicDetail}
-              className="image"
               width={38}
               height={38}
+              onClick={handleshowMusicDetail}
+              className="image"
               src={imageUri}
               alt="album image"
             />
@@ -278,8 +278,8 @@ function AudioControlBar() {
               <Image
                 onClick={handleshowMusicDetail}
                 className="image"
-                width={36}
-                height={36}
+                width={38}
+                height={38}
                 src={imageUri}
                 alt="album image"
               />

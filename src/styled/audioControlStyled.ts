@@ -157,6 +157,7 @@ export const LeftBox = styled.div`
 
   .title {
     width: calc(100% - 20px);
+    height: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

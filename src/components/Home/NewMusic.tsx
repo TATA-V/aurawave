@@ -11,7 +11,6 @@ import useMusicPlay from 'src/hook/useMusicPlay';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';
 
 import SkelNewMusic from 'src/components/Skeleton/SkelNewMusic';
-import LoadingLottie from '../Lottie/LoadingLottie';
 
 function NewMusic() {
   const [loaded, setLoaded] = useState(false);

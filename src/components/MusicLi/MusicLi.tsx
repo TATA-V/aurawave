@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
 import { MusicData } from 'src/types/musicTypes';
 import useMusicPlay from 'src/hook/useMusicPlay';
 import userState from 'src/atom/userState';
 import * as S from 'src/styled/musicLiStyled';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import MoreSvg from '../../../public/more.svg';
 
 import AddToPlaylistModal from './AddToPlaylistModal';

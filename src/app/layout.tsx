@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import RecoilProvider from 'src/components/provider/RecoilProvider';
-import './globals.css';
-import './iconfonts.css';
-import './reset.css';
 import StyledComponentsRegistry from 'src/components/provider/StyledComponentsRegistry';
 import DefaultLayout from 'src/components/Layout/DefaultLayout';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import './iconfonts.css';
+import './globals.css';
+import './reset.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

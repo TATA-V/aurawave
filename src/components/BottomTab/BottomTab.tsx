@@ -4,9 +4,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import currentTrackState from 'src/atom/currentTrackState';
-import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import MoonBlueSvg from '../../../public/moonBlueSvg.svg';
 import MoonGraySvg from '../../../public/moonGraySvg.svg';
 import MusicBlueSvg from '../../../public/musicBlueSvg.svg';
@@ -25,8 +24,12 @@ function BottomTab() {
   ];
 
   return (
-    <FadeInMotion>
+    <AnimatePresence>
       <BottomTabNav
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.25 }}
+        exit={{ opacity: 0 }}
         className="h-[50px] min-w540:h-[55px] px-[45px] min-w540:px-[60px] py-[14px]"
         $isShow={isShow}
       >
@@ -38,7 +41,7 @@ function BottomTab() {
           ))}
         </div>
       </BottomTabNav>
-    </FadeInMotion>
+    </AnimatePresence>
   );
 }
 
@@ -48,7 +51,7 @@ interface IsShow {
   $isShow: boolean;
 }
 
-export const BottomTabNav = styled.nav<IsShow>`
+export const BottomTabNav = styled(motion.nav)<IsShow>`
   width: 100%;
   max-width: 540px;
   background-color: var(--white-100);

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Image from 'next/image';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { AWPlaylistData } from 'src/types/playlistTypes';
@@ -11,6 +10,8 @@ import { motion } from 'framer-motion';
 import currentTrackState from 'src/atom/currentTrackState';
 import SkelPlaylist from 'src/components/Skeleton/SkelPlaylist';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';
+import Link from 'next/link';
+import Image from 'next/image';
 import PlayBlue from '../../../public/playBlueSvg.svg';
 import 'swiper/css';
 
@@ -77,7 +78,7 @@ function RecommendPlaylist() {
               <FadeInMotion>
                 <PlaylistItem>
                   <div className="playlist-content">
-                    <div onClick={() => handlePlay(idx)} className="image-box">
+                    <Link href={`/aw-playlist/${el.uuid}`} className="image-box">
                       <Image
                         className="image"
                         width={186}
@@ -85,11 +86,11 @@ function RecommendPlaylist() {
                         src={String(el.playlistImageUri)}
                         alt="recommended playlist"
                       />
-                    </div>
+                    </Link>
                     <div className="details">
                       <div className="des">
-                        <p onClick={() => handlePlay(idx)} className="title truncate">{el.playlistTitle}</p>
-                        <p onClick={() => handlePlay(idx)} className="description truncate">{el.description}</p>
+                        <Link href={`/aw-playlist/${el.uuid}`} className="title truncate">{el.playlistTitle}</Link>
+                        <Link href={`/aw-playlist/${el.uuid}`} className="description truncate">{el.description}</Link>
                       </div>
                       <motion.div
                         onClick={() => handlePlay(idx)}

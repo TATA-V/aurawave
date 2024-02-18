@@ -36,7 +36,7 @@ function UserPlaylistSection() {
     <SectionBlock>
       <TopBox>
         <p className="user-playlist">다른 유저의 플레이리스트</p>
-        <Link href="/playlist/" className="all-txt">
+        <Link href="/user-playlist" className="all-txt">
           전체보기
         </Link>
       </TopBox>
@@ -46,27 +46,29 @@ function UserPlaylistSection() {
       {loaded && (
         <Ul>
           {playlistData.slice(0, 5).map((el) => (
-            <UserPlaylistLi key={el.uuid}>
-              <div className="flex items-center">
-                <Image
-                  className="image"
-                  width={116}
-                  height={99}
-                  src={String(el.playlistImageUri)}
-                  alt="playlist image"
-                />
-                <div className="details">
-                  <p className="title-desc">
-                    <span className="title">{el.playlistTitle}</span>
-                    <span className="description">{el.description}</span>
-                  </p>
-                  <span className="username">{el.username}</span>
+            <Link href={`/user-playlist/${el.uuid}`} key={el.uuid}>
+              <UserPlaylistLi>
+                <div className="flex items-center">
+                  <Image
+                    className="image"
+                    width={116}
+                    height={99}
+                    src={String(el.playlistImageUri)}
+                    alt="playlist image"
+                  />
+                  <div className="details">
+                    <p className="title-desc">
+                      <span className="title">{el.playlistTitle}</span>
+                      <span className="description">{el.description}</span>
+                    </p>
+                    <span className="username">{el.username}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="i-down-box">
-                <i className="i-down" />
-              </div>
-            </UserPlaylistLi>
+                <div className="i-down-box">
+                  <i className="i-down" />
+                </div>
+              </UserPlaylistLi>
+            </Link>
           ))}
         </Ul>
       )}

@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { MusicData } from 'src/types/musicTypes';
 import playlistDataState from 'src/atom/playlistDataState';
 import useMusicPlay from 'src/hook/useMusicPlay';
 import * as S from 'src/styled/musicLiStyled';
+import Image from 'next/image';
 
 interface Props {
   el: MusicData;

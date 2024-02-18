@@ -16,8 +16,8 @@ import AddMusicAWMusicLi from 'src/components/AddMusicToPlaylist/AddMusicMusicLi
 function AddMusicToPlaylist() {
   const [loaded, setLoded] = useState(false);
   // search 음악
-  const [searchText, setSearchText] = useState('');
-  const [findSearchData, setFindSearchData] = useState<MusicData[]>([]);
+  const [search, setSearch] = useState('');
+  const [searchData, setSearchData] = useState<MusicData[]>([]);
   // all 음악
   const [allData, setAllData] = useState<MusicData[]>([]);
   const [data, setData] = useState<MusicData[]>([]);
@@ -47,12 +47,12 @@ function AddMusicToPlaylist() {
   }, []);
 
   // 검색
-  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchText = e.target.value.toLowerCase();
-    const searchResult = allData.filter((music) => (music.title && music.title.toLowerCase().includes(searchText))
-    || (music.composer && music.composer.toLowerCase().includes(searchText)));
-    setFindSearchData(searchResult);
-    setSearchText(e.target.value);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    const find = allData.filter((music) => (music.title && music.title.toLowerCase().includes(value))
+    || (music.composer && music.composer.toLowerCase().includes(value)));
+    setSearchData(find);
+    setSearch(value);
   };
 
   return (
@@ -76,7 +76,7 @@ function AddMusicToPlaylist() {
 
         {/* 모든 음악들 */}
         <ul>
-          {(searchText.trim() !== '' ? findSearchData : data).map((el) => (
+          {(search.trim().length !== 0 ? searchData : data).map((el) => (
             <FadeInMotion key={el.uuid}>
               <AddMusicAWMusicLi el={el} />
             </FadeInMotion>

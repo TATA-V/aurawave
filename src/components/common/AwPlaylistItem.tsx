@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { AWPlaylistData } from 'src/types/playlistTypes';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 interface Props {
   el: AWPlaylistData;
@@ -11,7 +11,7 @@ function AwPlaylistItem({ el } : Props) {
     <PlaylistItem key={el.uuid}>
       <Image
         className="image"
-        width={168}
+        width={143}
         height={143}
         src={String(el.playlistImageUri)}
         alt="aurawave playlist"

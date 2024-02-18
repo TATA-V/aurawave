@@ -165,7 +165,16 @@ export async function updatePlaylistDoc({ uuid, playlistData }: UpdatePlaylistDo
   await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
 }
 
-// 하나의 user 플레이리스트 가져오기
+// 하나의 user 플레이리스트 정보 가져오기
+export async function getOneMusicPlaylistInfo(uuid: string) {
+  const musicRef = doc(firestore, 'user_playlist', uuid);
+  const musicDocSnapshot = await getDoc(musicRef);
+  const musicData = musicDocSnapshot.data();
+  if (!musicData) return;
+  return musicData;
+}
+
+// 하나의 user 플레이리스트의 musicList 가져오기
 export async function getOneMusicPlaylist(uuid: string) {
   const musicRef = doc(firestore, 'user_playlist', uuid);
   const musicDocSnapshot = await getDoc(musicRef);
