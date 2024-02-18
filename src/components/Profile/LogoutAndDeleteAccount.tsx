@@ -14,7 +14,7 @@ import currentTrackState from 'src/atom/currentTrackState';
 import CustomModal from 'src/components/CustomModal/CustomModal';
 
 function LogoutAndDeleteAccount() {
-  const [toggleModal, setToggleModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
   const { isLoggedIn } = useRecoilValue(userState); // 리코일
   const resetCurrentMusicAndTrack = useResetRecoilState(currentTrackState); // 리코일
@@ -40,14 +40,14 @@ function LogoutAndDeleteAccount() {
       <Image width={540} height={327.69} className="crayon-img" src={crayonPng} alt="crayon line" priority />
 
       {isLoggedIn && (
-        <button onClick={() => setToggleModal(true)} className="delete-box">
+        <button onClick={() => setOpenModal(true)} className="delete-box">
           <span className="delete-txt">탈퇴하기</span>
         </button>
       )}
 
       {/* 탈퇴하기 모달 => CustomModal 컴포넌트 */}
-      {toggleModal && (
-        <CustomModal toggleModal={toggleModal} setToggleModal={setToggleModal} type="탈퇴" />
+      {openModal && (
+        <CustomModal open={openModal} setOpen={setOpenModal} type="탈퇴" />
       )}
     </LogoutAndDeleteAccountBlock>
   );

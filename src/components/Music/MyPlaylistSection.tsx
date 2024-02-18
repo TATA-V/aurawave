@@ -20,9 +20,6 @@ function MyPlaylistSection() {
       getUserInfo(user.uid)
         .then((data) => {
           setMyPlaylist(data.playlists as UserPlaylistData[]);
-        })
-        .catch((error) => {
-          // console.log(error);
         });
     }
   }, [user]);
@@ -33,7 +30,7 @@ function MyPlaylistSection() {
         <SectionBlock>
           <TopBox>
             <p className="my-playlist">내 플레이리스트</p>
-            <Link href={`/my-playlist/${user?.uid}`} className="all-txt">
+            <Link href="/my-playlist" className="all-txt">
               전체보기
             </Link>
           </TopBox>
@@ -124,7 +121,7 @@ const MyPlaylistLi = styled.li`
   }
 
   .description {
-    color: var(--dark-blue-700);
+    color: var(--dark-blue-500);
     font-size: 0.7rem;
     font-weight: 400;
     padding-top: 8px;

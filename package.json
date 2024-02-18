@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.5",
+    "@reactuses/core": "^5.0.0",
     "@svgr/webpack": "^8.1.0",
     "browser-image-compression": "^2.0.2",
     "firebase": "^10.8.0",

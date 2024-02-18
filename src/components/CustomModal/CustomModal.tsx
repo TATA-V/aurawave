@@ -2,23 +2,24 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { EmailAuthProvider, deleteUser, reauthenticateWithCredential } from 'firebase/auth';
 import { deleteObject, ref } from 'firebase/storage';
 import { useResetRecoilState } from 'recoil';
 import { auth, storage } from 'src/firebase/config';
 import { deleteUserDoc } from 'src/firebase/user';
 import { motion } from 'framer-motion';
+import { deletePlaylistDoc } from 'src/firebase/playlist';
 import currentTrackState from 'src/atom/currentTrackState';
 import useCloseModal from 'src/hook/useCloseModal';
 
 interface Props {
-  toggleModal: boolean;
-  setToggleModal: (value: boolean) => void;
-  type: string;
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  type: string | '탈퇴' | '플레이리스트삭제' | '플레이리스트에서한곡삭제';
 }
 
-function CustomModal({ toggleModal, setToggleModal, type }: Props) {
+function CustomModal({ open, setOpen, type }: Props) {
   const [loading, setLoading] = useState(false);
   const [deleteTxt, setDeleteTxt] = useState('');
   const [message, setMessage] = useState('');
@@ -29,9 +30,10 @@ function CustomModal({ toggleModal, setToggleModal, type }: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const user = auth.currentUser; // 현재 유저
+  const { myPlaylistId } = useParams();
 
   // 모달창 영역 밖을 클릭하면 모달창 닫힘
-  useCloseModal({ modalRef, state: toggleModal, setState: setToggleModal }); // hook
+  useCloseModal({ modalRef, state: open, setState: setOpen }); // hook
 
   useEffect(() => {
     if (type === '탈퇴') {
@@ -55,7 +57,7 @@ function CustomModal({ toggleModal, setToggleModal, type }: Props) {
     }
   }, [type, user?.providerData]);
 
-  const handleWithdrawal = async () => {
+  const handleOk = async () => {
     /* 유저 탈퇴 */
     if (type === '탈퇴') {
       try {
@@ -64,14 +66,14 @@ function CustomModal({ toggleModal, setToggleModal, type }: Props) {
           // 만약 현재 로그인 된 계정이 구글 계정이라면
           if (isGoogleSignIn) {
             await deleteUser(user);
-            setToggleModal(false);
+            setOpen(false);
           } else {
             // 만약 현재 로그인 된 계정이 일반 이메일 계정이라면
             const { email } = user;
             const credential = EmailAuthProvider.credential(email, password);
             await reauthenticateWithCredential(user, credential);
             await deleteUser(user);
-            setToggleModal(false);
+            setOpen(false);
           }
           // firestore에서 유저 정보 삭제
           await deleteUserDoc(user.uid);
@@ -88,7 +90,7 @@ function CustomModal({ toggleModal, setToggleModal, type }: Props) {
     }
 
     if (type === '플레이리스트삭제') {
-      // 플레이리스트 삭제
+      await deletePlaylistDoc(String(myPlaylistId));
     }
 
     if (type === '플레이리스트에서한곡삭제') {
@@ -120,10 +122,10 @@ function CustomModal({ toggleModal, setToggleModal, type }: Props) {
         )}
 
         <div className="btn-box">
-          <button className="btn cancel" onClick={() => setToggleModal(false)}>
+          <button className="btn cancel" onClick={() => setOpen(false)}>
             취소
           </button>
-          <button disabled={loading} onClick={handleWithdrawal} className="btn delete">
+          <button disabled={loading} onClick={handleOk} className="btn delete">
             {deleteTxt}
           </button>
         </div>

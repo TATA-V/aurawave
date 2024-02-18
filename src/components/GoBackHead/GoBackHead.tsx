@@ -14,7 +14,6 @@ function GoBackHead({ title }: Props) {
   const [isAurawaveTxt, setIsAurawaveTxt] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-
   useEffect(() => {
     if (title === '플레이리스트') {
       setIsAurawaveTxt(true);

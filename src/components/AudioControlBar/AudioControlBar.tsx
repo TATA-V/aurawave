@@ -69,7 +69,7 @@ function AudioControlBar() {
 
   useEffect(() => {
     const pathnameArr = pathname.split('/');
-    const hasBottomTabPage = pathname === '/' || ['music', 'chat', 'profile', 'aw-playlist', 'user-playlist'].includes(pathnameArr[1]);
+    const hasBottomTabPage = pathname === '/' || ['music', 'chat', 'profile', 'aw-playlist', 'user-playlist', 'my-playlist'].includes(pathnameArr[1]);
 
     // BottomTab 컴포넌트가 있으면
     if (hasBottomTabPage) {

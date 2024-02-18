@@ -6,7 +6,7 @@ import GoBackHead from 'src/components/GoBackHead/GoBackHead';
 import { getAllPlaylistDocs } from 'src/firebase/playlist';
 import { PlaylistData } from 'src/types/playlistTypes';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';
-import UserPlatlistItem from 'src/components/UserPlaylist/UserPlatlistItem';
+import UserPlaylistItem from 'src/components/UserPlaylist/UserPlaylistItem';
 import Link from 'next/link';
 
 function UserPlaylist() {
@@ -42,7 +42,7 @@ function UserPlaylist() {
             onChange={handleSearch}
             className="search-input"
             type="text"
-            placeholder="원하는 곡을 검색해 보세요"
+            placeholder="원하는 플레이리스트를 검색해 보세요"
           />
           <i className="i-search" />
           <S.Bar className="bar" />
@@ -52,7 +52,7 @@ function UserPlaylist() {
           {(search.trim().length !== 0 ? searchData : playlists).map((item) => (
             <FadeInMotion key={item.uuid}>
               <Link href={`/user-playlist/${item.uuid}`}>
-                <UserPlatlistItem item={item} />
+                <UserPlaylistItem item={item} />
               </Link>
             </FadeInMotion>
           ))}

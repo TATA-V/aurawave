@@ -140,13 +140,13 @@ const UserPlaylistLi = styled.li`
   }
 
   .description {
-    color: var(--blue-gray-800);
+    color: var(--blue-gray-700);
     font-size: 0.75rem;
     font-weight: 400;
   }
 
   .username {
-    color: var(--blue-gray-700);
+    color: var(--blue-gray-500);
     font-size: 0.75rem;
     font-weight: 400;
   }
