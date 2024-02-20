@@ -2,11 +2,11 @@
 
 import { SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 import playlistDataState from 'src/atom/playlistDataState';
-import { setUserPlaylistDoc } from 'src/firebase/playlist';
+import { setUserPlaylistDoc, updatePlaylistDoc } from 'src/firebase/playlist';
 import uploadImage from 'src/firebase/image';
 import formatDateToYYYYMMDD from 'src/utils/formatDateToYYYYMMDD';
 import compressImage from 'src/utils/compressImage';
@@ -14,6 +14,7 @@ import { updateUserPlaylists } from 'src/firebase/user';
 import { auth } from 'src/firebase/config';
 import { motion } from 'framer-motion';
 import userState from 'src/atom/userState';
+import useToast from 'src/hook/useToast';
 
 interface Props {
   loading?: boolean;
@@ -25,12 +26,14 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
   const [imageUri, setImageUri] = useState('');
   const [playlistData, setPlaylistData] = useRecoilState(playlistDataState); // 리코일
   const { username } = useRecoilValue(userState); // 리코일
-  const { isPublic, uuid, playlistImageUri, playlistTitle, description, musicList } = playlistData;
+  const { isEdit, isPublic, uuid, playlistImageUri, playlistTitle, description, musicList } = playlistData;
   const resetPlaylistDataState = useResetRecoilState(playlistDataState); // 리코일
   const formattedDate = formatDateToYYYYMMDD(); // 현재 날짜
   const router = useRouter();
   const pathname = usePathname();
   const user = auth.currentUser;
+  const myPlaylistId = useSearchParams().get('id');
+  const { successToast, errorToast } = useToast();
 
   // 오른쪽 글자
   useEffect(() => {
@@ -41,66 +44,70 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
     }
   }, [pathname]);
 
-  // 저장 버튼 눌리면 동작
-  useEffect(() => {
+  const submit = async () => {
     const isValid = uuid !== ''
-      && imageUri !== ''
-      && playlistTitle.trim() !== ''
-      && description.trim() !== ''
-      && musicList.length !== 0;
-
-    if (isValid && user) {
-      const playlistData = {
-        uuid,
-        userUuid: user?.uid,
-        username,
-        date: formatDateToYYYYMMDD(),
-        isPublic,
-        playlistImageUri: imageUri,
-        playlistTitle,
-        description,
-        musicList,
-      };
-      // firestore에 저장
-      const playlist = async () => {
+    && description.trim() !== ''
+    && musicList.length !== 0;
+    if (imageUri === '' && setLoading && !isEdit) {
+      errorToast('이미지를 추가해주세요.');
+      setLoading(false);
+      return;
+    }
+    if (!isValid && setLoading) {
+      errorToast('플레이리스트 설명과 노래를 추가해주세요.');
+      setLoading(false);
+      return;
+    }
+    if (!user) return;
+    const image = imageUri !== '' ? imageUri : playlistImageUri;
+    const playlistData = {
+      uuid,
+      userUuid: user?.uid,
+      username,
+      date: formatDateToYYYYMMDD(),
+      isPublic,
+      playlistImageUri: image,
+      playlistTitle,
+      description,
+      musicList,
+    };
+    // firestore에 저장
+    const playlist = async () => {
+      if (isEdit) {
+        await updatePlaylistDoc({ uuid, playlistData });
+        successToast('플레이리스트가 수정되었습니다.');
+      } else {
         await setUserPlaylistDoc({ uuid, playlistData }); // user_playlist에 플레이리스트 등록
         await updateUserPlaylists({ uuid: user.uid, playlistData }); // 유저 정보에 등록한 플레이리스트 추가
-      };
-      playlist();
-      resetPlaylistDataState();
-      const id = uuidv4(); // uuid 생성
-      setPlaylistData((prev) => ({ ...prev, uuid: id, playlistTitle: formattedDate }));
-
-      if (setLoading) {
-        setLoading(false);
+        successToast('플레이리스트가 추가되었습니다.');
       }
-      router.back();
+    };
+    playlist();
+    resetPlaylistDataState();
+    const id = uuidv4(); // uuid 생성
+    setPlaylistData((prev) => ({ ...prev, uuid: id, playlistTitle: formattedDate }));
+
+    if (setLoading) {
+      setLoading(false);
     }
-  }, [
-    username,
-    router,
-    uuid,
-    user,
-    isPublic,
-    description,
-    imageUri,
-    musicList,
-    playlistTitle,
-    formattedDate,
-    setLoading,
-    setPlaylistData,
-    resetPlaylistDataState,
-  ]);
+    router.push(`my-playlist/${uuid}`);
+  };
 
   // 뒤로가기
   const handleGoBack = () => {
-    router.back();
     if (pathname === '/playlist-editor') {
       resetPlaylistDataState();
       const id = uuidv4(); // uuid 생성
       setPlaylistData((prev) => ({ ...prev, uuid: id, playlistTitle: formattedDate }));
     }
+    router.back();
   };
+
+  useEffect(() => {
+    if (imageUri !== '') {
+      submit();
+    }
+  }, [imageUri]);
 
   // 오른쪽 버튼 클릭 시
   const handleRightBtnClick = async () => {
@@ -115,12 +122,15 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
           path: 'user_playlist_image',
           uuid,
         };
-        uploadImage(props);
+        await uploadImage(props);
+      }
+      if (isEdit && imageUri === '') {
+        submit();
       }
     }
 
     if (rightTxt === '닫기') {
-      router.back();
+      router.push('/playlist-editor');
     }
   };
 
@@ -130,7 +140,7 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
         <i className="i-back" />
       </motion.div>
 
-      <Title>새 플레이리스트 추가</Title>
+      <Title>{myPlaylistId ? '플레이리스트 수정' : '새 플레이리스트 추가'}</Title>
 
       <RightBox>
         <button disabled={loading} onClick={handleRightBtnClick} className="right-btn">

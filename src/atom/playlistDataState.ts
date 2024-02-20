@@ -1,7 +1,10 @@
 import { PlaylistData } from 'src/types/playlistTypes';
+import { DocumentData } from 'firebase/firestore';
 import { atom } from 'recoil';
 
-const DefaultValue: PlaylistData = {
+type DefaultValue = PlaylistData & { isEdit: boolean };
+
+const defaultValue: DefaultValue = {
   uuid: '',
   isPublic: false,
   playlistImageUri: '',
@@ -9,11 +12,12 @@ const DefaultValue: PlaylistData = {
   description: '',
   musicList: [],
   username: '',
+  isEdit: false,
 };
 
-const playlistDataState = atom<PlaylistData>({
+const playlistDataState = atom<DefaultValue | DocumentData>({
   key: 'playlistData',
-  default: DefaultValue,
+  default: defaultValue,
 });
 
 export default playlistDataState;

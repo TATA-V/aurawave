@@ -8,7 +8,7 @@ import { deleteObject, ref } from 'firebase/storage';
 import { useResetRecoilState } from 'recoil';
 import { auth, storage } from 'src/firebase/config';
 import { deleteUserDoc } from 'src/firebase/user';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { deletePlaylistDoc } from 'src/firebase/playlist';
 import currentTrackState from 'src/atom/currentTrackState';
 import useCloseModal from 'src/hook/useCloseModal';
@@ -91,6 +91,7 @@ function CustomModal({ open, setOpen, type }: Props) {
 
     if (type === '플레이리스트삭제') {
       await deletePlaylistDoc(String(myPlaylistId));
+      router.replace('/my-playlist');
     }
 
     if (type === '플레이리스트에서한곡삭제') {
@@ -99,38 +100,42 @@ function CustomModal({ open, setOpen, type }: Props) {
   };
 
   return (
-    <ModalBlock
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.25 }}
-      exit={{ opacity: 0 }}
-    >
-      <Modal ref={modalRef}>
-        <div className="modal-content">
-          <p className="modal-text">{message}</p>
-        </div>
+    <AnimatePresence>
+      {open && (
+        <ModalBlock
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.25 }}
+          exit={{ opacity: 0, transition: { duration: 0.15 } }}
+        >
+          <Modal ref={modalRef}>
+            <div className="modal-content">
+              <p className="modal-text">{message}</p>
+            </div>
 
-        {type === '탈퇴' && !isGoogleSignIn && (
-          <input
-            ref={pwdRef}
-            className="pwd-input"
-            type="password"
-            placeholder="계정 비밀번호 입력"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        )}
+            {type === '탈퇴' && !isGoogleSignIn && (
+              <input
+                ref={pwdRef}
+                className="pwd-input"
+                type="password"
+                placeholder="계정 비밀번호 입력"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            )}
 
-        <div className="btn-box">
-          <button className="btn cancel" onClick={() => setOpen(false)}>
-            취소
-          </button>
-          <button disabled={loading} onClick={handleOk} className="btn delete">
-            {deleteTxt}
-          </button>
-        </div>
-      </Modal>
-    </ModalBlock>
+            <div className="btn-box">
+              <button className="btn cancel" onClick={() => setOpen(false)}>
+                취소
+              </button>
+              <button disabled={loading} onClick={handleOk} className="btn delete">
+                {deleteTxt}
+              </button>
+            </div>
+          </Modal>
+        </ModalBlock>
+      )}
+    </AnimatePresence>
   );
 }
 

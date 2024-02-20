@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import GoBackHead from 'src/components/GoBackHead/GoBackHead';
 import { getAllPlaylistDocs } from 'src/firebase/playlist';
 import { PlaylistData } from 'src/types/playlistTypes';
-import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import UserPlaylistItem from 'src/components/UserPlaylist/UserPlaylistItem';
 import Link from 'next/link';
 
@@ -48,15 +47,13 @@ function UserPlaylist() {
           <S.Bar className="bar" />
         </S.SearchBox>
 
-        <div className="pt-[10px] pb-[100px] flex flex-col gap-[16px]">
+        <ul className="pt-[10px] pb-[100px] flex flex-col gap-[16px]">
           {(search.trim().length !== 0 ? searchData : playlists).map((item) => (
-            <FadeInMotion key={item.uuid}>
-              <Link href={`/user-playlist/${item.uuid}`}>
-                <UserPlaylistItem item={item} />
-              </Link>
-            </FadeInMotion>
+            <Link key={item.uuid} href={`/user-playlist/${item.uuid}`}>
+              <UserPlaylistItem item={item} />
+            </Link>
           ))}
-        </div>
+        </ul>
       </div>
     </>
   );

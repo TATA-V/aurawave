@@ -11,6 +11,7 @@ import playlistDataState from 'src/atom/playlistDataState';
 import PlaylistEditorMusicLi from 'src/components/PlaylistEditor/PlaylistEditorMusicLi';
 import AwPlaylistGoBackHead from 'src/components/GoBackHead/AwPlaylistGoBackHead';
 import dynamic from 'next/dynamic';
+import { MusicData } from 'src/types/musicTypes';
 
 function AdminAwplaylistEditor() {
   const [playlistData, setPlaylistData] = useRecoilState(playlistDataState); // 리코일
@@ -85,7 +86,7 @@ function AdminAwplaylistEditor() {
 
           {/* 플레이리스트에 추가된 곡 */}
           <ul>
-            {musicList.map((el) => (
+            {musicList.map((el : MusicData) => (
               <PlaylistEditorMusicLi key={el.uuid} el={el} />
             ))}
           </ul>

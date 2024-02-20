@@ -37,24 +37,26 @@ function MyPlaylistSection() {
 
           <Ul>
             {myPlaylist?.slice(0, 3).map((el) => (
-              <MyPlaylistLi key={el.uuid} className="li w-full">
-                <div className="flex items-center">
-                  <Image
-                    className="image"
-                    width={68}
-                    height={58}
-                    src={String(el.playlistImageUri)}
-                    alt="playlist image"
-                  />
-                  <div className="details">
-                    <span className="title">{el.playlistTitle}</span>
-                    <span className="description">{el.description}</span>
+              <Link key={el.uuid} href={`/my-playlist/${el.uuid}`}>
+                <MyPlaylistLi className="li w-full">
+                  <div className="flex items-center">
+                    <Image
+                      className="image"
+                      width={68}
+                      height={58}
+                      src={String(el.playlistImageUri)}
+                      alt="playlist image"
+                    />
+                    <div className="details">
+                      <span className="title">{el.playlistTitle}</span>
+                      <span className="description">{el.description}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="i-down-box">
-                  <i className="i-down" />
-                </div>
-              </MyPlaylistLi>
+                  <div className="i-down-box">
+                    <i className="i-down" />
+                  </div>
+                </MyPlaylistLi>
+              </Link>
             ))}
           </Ul>
         </SectionBlock>
@@ -91,12 +93,12 @@ const TopBox = styled.div`
 `;
 
 const MyPlaylistLi = styled.li`
-  width: 100%;
-  height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 17px;
+    width: 100%;  
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
 
   .image {
     width: 66px;
@@ -140,7 +142,5 @@ const MyPlaylistLi = styled.li`
 const Ul = styled.ul`
   display: flex;
   flex-direction: column;
-  li:last-child {
-    margin-bottom: 0;
-  }
+  gap: 17px;
 `;

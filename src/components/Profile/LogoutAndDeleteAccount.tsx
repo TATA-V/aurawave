@@ -46,9 +46,7 @@ function LogoutAndDeleteAccount() {
       )}
 
       {/* 탈퇴하기 모달 => CustomModal 컴포넌트 */}
-      {openModal && (
-        <CustomModal open={openModal} setOpen={setOpenModal} type="탈퇴" />
-      )}
+      <CustomModal open={openModal} setOpen={setOpenModal} type="탈퇴" />
     </LogoutAndDeleteAccountBlock>
   );
 }

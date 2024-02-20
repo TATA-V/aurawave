@@ -4,6 +4,7 @@ import PencilIcon from 'src/assets/icons/PencilIcon';
 import { useRef, useState } from 'react';
 import { useClickOutside } from '@reactuses/core';
 import CustomModal from 'src/components/CustomModal/CustomModal';
+import { useParams, useRouter } from 'next/navigation';
 
 function MyPLEditDeleteModal() {
   const [openPL, setOpenPL] = useState(false);
@@ -13,6 +14,12 @@ function MyPLEditDeleteModal() {
   useClickOutside(modalRef, () => {
     setOpenPL(false);
   });
+
+  const router = useRouter();
+  const { myPlaylistId } = useParams();
+  const handleEdit = () => {
+    router.push(`/playlist-editor?id=${myPlaylistId}`);
+  };
 
   const handleDelete = async () => {
     setType('플레이리스트삭제');
@@ -27,28 +34,28 @@ function MyPLEditDeleteModal() {
           <PencilIcon />
         </motion.button>
         {openPL
-      && (
-        <motion.ul
-          ref={modalRef}
-          initial={{ opacity: 0, scale: 0, transformOrigin: '100% 0%' }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: 'spring', duration: 0.5 }}
-          className="edit-modal text-xs px-[11px] min-w-[130px] flex flex-col justify-center items-center"
-        >
-          <li>
-            <motion.button whileTap={{ scale: 0.9 }} className="h-[40px] flex justify-center items-center flex-shrink-0">
-              플레이리스트 수정
-            </motion.button>
-          </li>
-          <li>
-            <motion.button onClick={handleDelete} whileTap={{ scale: 0.9 }} className="border-top h-[40px] flex justify-center items-center flex-shrink-0">
-              플레이리스트 삭제
-            </motion.button>
-          </li>
-        </motion.ul>
-      )}
+          && (
+            <motion.ul
+              ref={modalRef}
+              initial={{ opacity: 0, scale: 0, transformOrigin: '100% 0%' }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: 'spring', duration: 0.5 }}
+              className="edit-modal text-xs px-[11px] min-w-[130px] flex flex-col justify-center items-center"
+            >
+              <li>
+                <motion.button onClick={handleEdit} whileTap={{ scale: 0.9 }} className="h-[40px] flex justify-center items-center flex-shrink-0">
+                  플레이리스트 수정
+                </motion.button>
+              </li>
+              <li>
+                <motion.button onClick={handleDelete} whileTap={{ scale: 0.9 }} className="border-top h-[40px] flex justify-center items-center flex-shrink-0">
+                  플레이리스트 삭제
+                </motion.button>
+              </li>
+            </motion.ul>
+          )}
       </PlaylistModalBlock>
-      {openModal && <CustomModal type={type} open={openModal} setOpen={setOpenModal} />}
+      <CustomModal type={type} open={openModal} setOpen={setOpenModal} />
     </>
   );
 }

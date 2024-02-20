@@ -20,7 +20,7 @@ function AddMusicMusicLi({ el }: Props) {
   const musicPlay = useMusicPlay(); // hook
 
   useEffect(() => {
-    const inPlaylist = musicList.some((music) => music.uuid === el.uuid);
+    const inPlaylist = musicList.some((music: MusicData) => music.uuid === el.uuid);
     setIsInPlaylist(inPlaylist);
   }, [musicList, el.uuid]);
 
@@ -31,7 +31,7 @@ function AddMusicMusicLi({ el }: Props) {
   const handleAddMusic = () => {
     if (isInPlaylist) {
       // 플레이리스트에서 음악을 삭제
-      const removeMusic = musicList.filter((music) => music.uuid !== el.uuid);
+      const removeMusic = musicList.filter((music: MusicData) => music.uuid !== el.uuid);
       setPlaylistData((prev) => ({ ...prev, musicList: removeMusic }));
     } else {
       // 플레이리스트에 음악을 추가

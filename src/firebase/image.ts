@@ -22,7 +22,7 @@ interface Props {
   uuid: string;
 }
 
-const uploadImage = ({ file, setState, path, uuid }: Props) => {
+const uploadImage = async ({ file, setState, path, uuid }: Props) => {
   const user = auth.currentUser;
   if (user && file) {
     const metadata = { contentType: file.type };

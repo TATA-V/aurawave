@@ -41,5 +41,6 @@ const ImageAndTitle = styled.div`
     height: 130px;
     border-radius: 15px;
     border: 1px solid var(--gray-100);
+    object-fit: cover;
   }
 `;

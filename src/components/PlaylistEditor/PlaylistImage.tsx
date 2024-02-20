@@ -32,7 +32,9 @@ function PlaylistImage() {
           src={
             playlistImageUri instanceof File
               ? URL.createObjectURL(playlistImageUri)
-              : playlistDefaultJpg
+              : playlistImageUri !== ''
+                ? playlistImageUri
+                : playlistDefaultJpg
           }
           alt="playlist image"
         />

@@ -1,4 +1,4 @@
-import { doc, setDoc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc, deleteDoc, getDoc, query, where, collection, getDocs, orderBy } from 'firebase/firestore';
 import {
   SetUserDoc,
   UpdateUserAllPlaylists,
@@ -49,6 +49,16 @@ export async function getUserInfo(uuid: string) {
   const userDocRef = doc(firestore, 'user', uuid);
   const userDocSnapshot = await getDoc(userDocRef);
   const userData = userDocSnapshot.data();
+
+  if (!userData) return;
+  const q = query(collection(firestore, 'user_playlist'), where('userUuid', '==', uuid));
+  const querySnapshot = await getDocs(q);
+  const playlists: any = [];
+  querySnapshot.forEach((doc) => {
+    playlists.push(doc.data());
+  });
+  userData.playlists = playlists;
+
   return userData as UserData;
 }
 

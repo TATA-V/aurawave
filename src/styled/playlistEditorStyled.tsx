@@ -170,7 +170,7 @@ export const PublicOrPrivate = styled.div`
   }
 `;
 
-export const ToggleBtn = styled.button<IsPublic>`
+export const Toggle = styled.div<IsPublic>`
   width: 31px;
   height: 15px;
   border-radius: 50px;
@@ -190,7 +190,7 @@ export const ToggleBtn = styled.button<IsPublic>`
     position: absolute;
     top: -2.9px;
     left: ${({ $isPublic }) => ($isPublic ? '12.8px' : '-2.8px')};
-    transition: left 0.1s ease, outline 0.1s ease;
+    transition: all 0.1s ease-in-out;
 
     &:hover {
       outline: 6px solid rgba(0, 0, 0, 0.05);

@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import PlusIcon from 'src/assets/icons/PlusIcon';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import MyPlaylistItem from 'src/components/MyPlaylist/MyPlaylistItem';
 import Link from 'next/link';
 import { UserPlaylistData } from 'src/types/playlistTypes';
@@ -27,8 +26,10 @@ function MyPlaylist() {
     if (!user) return;
     getUserInfo(user.uid)
       .then((data) => {
-        if (!data.playlists) return;
-        setPlaylists(data.playlists);
+        if (!data) return;
+        const { playlists } = data;
+        if (!playlists) return;
+        setPlaylists(playlists);
       });
   }, []);
 
@@ -67,15 +68,13 @@ function MyPlaylist() {
           </Button>
         </div>
 
-        <div className="pt-[30px] pb-[100px] flex flex-col gap-[16px]">
+        <ul className="pt-[30px] pb-[100px] flex flex-col gap-[16px]">
           {(search.trim().length !== 0 ? searchData : playlists).map((item) => (
-            <FadeInMotion key={item.uuid}>
-              <Link href={`/my-playlist/${item.uuid}`}>
-                <MyPlaylistItem item={item} />
-              </Link>
-            </FadeInMotion>
+            <Link key={item.uuid} href={`/my-playlist/${item.uuid}`}>
+              <MyPlaylistItem item={item} />
+            </Link>
           ))}
-        </div>
+        </ul>
       </div>
     </>
   );
