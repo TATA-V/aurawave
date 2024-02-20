@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import * as S from 'src/styled/playlistEditorStyled';
@@ -42,7 +42,9 @@ function PlaylistEditor() {
   return (
     <>
       <>
-        <PlaylistGoBackHead loading={loading} setLoading={setLoading} />
+        <Suspense fallback={<div className="w-full h-[61px]" />}>
+          <PlaylistGoBackHead loading={loading} setLoading={setLoading} />
+        </Suspense>
         {loading && <PlaylistLottie />}
         {!loading && (
           <CreatePlaylistBlock>

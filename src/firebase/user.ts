@@ -58,7 +58,6 @@ export async function getUserInfo(uuid: string) {
     playlists.push(doc.data());
   });
   userData.playlists = playlists;
-
   return userData as UserData;
 }
 

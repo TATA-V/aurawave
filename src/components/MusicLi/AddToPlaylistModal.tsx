@@ -35,6 +35,7 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
     const user = auth.currentUser;
     if (!user) return;
     getUserInfo(user.uid).then((data) => {
+      if (!data) return;
       setPlaylists(data.playlists);
     });
   }, []);

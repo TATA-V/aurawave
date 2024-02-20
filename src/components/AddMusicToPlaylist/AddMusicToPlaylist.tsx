@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import * as S from 'src/styled/searchStyled';
 import { getAllMusicDocs } from 'src/firebase/music';
@@ -57,7 +57,9 @@ function AddMusicToPlaylist() {
 
   return (
     <>
-      <PlaylistGoBackHead />
+      <Suspense fallback={<div className="w-full h-[61px]" />}>
+        <PlaylistGoBackHead />
+      </Suspense>
 
       <AddMusicPlaylistblock>
         {/* 검색창 */}

@@ -19,6 +19,7 @@ function MyPlaylistSection() {
     if (user) {
       getUserInfo(user.uid)
         .then((data) => {
+          if (!data) return;
           setMyPlaylist(data.playlists as UserPlaylistData[]);
         });
     }

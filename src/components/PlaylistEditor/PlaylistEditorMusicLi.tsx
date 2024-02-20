@@ -23,7 +23,7 @@ function CreatePlaylistMusicLi({ el }: Props) {
 
   // 플레이리스트에 음악을 추가
   const handleRemove = () => {
-    const removeMusic = musicList.filter((music) => music.uuid !== el.uuid);
+    const removeMusic = musicList.filter((music: MusicData) => music.uuid !== el.uuid);
     setPlaylistData((prev) => ({ ...prev, musicList: removeMusic }));
   };
 
