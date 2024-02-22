@@ -7,40 +7,45 @@ import { useRouter } from 'next/navigation';
 import { auth } from 'src/firebase/config';
 import { setUserDoc } from 'src/firebase/user';
 import userState from 'src/atom/userState';
+import useToast from 'src/hook/useToast';
 import GoogleSvg from '../../../public/googleSvg.svg';
 
 function GoogleAuth() {
   const provider = new GoogleAuthProvider();
   const setUserState = useSetRecoilState(userState); // 리코일
   const router = useRouter();
+  const { successToast, errorToast } = useToast();
 
   const handleGoogleLogin = async () => {
-    await signInWithPopup(auth, provider);
+    try {
+      await signInWithPopup(auth, provider);
+      successToast('로그인 되었습니다.');
+    } catch (err) {
+      errorToast('로그인에 실패했습니다. 다시 시도하세요.');
+    }
     const user = auth.currentUser;
+    if (!user) return;
 
-    if (user) {
-      const { uid, email, displayName, photoURL } = user;
-      // 리코일에 유저정보 저장
-      if (auth.currentUser) {
-        setUserState((data) => ({
-          ...data,
-          username: displayName,
-          photoURL,
-          isLoggedIn: true,
-        }));
-      }
-      router.replace('/');
-
-      // firestore에 유저 정보 저장
-      if (uid !== null && displayName !== null && email !== null && photoURL !== null) {
-        const userData = {
-          uuid: uid,
-          email,
-          username: displayName,
-          photoURL,
-        };
-        setUserDoc({ uuid: uid, userData });
-      }
+    const { uid, email, displayName, photoURL } = user;
+    // 리코일에 유저정보 저장
+    if (auth.currentUser) {
+      setUserState((data) => ({
+        ...data,
+        username: displayName,
+        photoURL,
+        isLoggedIn: true,
+      }));
+    }
+    router.replace('/');
+    // firestore에 유저 정보 저장
+    if (uid !== null && displayName !== null && email !== null && photoURL !== null) {
+      const userData = {
+        uuid: uid,
+        email,
+        username: displayName,
+        photoURL,
+      };
+      setUserDoc({ uuid: uid, userData });
     }
   };
 

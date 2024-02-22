@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { deletePlaylistDoc } from 'src/firebase/playlist';
 import currentTrackState from 'src/atom/currentTrackState';
 import useCloseModal from 'src/hook/useCloseModal';
+import useToast from 'src/hook/useToast';
 
 interface Props {
   open: boolean;
@@ -31,6 +32,7 @@ function CustomModal({ open, setOpen, type }: Props) {
   const router = useRouter();
   const user = auth.currentUser; // 현재 유저
   const { myPlaylistId } = useParams();
+  const { successToast, errorToast } = useToast();
 
   // 모달창 영역 밖을 클릭하면 모달창 닫힘
   useCloseModal({ modalRef, state: open, setState: setOpen }); // hook
@@ -81,11 +83,13 @@ function CustomModal({ open, setOpen, type }: Props) {
           const storageRef = ref(storage, `user_image/${user.uid}`);
           await deleteObject(storageRef);
         }
+        successToast('탈퇴되었습니다.');
         router.push('/login');
         setLoading(false);
         resetCurrentMusicAndTrack();
       } catch (error) {
         setLoading(false);
+        errorToast('탈퇴에 실패했습니다. 다시 시도하세요.');
       }
     }
 

@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import * as S from 'src/styled/authStyled';
 import { auth } from 'src/firebase/config';
 import { setUserDoc } from 'src/firebase/user';
+import useToast from 'src/hook/useToast';
 
 import GoBackHead from 'src/components/GoBackHead/GoBackHead';
 import GoogleAuth from 'src/components/GoogleAuth/GoogleAuth';
@@ -18,6 +19,7 @@ function Signup() {
   const checkPwdRef = useRef<HTMLInputElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const { successToast, errorToast } = useToast();
 
   const {
     control,
@@ -52,12 +54,14 @@ function Signup() {
           }
         }
 
+        successToast('회원가입이 완료되었습니다🎉');
         // 로그인 페이지 이동
         router.replace('/login');
         setLoading(false);
       }
     } catch (error) {
       setLoading(false);
+      errorToast('회원가입에 실패했습니다. 다시 시도하세요.');
     }
   });
 

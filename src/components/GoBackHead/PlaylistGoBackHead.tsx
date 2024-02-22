@@ -3,7 +3,7 @@
 import { SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 import playlistDataState from 'src/atom/playlistDataState';
 import { setUserPlaylistDoc, updatePlaylistDoc } from 'src/firebase/playlist';
@@ -15,6 +15,7 @@ import { auth } from 'src/firebase/config';
 import { motion } from 'framer-motion';
 import userState from 'src/atom/userState';
 import useToast from 'src/hook/useToast';
+import myPlaylistState from 'src/atom/myPlaylistState';
 
 interface Props {
   loading?: boolean;
@@ -28,6 +29,7 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
   const { username } = useRecoilValue(userState); // 리코일
   const { isEdit, isPublic, uuid, playlistImageUri, playlistTitle, description, musicList } = playlistData;
   const resetPlaylistDataState = useResetRecoilState(playlistDataState); // 리코일
+  const setMyPlaylist = useSetRecoilState(myPlaylistState);
   const formattedDate = formatDateToYYYYMMDD(); // 현재 날짜
   const router = useRouter();
   const pathname = usePathname();
@@ -75,6 +77,7 @@ function PlaylistGoBackHead({ loading, setLoading }: Props) {
     const playlist = async () => {
       if (isEdit) {
         await updatePlaylistDoc({ uuid, playlistData });
+        setMyPlaylist((prev) => ({ ...prev, musicList }));
         successToast('플레이리스트가 수정되었습니다.');
       } else {
         await setUserPlaylistDoc({ uuid, playlistData }); // user_playlist에 플레이리스트 등록

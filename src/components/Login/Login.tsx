@@ -14,6 +14,7 @@ import {
 import userState from 'src/atom/userState';
 import { auth } from 'src/firebase/config';
 import * as S from 'src/styled/authStyled';
+import useToast from 'src/hook/useToast';
 
 import GoBackHead from 'src/components/GoBackHead/GoBackHead';
 import GoogleAuth from 'src/components/GoogleAuth/GoogleAuth';
@@ -30,6 +31,7 @@ function Login() {
     formState: { errors },
   } = useForm();
   const setUserState = useSetRecoilState(userState); // 리코일
+  const { successToast, errorToast } = useToast();
 
   useEffect(() => {
     // 로그인 되어있지 않다면 리코일 상태 리셋
@@ -61,11 +63,12 @@ function Login() {
           isAdmin,
         }));
       }
+      successToast('로그인 되었습니다.');
       router.replace('/');
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      alert('가입되지 않은 이메일이거나, 잘못된 비밀번호입니다.');
+      errorToast('가입되지 않은 이메일이거나, 잘못된 비밀번호입니다.');
     }
   });
 

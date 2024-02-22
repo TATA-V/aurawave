@@ -5,14 +5,14 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import * as S from 'src/styled/playlistEditorStyled';
 import playlistDataState from 'src/atom/playlistDataState';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { getOneMusicPlaylistInfo } from 'src/firebase/playlist';
+import { MusicData } from 'src/types/musicTypes';
 
 import PlaylistGoBackHead from 'src/components/GoBackHead/PlaylistGoBackHead';
 import PlaylistEditorMusicLi from 'src/components/PlaylistEditor/PlaylistEditorMusicLi';
 import PlaylistLottie from 'src/components/Lottie/PlaylistLottie';
 import PlaylistImage from 'src/components/PlaylistEditor/PlaylistImage';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { getOneMusicPlaylistInfo } from 'src/firebase/playlist';
-import { MusicData } from 'src/types/musicTypes';
 
 function PlaylistEditor() {
   const [loading, setLoading] = useState(false);

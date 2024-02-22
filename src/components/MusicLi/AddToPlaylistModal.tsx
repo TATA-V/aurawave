@@ -1,8 +1,8 @@
 'use clinet';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { MusicData } from 'src/types/musicTypes';
@@ -12,8 +12,9 @@ import { motion } from 'framer-motion';
 import { getUserInfo } from 'src/firebase/user';
 import { auth } from 'src/firebase/config';
 import { UserPlaylistData } from 'src/types/playlistTypes';
-import { addOneMusicToPlaylist } from 'src/firebase/playlist';
+import { addOneMusicToPlaylist, deleteOneMusicToPlaylist } from 'src/firebase/playlist';
 import useToast from 'src/hook/useToast';
+import myPlaylistState from 'src/atom/myPlaylistState';
 
 interface Props {
   el: MusicData;
@@ -22,30 +23,26 @@ interface Props {
   setShowAddToPlaylistModal: (value: boolean) => void;
 }
 function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlaylistModal }: Props) {
-  const [soundtrackPage, setSoundtrackPage] = useState(false);
   const [playlists, setPlaylists] = useState<UserPlaylistData[] | undefined>([]);
+  const setMyPlaylist = useSetRecoilState(myPlaylistState);
   const [currentMusicAndTrack, setCurrentMusicAndTrack] = useRecoilState(currentTrackState); // 리코일
-  const { playMode, showMusicDetail, currentMusic, currentTrack, suffleTrack } = currentMusicAndTrack;
+  const { playMode, currentMusic, currentTrack, suffleTrack } = currentMusicAndTrack;
 
   const modalRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const paths = pathname.split('/');
+  const isMyPlaylistPage = paths[1] === 'my-playlist';
   const { errorToast, successToast } = useToast();
+  const user = auth.currentUser;
+  const { myPlaylistId } = useParams();
 
   useEffect(() => {
-    const user = auth.currentUser;
     if (!user) return;
     getUserInfo(user.uid).then((data) => {
       if (!data) return;
       setPlaylists(data.playlists);
     });
   }, []);
-
-  // 현재 페이지가 soundtrack이라면
-  useEffect(() => {
-    if (pathname === '/soundtrack') {
-      setSoundtrackPage(true);
-    }
-  }, [pathname]);
 
   // 모달창 영역 밖을 클릭하면 모달창 닫힘
   useCloseModal({ modalRef, state: showAddToPlaylistModal, setState: setShowAddToPlaylistModal }); // hook
@@ -84,6 +81,18 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
     successToast('재생목록에 음악을 추가했습니다.');
   };
 
+  const handleDeleteFromMyPlaylist = async () => {
+    if (!user) return;
+    try {
+      const data = await deleteOneMusicToPlaylist(String(myPlaylistId), el);
+      setMyPlaylist((prev) => ({ ...prev, musicList: data }));
+      setShowAddToPlaylistModal(false);
+      successToast('플레이리스트에서 1곡을 삭제했습니다.');
+    } catch (err) {
+      errorToast('삭제에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
   return (
     <Container
       $top={top}
@@ -92,11 +101,12 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
       transition={{ type: 'spring', duration: 0.5 }}
     >
       <AddToPlaylistModalBlock ref={modalRef}>
-        {soundtrackPage && !showMusicDetail && (
-          <ModalTitle onClick={handleDeleteMusic}>
-            <p className="delete-music">현재 재생목록에서 삭제</p>
+        {isMyPlaylistPage && (
+          <ModalTitle onClick={handleDeleteFromMyPlaylist}>
+            <p className="delete-music">내 플레이리스트에서 삭제</p>
           </ModalTitle>
         )}
+
         <ModalTitle>
           <p className="add-music">내 플레이리스트에 추가</p>
         </ModalTitle>

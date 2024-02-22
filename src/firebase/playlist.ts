@@ -24,7 +24,6 @@ import {
 } from 'src/types/playlistTypes';
 import { MusicData } from 'src/types/musicTypes';
 import { auth, firestore } from './config';
-import { getUserInfo, updateUserAllPlaylists } from './user';
 
 // 새로운 AuraWave 플레이리스트 정보 등록
 // eslint-disable-next-line no-redeclare
@@ -158,13 +157,6 @@ export async function getOneMusicPlaylist(uuid: string) {
 export async function deletePlaylistDoc(uuid: string) {
   const musicRef = doc(firestore, 'user_playlist', uuid);
   await deleteDoc(musicRef);
-
-  // if (!user) return;
-  // const userData = await getUserInfo(user.uid);
-  // if (!userData) return;
-  // const updatePlaylists = userData.playlists?.filter((el) => el.uuid !== uuid);
-  // if (!updatePlaylists) return;
-  // await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updatePlaylists });
 }
 
 // user 플레이리스트 수정하기
@@ -172,18 +164,6 @@ export async function updatePlaylistDoc({ uuid, playlistData }: UpdatePlaylistDo
   const musicRef = doc(firestore, 'user_playlist', uuid);
   const data = await getOneMusicPlaylistInfo(uuid);
   await updateDoc(musicRef, { ...data, ...playlistData });
-
-  // if (!user) return;
-  // const userData = await getUserInfo(user.uid);
-  // if (!userData) return;
-  // const updateUserData = userData.playlists?.map((el) => {
-  //   if (el.uuid === uuid) {
-  //     return playlistData;
-  //   }
-  //   return el;
-  // });
-  // if (!updateUserData) return;
-  // await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
 }
 
 // user 플레이리스트에 하나의 음악 추가
@@ -194,23 +174,6 @@ export async function addOneMusicToPlaylist(uuid: string, music: MusicData) {
   if (!exist) {
     await updateDoc(musicRef, { musicList: [...musicData, music] });
   }
-
-  // if (!user) return;
-  // const userData = await getUserInfo(user.uid);
-  // if (!userData) return;
-  // const updateUserData = userData.playlists?.map((el) => {
-  //   if (el.uuid === uuid) {
-  //     const musicList = Array.isArray(el.musicList) ? el.musicList : [];
-  //     const exist = musicList.some((item) => item.uuid === music.uuid);
-  //     if (!exist) {
-  //       return { ...el, musicList: [...musicList, music] };
-  //     }
-  //     return el;
-  //   }
-  //   return el;
-  // });
-  // if (!updateUserData) return;
-  // await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
   return exist;
 }
 
@@ -221,16 +184,5 @@ export async function deleteOneMusicToPlaylist(uuid: string, music: MusicData) {
   if (!musicData) return;
   const updateMusicData = musicData.filter((el: MusicData) => el.uuid !== music.uuid);
   await updateDoc(musicRef, { musicList: updateMusicData });
-
-  // if (!user) return;
-  // const userData = await getUserInfo(user.uid);
-  // if (!userData) return;
-  // const updateUserData = userData.playlists?.map((el) => {
-  //   if (el.uuid === uuid) {
-  //     return { ...el, musicList: updateMusicData };
-  //   }
-  //   return el;
-  // });
-  // if (!updateUserData) return;
-  // await updateUserAllPlaylists({ uuid: user.uid, playlistsData: updateUserData });
+  return updateMusicData;
 }

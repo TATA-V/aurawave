@@ -10,6 +10,7 @@ import userState from 'src/atom/userState';
 import crayonPng from 'src/assets/png-file/crayon-line.png';
 import { auth } from 'src/firebase/config';
 import currentTrackState from 'src/atom/currentTrackState';
+import useToast from 'src/hook/useToast';
 
 import CustomModal from 'src/components/CustomModal/CustomModal';
 
@@ -18,14 +19,16 @@ function LogoutAndDeleteAccount() {
   const router = useRouter();
   const { isLoggedIn } = useRecoilValue(userState); // 리코일
   const resetCurrentMusicAndTrack = useResetRecoilState(currentTrackState); // 리코일
+  const { successToast, errorToast } = useToast();
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       resetCurrentMusicAndTrack();
+      successToast('로그아웃 되었습니다.');
       router.replace('/login');
     } catch (error) {
-      alert('로그아웃 도중에 문제가 발생했습니다.');
+      errorToast('로그아웃 도중에 문제가 발생했습니다.');
     }
   };
 

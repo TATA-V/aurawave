@@ -44,7 +44,7 @@ function PlaylistDetail({ loaded, data }: Props) {
 
         {!loaded && <FadeInMotion><SkelMusicLi8 /></FadeInMotion>}
         <ul>
-          {data && data.musicList.map((el: any) => (
+          {data && data.musicList.map((el: MusicData) => (
             <FadeInMotion key={el.uuid}>
               <MusicLi el={el} />
             </FadeInMotion>
