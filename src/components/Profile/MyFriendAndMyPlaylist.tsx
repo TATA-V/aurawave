@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import Link from 'next/link';
 import userState from 'src/atom/userState';
-import PeopleCircleSvg from '../../../public/peopleCircleSvg.svg';
 
 function MyFriendAndMyPlaylist() {
   const { isAdmin, isLoggedIn } = useRecoilValue(userState);
@@ -14,14 +13,12 @@ function MyFriendAndMyPlaylist() {
       {isLoggedIn
       && (
         <MyFriendAndMyPlaylistBlock>
-          <li className="list-box">
-            <PeopleCircleSvg />
-            <p className="list-text">친구 목록</p>
-          </li>
-          <li className="list-box">
-            <i className="i-list-circle" />
-            <p className="list-text">내 플레이리스트 목록</p>
-          </li>
+          <Link href="/my-playlist">
+            <li className="list-box">
+              <i className="i-list-circle" />
+              <p className="list-text">내 플레이리스트 목록</p>
+            </li>
+          </Link>
 
           {/* andmin 계정일 때 */}
           {isAdmin && (
@@ -53,6 +50,7 @@ const MyFriendAndMyPlaylistBlock = styled.ul`
 
   .list-box {
     height: 48px;
+    border-top: 1px solid var(--blue-gray-200);
     border-bottom: 1px solid var(--blue-gray-200);
     display: flex;
     align-items: center;

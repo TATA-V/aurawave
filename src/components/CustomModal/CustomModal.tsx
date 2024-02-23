@@ -13,11 +13,14 @@ import { deletePlaylistDoc } from 'src/firebase/playlist';
 import currentTrackState from 'src/atom/currentTrackState';
 import useCloseModal from 'src/hook/useCloseModal';
 import useToast from 'src/hook/useToast';
+import useA2HS from 'src/hook/useA2HS';
+import Image from 'next/image';
+import iconLogoPng from '../../../public/icon-512.png';
 
 interface Props {
   open: boolean;
   setOpen: (value: boolean) => void;
-  type: string | '탈퇴' | '플레이리스트삭제' | '플레이리스트에서한곡삭제';
+  type: string | '탈퇴' | '플레이리스트삭제' | '플레이리스트에서한곡삭제' | 'A2HS';
 }
 
 function CustomModal({ open, setOpen, type }: Props) {
@@ -33,6 +36,7 @@ function CustomModal({ open, setOpen, type }: Props) {
   const user = auth.currentUser; // 현재 유저
   const { myPlaylistId } = useParams();
   const { successToast, errorToast } = useToast();
+  const { installApp } = useA2HS();
 
   // 모달창 영역 밖을 클릭하면 모달창 닫힘
   useCloseModal({ modalRef, state: open, setState: setOpen }); // hook
@@ -40,7 +44,7 @@ function CustomModal({ open, setOpen, type }: Props) {
   useEffect(() => {
     if (type === '탈퇴') {
       pwdRef.current?.focus();
-      setMessage('탈퇴하시겠습니까? 탈퇴 후에는 다시 복구할 수 없습니다.');
+      setMessage('탈퇴하시겠습니까? 탈퇴 후에는\n다시 복구할 수 없습니다.');
       setDeleteTxt('탈퇴');
       const googleSignIn = user?.providerData[0].providerId === 'google.com'; // 현재 로그인 된 계정이 구글인지 확인
       if (googleSignIn) {
@@ -56,6 +60,11 @@ function CustomModal({ open, setOpen, type }: Props) {
     if (type === '플레이리스트에서한곡삭제') {
       setMessage('선택한 1곡을 플레이리스트에서 삭제하시겠습니까?');
       setDeleteTxt('삭제');
+    }
+
+    if (type === 'A2HS') {
+      setMessage('바로가기를\n추가하시겠습니까?');
+      setDeleteTxt('추가');
     }
   }, [type, user?.providerData]);
 
@@ -101,6 +110,10 @@ function CustomModal({ open, setOpen, type }: Props) {
     if (type === '플레이리스트에서한곡삭제') {
       // 플레이리스트에서 한 곡 삭제
     }
+
+    if (type === 'A2HS') {
+      installApp();
+    }
   };
 
   return (
@@ -114,7 +127,13 @@ function CustomModal({ open, setOpen, type }: Props) {
         >
           <Modal ref={modalRef}>
             <div className="modal-content">
-              <p className="modal-text">{message}</p>
+              <p className={`modal-text flex gap-4 ${type === 'A2HS' ? 'text-start font-light' : 'text-center'}`}>
+                { type === 'A2HS' && <Image width={65} height={65} className="w-[60px] h-[60px]" src={iconLogoPng} alt="logo" /> }
+                <span>
+                  {type === 'A2HS' && <span className="font-medium">AuraWave&nbsp;</span>}
+                  {message}
+                </span>
+              </p>
             </div>
 
             {type === '탈퇴' && !isGoogleSignIn && (
@@ -182,15 +201,16 @@ const Modal = styled.div`
   align-items: center;
 
   .modal-content {
-    width: 223px;
+    width: 100%;
     padding-top: 36px;
     line-height: 1.5rem;
+    display: flex;
+    justify-content: center;
   }
 
   .modal-text {
     color: var(--dark-blue-900);
     font-size: 1.0625rem;
-    text-align: center;
     white-space: pre-line;
   }
 
