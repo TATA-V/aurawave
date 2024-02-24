@@ -8,6 +8,7 @@ export interface CurrentMusic {
   title: string;
   composer: string;
   copyright: string;
+  isChecked? : boolean;
 }
 
 export interface CurrentTrackState {
@@ -34,6 +35,7 @@ export const currentTrackDefault: CurrentTrackState = {
     title: '',
     composer: '',
     copyright: '',
+    isChecked: false,
   },
   currentTrack: [],
   suffleTrack: [],

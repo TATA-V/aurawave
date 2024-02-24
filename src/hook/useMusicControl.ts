@@ -33,6 +33,15 @@ export const useMusicShuffle = () => {
     } else {
       const randomData = shuffle(currentTrack);
       const randomTrack = randomData.filter((track) => track.uuid !== currentMusic.uuid);
+
+      if (currentMusic.isChecked) {
+        setCurrentMusicAndTrack((prev) => ({
+          ...prev,
+          playMode: 'shuffle',
+          suffleTrack: [...prev.suffleTrack, ...randomTrack],
+        }));
+        return;
+      }
       setCurrentMusicAndTrack((prev) => ({
         ...prev,
         playMode: 'shuffle',
