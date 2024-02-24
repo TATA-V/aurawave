@@ -70,13 +70,12 @@ export const ProgressBarAndTime = styled.div<CurrentTimeWidth>`
     border-radius: 2px;
     background-color: #648b8b;
 
-    display: flex;
+    display: ${({ $currentTimeWidth }) => (Number.isNaN($currentTimeWidth) ? 'hidden' : 'flex')};
     justify-content: center;
     align-items: center;
 
     position: absolute;
     top: 8px;
-    /* left: ${({ $currentTimeWidth }) => $currentTimeWidth - 12}%; */
     left: ${({ $currentTimeWidth }) => $currentTimeWidth - 9}%;
     z-index: 1;
   }
@@ -149,7 +148,6 @@ export const LeftBox = styled.div`
   .details {
     width: 100%;
     padding-left: 13px;
-    height: 33px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -200,6 +198,7 @@ export const SimpleMusicPlayer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 62px;
 
   .image {
     width: 38px;

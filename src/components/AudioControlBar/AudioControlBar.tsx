@@ -295,7 +295,7 @@ function AudioControlBar() {
 
             {/* 음악 컨트롤 */}
             <S.RightBox>
-              <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay}>
+              <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay} className="w-[21px]">
                 {isPlaying ? (
                   <MusicPauseSvg width={19} height={21} fill="white" />
                 ) : (

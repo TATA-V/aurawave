@@ -129,7 +129,7 @@ function CustomModal({ open, setOpen, type }: Props) {
           <Modal ref={modalRef}>
             <div className="modal-content">
               <p className={`modal-text flex gap-4 ${type === 'A2HS' ? 'text-start font-light' : 'text-center'}`}>
-                { type === 'A2HS' && <Image width={65} height={65} className="w-[60px] h-[60px]" src={iconLogoPng} alt="logo" loading="lazy" /> }
+                { type === 'A2HS' && <Image width={65} height={65} className="w-[60px] h-[60px]" src={iconLogoPng} alt="logo" placeholder="blur" /> }
                 <span>
                   {type === 'A2HS' && <span className="font-medium">AuraWave&nbsp;</span>}
                   {message}
