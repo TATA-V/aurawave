@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TentIcon from 'src/assets/icons/TentIcon';
 import XIcon from 'src/assets/icons/XIcon';
 import { useState } from 'react';
-import VolumeModal from './VolumeModal';
+import VolumeModal from 'src/components/AudioEnhancer/VolumeModal';
 
 function AudioEnhancer() {
   const [mode, setMode] = useState<string[]>(['default', 'linear-gradient(145deg, #8ECECE 10%, #DDC4C8, #FF99A7)']);

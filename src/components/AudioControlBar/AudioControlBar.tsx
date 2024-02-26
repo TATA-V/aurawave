@@ -221,103 +221,105 @@ function AudioControlBar() {
 
       <S.AudioControlBarBlock $hasBottomTab={hasBottomTab}>
         <AudioEnhancer />
-        <S.ProgressBarAndTime $currentTimeWidth={currentTimeWidth} className="mt-[-16px]">
-          <S.ProgressBarBox $currentTimeWidth={currentTimeWidth}>
-            <S.ProgressBar
-              onMouseMove={(e) => {
-                handleProgressBar(e, 'hover');
-                setIsMouseMoveActive(true);
-              }}
-              onMouseLeave={() => setIsMouseMoveActive(false)}
-              onClick={(e) => handleProgressBar(e, 'click')}
-              $progressBarWidth={progressBarWidth}
-            />
-          </S.ProgressBarBox>
-          {isMouseMoveActive && (
-            <div className="hover-time">
-              <p>{formatTime(currentTime)}</p>
-            </div>
+        <div className="transform translate-y-[-16px]">
+          <S.ProgressBarAndTime $currentTimeWidth={currentTimeWidth}>
+            <S.ProgressBarBox $currentTimeWidth={currentTimeWidth}>
+              <S.ProgressBar
+                onMouseMove={(e) => {
+                  handleProgressBar(e, 'hover');
+                  setIsMouseMoveActive(true);
+                }}
+                onMouseLeave={() => setIsMouseMoveActive(false)}
+                onClick={(e) => handleProgressBar(e, 'click')}
+                $progressBarWidth={progressBarWidth}
+              />
+            </S.ProgressBarBox>
+            {isMouseMoveActive && (
+              <div className="hover-time">
+                <p>{formatTime(currentTime)}</p>
+              </div>
+            )}
+          </S.ProgressBarAndTime>
+
+          {/* 현재 페이지에 BottomTab 컴포넌트가 없다면 */}
+          {!hasBottomTab && (
+            <S.SimpleMusicPlayer>
+              <Image
+                width={38}
+                height={38}
+                onClick={handleshowMusicDetail}
+                className="image"
+                src={imageUri}
+                alt="album image"
+              />
+              <S.Controls>
+                <motion.button whileTap={{ scale: 0.9 }}>
+                  <i onClick={() => handlePrevNextMusic('prev')} className="i-back-music" />
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay}>
+                  {isPlaying ? (
+                    <MusicPauseSvg width={26} height={28} fill="white" />
+                  ) : (
+                    <i className="i-play" />
+                  )}
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic()}>
+                  <i className="i-next-play" />
+                </motion.button>
+              </S.Controls>
+
+              <S.Option>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={() => setPlayModeModal(!playModeModal)}>
+                  <i className="i-setting" />
+                </motion.button>
+
+                {/* 재생 모드 모달 => PlayModeModal 컴포넌트 */}
+                {playModeModal && (
+                  <PlayModeModal playModeModal={playModeModal} setPlayModeModal={setPlayModeModal} />
+                )}
+              </S.Option>
+            </S.SimpleMusicPlayer>
           )}
-        </S.ProgressBarAndTime>
 
-        {/* 현재 페이지에 BottomTab 컴포넌트가 없다면 */}
-        {!hasBottomTab && (
-          <S.SimpleMusicPlayer>
-            <Image
-              width={38}
-              height={38}
-              onClick={handleshowMusicDetail}
-              className="image"
-              src={imageUri}
-              alt="album image"
-            />
-            <S.Controls>
-              <motion.button whileTap={{ scale: 0.9 }}>
-                <i onClick={() => handlePrevNextMusic('prev')} className="i-back-music" />
-              </motion.button>
-              <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay}>
-                {isPlaying ? (
-                  <MusicPauseSvg width={26} height={28} fill="white" />
-                ) : (
-                  <i className="i-play" />
-                )}
-              </motion.button>
-              <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic()}>
-                <i className="i-next-play" />
-              </motion.button>
-            </S.Controls>
+          {/* 현재 페이지에 BottomTab 컴포넌트가 있다면 */}
+          {hasBottomTab && (
+            <S.BottomTabMusicPlayer>
+              {/* 현재 재생되고 있는 음악 정보 */}
+              <S.LeftBox>
+                <div onClick={handleshowMusicDetail} className="min-w-[38px] w-[38px] min-h-[38px] rounded-[2px] overflow-hidden cursor-pointer">
+                  <LazyLoadImage effect="blur" width="100%" height={38} className="image" src={imageUri} alt="album image" />
+                </div>
+                <div className="details">
+                  <p onClick={handleshowMusicDetail} className="title">
+                    {title}
+                  </p>
+                  <p onClick={handleshowMusicDetail} className="composer">
+                    {composer}
+                  </p>
+                </div>
+              </S.LeftBox>
 
-            <S.Option>
-              <motion.button whileTap={{ scale: 0.9 }} onClick={() => setPlayModeModal(!playModeModal)}>
-                <i className="i-setting" />
-              </motion.button>
-
-              {/* 재생 모드 모달 => PlayModeModal 컴포넌트 */}
-              {playModeModal && (
-                <PlayModeModal playModeModal={playModeModal} setPlayModeModal={setPlayModeModal} />
-              )}
-            </S.Option>
-          </S.SimpleMusicPlayer>
-        )}
-
-        {/* 현재 페이지에 BottomTab 컴포넌트가 있다면 */}
-        {hasBottomTab && (
-          <S.BottomTabMusicPlayer>
-            {/* 현재 재생되고 있는 음악 정보 */}
-            <S.LeftBox>
-              <div onClick={handleshowMusicDetail} className="min-w-[38px] w-[38px] min-h-[38px] rounded-[2px] overflow-hidden cursor-pointer">
-                <LazyLoadImage effect="blur" width="100%" height={38} className="image" src={imageUri} alt="album image" />
-              </div>
-              <div className="details">
-                <p onClick={handleshowMusicDetail} className="title">
-                  {title}
-                </p>
-                <p onClick={handleshowMusicDetail} className="composer">
-                  {composer}
-                </p>
-              </div>
-            </S.LeftBox>
-
-            {/* 음악 컨트롤 */}
-            <S.RightBox>
-              <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay} className="w-[21px]">
-                {isPlaying ? (
-                  <MusicPauseSvg width={19} height={21} fill="white" />
-                ) : (
-                  <i className="i-play" />
-                )}
-              </motion.button>
-              <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic()}>
-                <i className="i-next-play" />
-              </motion.button>
-              <S.StyledLink href="/soundtrack">
-                <motion.div whileTap={{ scale: 0.9 }}>
-                  <i className="i-menu" />
-                </motion.div>
-              </S.StyledLink>
-            </S.RightBox>
-          </S.BottomTabMusicPlayer>
-        )}
+              {/* 음악 컨트롤 */}
+              <S.RightBox>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={handleTogglePlay} className="w-[21px]">
+                  {isPlaying ? (
+                    <MusicPauseSvg width={19} height={21} fill="white" />
+                  ) : (
+                    <i className="i-play" />
+                  )}
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.9 }} onClick={() => handlePrevNextMusic()}>
+                  <i className="i-next-play" />
+                </motion.button>
+                <S.StyledLink href="/soundtrack">
+                  <motion.div whileTap={{ scale: 0.9 }}>
+                    <i className="i-menu" />
+                  </motion.div>
+                </S.StyledLink>
+              </S.RightBox>
+            </S.BottomTabMusicPlayer>
+          )}
+        </div>
       </S.AudioControlBarBlock>
     </>
   );
