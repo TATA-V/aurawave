@@ -5,6 +5,7 @@ import RecoilProvider from 'src/components/provider/RecoilProvider';
 import StyledComponentsRegistry from 'src/components/provider/StyledComponentsRegistry';
 import DefaultLayout from 'src/components/Layout/DefaultLayout';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-range-slider-input/dist/style.css';
 import './iconfonts.css';
 import './globals.css';
 import './reset.css';

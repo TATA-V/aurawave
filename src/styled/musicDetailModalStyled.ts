@@ -179,6 +179,7 @@ export const Controls = styled.div`
 
 export const PlayBox = styled.div`
   width: 100%;
+  height: 44px;
   display: flex;
   justify-content: space-between;
 

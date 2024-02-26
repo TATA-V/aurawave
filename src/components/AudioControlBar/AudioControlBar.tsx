@@ -2,15 +2,18 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { motion } from 'framer-motion';
 import * as S from 'src/styled/audioControlStyled';
 import currentTrackState, { CurrentMusic } from 'src/atom/currentTrackState';
 import formatTime from 'src/utils/formatTime';
+import Image from 'next/image';
 import updateProgressBarWidth from 'src/utils/updateProgressBarWidth';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import PlayModeModal from 'src/components/AudioControlBar/PlayModeModal';
 import MusicDetailModal from 'src/components/MusicDetailModal/MusicDetailModal';
-import Image from 'next/image';
+import AudioEnhancer from 'src/components/AudioEnhancer/AudioEnhancer';
+import audioEnhanceState from 'src/atom/audioEnhance';
 import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
 
 function AudioControlBar() {
@@ -26,6 +29,8 @@ function AudioControlBar() {
   const [hasBottomTab, setHasBottomTab] = useState(true);
   // 옵션(Loop, Shuffle) 모달
   const [playModeModal, setPlayModeModal] = useState(false);
+  // AudioEnhancer
+  const { volume } = useRecoilValue(audioEnhanceState);
 
   const [currentMusicAndTrack, setCurrentMusicAndTrack] = useRecoilState(currentTrackState); // 리코일
   const {
@@ -44,26 +49,30 @@ function AudioControlBar() {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio) {
-      // 음악 재생 상태 변경 시 총 시간 업데이트
-      audio.addEventListener('durationchange', () => {
-        setTotalDuration(audio.duration);
-      });
-      // 음악 재생 상태 변경 시 현재 시간 업데이트
-      audio.addEventListener('timeupdate', () => {
-        setCurrentDuration(audio.currentTime);
-      });
-    }
+    if (!audio) return;
+    audioRef.current.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    // 음악 재생 상태 변경 시 총 시간 업데이트
+    audio.addEventListener('durationchange', () => {
+      setTotalDuration(audio.duration);
+    });
+    // 음악 재생 상태 변경 시 현재 시간 업데이트
+    audio.addEventListener('timeupdate', () => {
+      setCurrentDuration(audio.currentTime);
+    });
 
     return () => {
-      if (audio) {
-        audio.removeEventListener('durationchange', () => {
-          setTotalDuration(audio.duration);
-        });
-        audio.removeEventListener('timeupdate', () => {
-          setCurrentDuration(audio.currentTime);
-        });
-      }
+      if (!audio) return;
+      audio.removeEventListener('durationchange', () => {
+        setTotalDuration(audio.duration);
+      });
+      audio.removeEventListener('timeupdate', () => {
+        setCurrentDuration(audio.currentTime);
+      });
     };
   }, []);
 
@@ -211,7 +220,8 @@ function AudioControlBar() {
       </S.StyledAudio>
 
       <S.AudioControlBarBlock $hasBottomTab={hasBottomTab}>
-        <S.ProgressBarAndTime $currentTimeWidth={currentTimeWidth}>
+        <AudioEnhancer />
+        <S.ProgressBarAndTime $currentTimeWidth={currentTimeWidth} className="mt-[-16px]">
           <S.ProgressBarBox $currentTimeWidth={currentTimeWidth}>
             <S.ProgressBar
               onMouseMove={(e) => {
@@ -275,14 +285,9 @@ function AudioControlBar() {
           <S.BottomTabMusicPlayer>
             {/* 현재 재생되고 있는 음악 정보 */}
             <S.LeftBox>
-              <Image
-                onClick={handleshowMusicDetail}
-                className="image"
-                width={38}
-                height={38}
-                src={imageUri}
-                alt="album image"
-              />
+              <div onClick={handleshowMusicDetail} className="min-w-[38px] w-[38px] min-h-[38px] rounded-[2px] overflow-hidden cursor-pointer">
+                <LazyLoadImage effect="blur" width="100%" height={38} className="image" src={imageUri} alt="album image" />
+              </div>
               <div className="details">
                 <p onClick={handleshowMusicDetail} className="title">
                   {title}

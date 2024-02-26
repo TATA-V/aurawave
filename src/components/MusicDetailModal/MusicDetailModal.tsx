@@ -89,8 +89,6 @@ function MusicDetailModal({
             {/* 음악 제목 => MusicTitle 컴포넌트 */}
             <MusicTitle />
             {/* 음악 이미지 */}
-            {/* <Image width={340} height={340} className="image" src={imageUri} alt="album image" /> */}
-            {/* <Blurhash width="100%" height={340} className="image" hash="LEHV6nWB2yk8pyo0adR*.7kCMdnj" resolutionX={32} resolutionY={32} punch={1} /> */}
             <LazyLoadImage effect="blur" width="100%" height={340} className="image" src={imageUri} alt="album image" />
             {/* 출처 => MusicCopyright 컴포넌트 */}
             <MusicCopyright />

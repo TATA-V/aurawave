@@ -14,7 +14,7 @@ function AddToHomeScreen() {
     <>
       <AddToHomeScreenBlock onClick={() => setOpenModal(!openModal)} className="px-[20px] pb-[15px] cursor-pointer">
         <div className="relative bg-[#505A5D] overflow-hidden w-full rounded-[8px] h-[70px]">
-          <Image className="w-full h-[71px] rounded-[8px] object-cover absolute top-0 left-0" src={a2hsBg} alt="a2hs-bg" layout="fill" objectFit="cover" />
+          <Image placeholder="blur" className="w-full h-[71px] rounded-[8px] object-cover absolute top-0 left-0" src={a2hsBg} alt="a2hs-bg" layout="fill" objectFit="cover" />
           <div className="h-full w-full flex items-center px-[20px]">
             <p className="font-light text-[#fff] text-base">
               지금 바로 AuraWave를 <span className="font-medium">홈 화면에 추가</span>하세요

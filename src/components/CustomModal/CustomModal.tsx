@@ -57,11 +57,6 @@ function CustomModal({ open, setOpen, type }: Props) {
       setDeleteTxt('삭제');
     }
 
-    if (type === '플레이리스트에서한곡삭제') {
-      setMessage('선택한 1곡을 플레이리스트에서 삭제하시겠습니까?');
-      setDeleteTxt('삭제');
-    }
-
     if (type === 'A2HS') {
       setMessage('바로가기를\n추가하시겠습니까?');
       setDeleteTxt('추가');
@@ -107,10 +102,6 @@ function CustomModal({ open, setOpen, type }: Props) {
       router.replace('/my-playlist');
     }
 
-    if (type === '플레이리스트에서한곡삭제') {
-      // 플레이리스트에서 한 곡 삭제
-    }
-
     if (type === 'A2HS') {
       installApp();
       setOpen(false);
@@ -129,7 +120,12 @@ function CustomModal({ open, setOpen, type }: Props) {
           <Modal ref={modalRef}>
             <div className="modal-content">
               <p className={`modal-text flex gap-4 ${type === 'A2HS' ? 'text-start font-light' : 'text-center'}`}>
-                { type === 'A2HS' && <Image width={65} height={65} className="w-[60px] h-[60px]" src={iconLogoPng} alt="logo" placeholder="blur" /> }
+                { type === 'A2HS'
+                && (
+                  <div className="w-[65px] h-[65px] rounded-full overflow-hidden">
+                    <Image width={65} height={65} className="w-[60px] h-[60px]" src={iconLogoPng} alt="logo" placeholder="blur" />
+                  </div>
+                ) }
                 <span>
                   {type === 'A2HS' && <span className="font-medium">AuraWave&nbsp;</span>}
                   {message}
