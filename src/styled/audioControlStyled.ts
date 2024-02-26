@@ -59,7 +59,7 @@ export const ProgressBarBox = styled.div<CurrentTimeWidth>`
 `;
 
 export const ProgressBarAndTime = styled.div<CurrentTimeWidth>`
-  position: relative;
+  /* position: relative; */
 
   .hover-time {
     width: 42px;

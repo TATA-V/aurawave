@@ -221,7 +221,7 @@ function AudioControlBar() {
 
       <S.AudioControlBarBlock $hasBottomTab={hasBottomTab}>
         <AudioEnhancer />
-        <div className="transform translate-y-[-16px]">
+        <div>
           <S.ProgressBarAndTime $currentTimeWidth={currentTimeWidth}>
             <S.ProgressBarBox $currentTimeWidth={currentTimeWidth}>
               <S.ProgressBar

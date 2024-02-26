@@ -28,7 +28,7 @@ function AudioEnhancer() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-0">
       <AudioEnhancerBtn onClick={handleClick} $mode={mode}>
         <div className="audio-enhance absolute top-[-66px] right-[16px] rounded-full w-[53px] h-[53px] z-100 bg-gray500 flex justify-center items-center">
           <div className="relative">
