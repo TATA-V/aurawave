@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import RangeSlider from 'react-range-slider-input';
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { useClickOutside } from '@reactuses/core';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import currentTrackState from 'src/atom/currentTrackState';
 import audioEnhanceState from 'src/atom/audioEnhance';
+import CustomRangeSlider from '../common/CustomRangeSlider';
 
 interface Props {
   open: boolean;
@@ -20,7 +20,7 @@ function VolumeModal({ open, setOpen } : Props) {
   useClickOutside(modalRef, () => {
     setOpen(false);
   });
-  const handleRange = (values: any) => {
+  const handleRange = (values: number[]) => {
     const volume = values[1] / 100;
     setAudioEnhance((prev) => ({ ...prev, volume }));
   };
@@ -34,20 +34,15 @@ function VolumeModal({ open, setOpen } : Props) {
           animate={{ opacity: 1, scale: 1, transition: { type: 'spring', duration: 0.5 } }}
           exit={{ opacity: 0, transition: { duration: 0.1 } }}
           ref={modalRef}
-          className="bottom-[90px] right-[16px] w-[105px] px-[5px]"
+          className="bottom-[75px] right-[16px] w-[105px] px-[5px]"
         >
           <p className="title h-[33px] w-full flex items-center justify-center font-medium text-[0.6rem] text-darkBlue800">
             현재 음악 음량 조절
           </p>
           <div className="range h-[45px] flex justify-center items-center">
-            <RangeSlider
-              defaultValue={[0, 50]}
-              thumbsDisabled={[true, false]}
-              rangeSlideDisabled
-              onInput={handleRange}
-            />
+            <CustomRangeSlider handleRange={handleRange} />
           </div>
-          <button onClick={resetCurrentTrack} className="h-[33px] w-full flex items-center justify-center font-medium text-[0.55rem] text-pink500">
+          <button onClick={resetCurrentTrack} className="h-[33px] w-full flex gap-[4px] items-center justify-center font-medium text-[0.55rem] text-pink500">
             <i className="i-delete" />음악 재생 창 닫기
           </button>
         </VolumeModalBlock>
@@ -69,34 +64,8 @@ const VolumeModalBlock = styled(motion.div)`
   }
   .i-delete {
     font-size: 0.4rem;
-    margin-right: 4px;
     &::before {
       color: var(--pink-500);
     }
-  }
-
-  .single-thumb .range-slider__thumb[data-lower] {
-    width: 0;
-  }
-  .range-slider {
-    width: 70px;
-    height: 5px;
-  }
-  .range-slider__range {
-    width: 50%;
-    background: linear-gradient(to bottom, #7A99A4, #2F7381);
-    border-radius: 30px 0px 0px 30px;
-  }
-  .range-slider__thumb {
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-  }
-  .range-slider__thumb[data-lower] {
-    width: 0;
-    display: none;
-  }
-  .range-slider__thumb[data-upper] {
-    background: radial-gradient(#7A99A4, #2F7381)
   }
 `;
