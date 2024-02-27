@@ -68,6 +68,9 @@ function Soundtrack() {
       const track = playMode === 'shuffle' ? delMusicFromSuffleTrack : delMusicFromCurrentTrack;
       setCurrentMusicAndTrack((prev) => ({ ...prev, currentMusic: track[0] }));
     }
+    if (delMusicFromSuffleTrack.length <= 0) {
+      resetCurrentMusicAndTrack();
+    }
   };
 
   return (

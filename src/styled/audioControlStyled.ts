@@ -176,7 +176,6 @@ export const LeftBox = styled.div`
 
 export const RightBox = styled.div`
   width: 101px;
-  padding-top: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;

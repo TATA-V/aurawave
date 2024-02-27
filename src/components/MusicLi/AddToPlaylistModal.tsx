@@ -1,6 +1,6 @@
 'use clinet';
 
-import { usePathname, useParams } from 'next/navigation';
+import { usePathname, useParams, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -26,7 +26,7 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
   const [playlists, setPlaylists] = useState<UserPlaylistData[] | undefined>([]);
   const setMyPlaylist = useSetRecoilState(myPlaylistState);
   const [currentMusicAndTrack, setCurrentMusicAndTrack] = useRecoilState(currentTrackState); // 리코일
-  const { playMode, currentMusic, currentTrack, suffleTrack } = currentMusicAndTrack;
+  const { playMode, currentMusic, currentTrack, suffleTrack, showMusicDetail } = currentMusicAndTrack;
 
   const modalRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -35,6 +35,7 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
   const { errorToast, successToast } = useToast();
   const user = auth.currentUser;
   const { myPlaylistId } = useParams();
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) return;
@@ -93,6 +94,13 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
     }
   };
 
+  const handleAddNewPlaylist = () => {
+    if (showMusicDetail) {
+      setCurrentMusicAndTrack((prev) => ({ ...prev, showMusicDetail: false }));
+    }
+    router.push('/playlist-editor');
+  };
+
   return (
     <Container
       $top={top}
@@ -121,12 +129,10 @@ function AddToPlaylistModal({ el, top, showAddToPlaylistModal, setShowAddToPlayl
             </AddToPlaylistLi>
           ))}
         </AddToPlaylistUl>
-        <AddNewPlaylist whileTap={{ scale: 0.9 }}>
-          <StyledLink href="/playlist-editor">
-            <i className="i-plus-circle" />
-            <p className="add-new-playlist">새 플레이리스트 추가</p>
-          </StyledLink>
-        </AddNewPlaylist>
+        <AddNewPlaylistBtn onClick={handleAddNewPlaylist} whileTap={{ scale: 0.9 }}>
+          <i className="i-plus-circle" />
+          <p className="add-new-playlist">새 플레이리스트 추가</p>
+        </AddNewPlaylistBtn>
       </AddToPlaylistModalBlock>
     </Container>
   );
@@ -239,7 +245,7 @@ const AddToPlaylistLi = styled(motion.li)<Num>`
   }
 `;
 
-const AddNewPlaylist = styled(motion.div)`
+const AddNewPlaylistBtn = styled(motion.button)`
   width: 100%;
   height: 35px;
   padding-right: 5px;
