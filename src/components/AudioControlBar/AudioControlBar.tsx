@@ -43,7 +43,7 @@ function AudioControlBar() {
     currentTrack,
     suffleTrack,
   } = currentMusicAndTrack;
-  const { uuid, imageUri, musicUri, title, composer } = currentMusic; // 현재 재생 중인 음악
+  const { uuid, imageUri, musicUri, title, composer } = currentMusic || {}; // 현재 재생 중인 음악
   const pathname = usePathname();
   const audioRef = useRef<HTMLAudioElement>(null);
 

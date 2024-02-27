@@ -46,9 +46,13 @@ function Soundtrack() {
     setCurrentMusicAndTrack((prev) => ({ ...prev, currentTrack: musicTrack }));
   };
 
-  const isCurrentMusicIsChecked = musicTrack.some((item) => item.uuid === currentMusic.uuid && item.isChecked);
+  const isChecked = () => {
+    const isCurrentMusicIsChecked = musicTrack.some((item) => item.uuid === currentMusic.uuid && item.isChecked);
+    return isCurrentMusicIsChecked;
+  };
 
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>, uuid: string) => {
+    const isCurrentMusicIsChecked = isChecked();
     const updateCheckedCurrent = currentTrack.map((item) => (item.uuid === uuid ? { ...item, isChecked: e.target.checked } : item));
     const updateCheckedSuffle = suffleTrack.map((item) => (item.uuid === uuid ? { ...item, isChecked: e.target.checked } : item));
     setCurrentMusicAndTrack((prev) => ({ ...prev, currentTrack: updateCheckedCurrent, suffleTrack: updateCheckedSuffle }));
@@ -59,6 +63,7 @@ function Soundtrack() {
   };
 
   const handleDelete = () => {
+    const isCurrentMusicIsChecked = isChecked();
     const delMusicFromSuffleTrack = suffleTrack.filter((item) => !item.isChecked);
     const delMusicFromCurrentTrack = currentTrack.filter((item) => !item.isChecked);
     setCurrentMusicAndTrack((prev) => ({ ...prev, suffleTrack: delMusicFromSuffleTrack }));
@@ -67,9 +72,6 @@ function Soundtrack() {
     if (isCurrentMusicIsChecked) {
       const track = playMode === 'shuffle' ? delMusicFromSuffleTrack : delMusicFromCurrentTrack;
       setCurrentMusicAndTrack((prev) => ({ ...prev, currentMusic: track[0] }));
-    }
-    if (delMusicFromSuffleTrack.length <= 0) {
-      resetCurrentMusicAndTrack();
     }
   };
 
