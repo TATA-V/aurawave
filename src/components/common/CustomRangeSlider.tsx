@@ -1,6 +1,8 @@
 'use client';
 
 import RangeSlider from 'react-range-slider-input';
+import { useRecoilValue } from 'recoil';
+import audioEnhanceState from 'src/atom/audioEnhance';
 import styled from 'styled-components';
 
 interface Props {
@@ -9,12 +11,16 @@ interface Props {
 }
 
 function CustomRangeSlider({ handleRange, mode = 'horizontal' } : Props) {
+  const { volumeValues, bgVolumeValues } = useRecoilValue(audioEnhanceState)
+  console.log(volumeValues)
+  console.log(bgVolumeValues)
+
   return (
     <>
       {mode === 'horizontal' && (
         <HorizontalRange>
           <RangeSlider
-            defaultValue={[0, 50]}
+            defaultValue={volumeValues}
             thumbsDisabled={[true, false]}
             rangeSlideDisabled
             onInput={handleRange}
@@ -25,7 +31,7 @@ function CustomRangeSlider({ handleRange, mode = 'horizontal' } : Props) {
         <VerticalRange>
           <RangeSlider
             orientation="vertical"
-            defaultValue={[50, 100]}
+            defaultValue={bgVolumeValues}
             thumbsDisabled={[false, true]}
             rangeSlideDisabled
             onInput={handleRange}

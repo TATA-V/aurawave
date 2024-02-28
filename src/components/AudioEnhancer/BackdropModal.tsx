@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import CustomRangeSlider from 'src/components/common/CustomRangeSlider';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { useClickOutside } from '@reactuses/core';
+import { useSetRecoilState } from 'recoil';
+import audioEnhanceState from 'src/atom/audioEnhance';
 
 interface Props {
   open: boolean;
@@ -11,6 +13,7 @@ interface Props {
 
 function BackdropModal({ open, setOpen }: Props) {
   const [bgAudioText, setBgAudioText] = useState('');
+  const setAudioEnhance = useSetRecoilState(audioEnhanceState);
   const audioRef = useRef<HTMLAudioElement>(null);
   const audio = audioRef.current;
 
@@ -26,6 +29,7 @@ function BackdropModal({ open, setOpen }: Props) {
   });
   const handleRange = (values: number[]) => {
     if (!audio) return;
+    setAudioEnhance((prev) => ({...prev, bgVolumeValues: values }));
     const volume = (100 - values[0]) / 100;
     audio.volume = volume;
   };

@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation';
 import AudioControlBar from 'src/components/AudioControlBar/AudioControlBar';
 import BottomTab from 'src/components/BottomTab/BottomTab';
 import useCurrentTrackSSR from 'src/hook/useCurrentTrackSSR';
+import useAudioEnhanceSSR from 'src/hook/useAudioEnhanceSSR';
 
 interface Props {
   children: React.ReactNode;
@@ -18,13 +19,13 @@ interface Props {
 
 function DefaultLayout({ children }: Props) {
   const [{ isShow, showMusicDetail }, _] = useCurrentTrackSSR();
+  useAudioEnhanceSSR();
   const setPlaylistData = useSetRecoilState(playlistDataState);
   const pathname = usePathname();
   const pathnameArr = pathname.split('/');
   const HideBottomTab = showMusicDetail || ['soundtrack', 'login', 'signup', 'music-collection', 'playlist-editor'].includes(pathnameArr[1]);
 
   useAuthentication();
-
   useEffect(() => {
     const id = uuidv4(); // uuid 생성
     const formattedDate = formatDateToYYYYMMDD(); // 현재 날짜
