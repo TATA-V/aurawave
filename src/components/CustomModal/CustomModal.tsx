@@ -123,7 +123,7 @@ function CustomModal({ open, setOpen, type }: Props) {
                 { type === 'A2HS'
                 && (
                   <div className="w-[65px] h-[65px] rounded-full overflow-hidden">
-                    <Image width={65} height={65} className="w-[60px] h-[60px]" src={iconLogoPng} alt="logo" placeholder="blur" />
+                    <Image width={65} height={65} className="w-[60px] h-[60px] rounded-full overflow-hidden" src={iconLogoPng} alt="logo" placeholder="blur" />
                   </div>
                 ) }
                 <span>

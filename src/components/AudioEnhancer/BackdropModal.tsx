@@ -30,15 +30,9 @@ function BackdropModal({ open, setOpen }: Props) {
     audio.volume = volume;
   };
 
-  const handleOptionClick = (value: string) => {
+  const audioSrc = (value: string) => {
     if (!audio) return;
-    if (bgAudioText === value) {
-      setBgAudioText('');
-      audio.pause();
-      audio.currentTime = 0;
-      return;
-    }
-    setBgAudioText(value);
+    console.log('bgAudioText:', bgAudioText)
     switch (value) {
       case '모닥불':
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F1_%E1%84%86%E1%85%A9%E1%84%83%E1%85%A1%E1%86%A8%E1%84%87%E1%85%AE%E1%86%AF.mp3?alt=media&token=6a5a134f-ed5a-45ba-b487-7ac71c5bfea8';
@@ -54,11 +48,27 @@ function BackdropModal({ open, setOpen }: Props) {
         break;
     }
     audio.play();
+  }
+
+  const handleOptionClick = (value: string) => {
+    if (!audio) return;
+    if (bgAudioText === value) {
+      setBgAudioText('');
+      audio.pause();
+      audio.currentTime = 0;
+      return;
+    }
+    setBgAudioText(value);
+    audioSrc(value);
   };
+
+  const handleEnded = () => {
+    audioSrc(bgAudioText);
+  }
 
   return (
     <AnimatePresence>
-      <audio ref={audioRef} controls className='hidden'><source /></audio>
+      <audio onEnded={handleEnded} ref={audioRef} controls className='hidden'><source /></audio>
 
       {open
         && (
