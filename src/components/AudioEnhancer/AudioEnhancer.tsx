@@ -5,26 +5,35 @@ import TentIcon from 'src/assets/icons/TentIcon';
 import XIcon from 'src/assets/icons/XIcon';
 import { useState } from 'react';
 import VolumeModal from 'src/components/AudioEnhancer/VolumeModal';
+import BackdropModal from 'src/components/AudioEnhancer/BackdropModal';
+import { useRecoilState } from 'recoil';
+import audioEnhanceState from 'src/atom/audioEnhance';
 
 function AudioEnhancer() {
-  const [mode, setMode] = useState<string[]>(['default', 'linear-gradient(145deg, #8ECECE 10%, #DDC4C8, #FF99A7)']);
+  const [{ mode }, setAudioEnhance ] = useRecoilState(audioEnhanceState)
   const [openVolumeModal, setOpenVolumeModal] = useState(false);
+  const [openBackdropModal, setOpenBackdropModal] = useState(false);
+  const backdropModalProps = { open: openBackdropModal, setOpen: setOpenBackdropModal };
+  const volumeModalProps = { open: openVolumeModal, setOpen: setOpenVolumeModal };
 
   const handleClick = () => {
+    let temp: string[];
     switch (mode[0]) {
       case 'default':
-        setMode(['backdrop', 'linear-gradient(145deg, #ACACAC, #D7DADB)']);
+        temp = ['backdrop', 'linear-gradient(145deg, #ACACAC, #D7DADB)'];
+        setOpenBackdropModal(true);
         break;
       case 'backdrop':
-        setMode(['volume', 'linear-gradient(145deg, #78999A, #D2B2B7)']);
+        temp = ['volume', 'linear-gradient(145deg, #78999A, #D2B2B7)'];
         setOpenVolumeModal(true);
         break;
       case 'volume':
-        setMode(['default', 'linear-gradient(145deg, #8ECECE 10%, #DDC4C8, #FF99A7)']);
+        temp = ['default', 'linear-gradient(145deg, #8ECECE 10%, #DDC4C8, #FF99A7)'];
         break;
       default:
-        setMode(['default', 'linear-gradient(145deg, #8ECECE 10%, #DDC4C8, #FF99A7)']);
+        temp = ['default', 'linear-gradient(145deg, #8ECECE 10%, #DDC4C8, #FF99A7)'];
     }
+    setAudioEnhance((prev) => ({...prev, mode: temp}));
   };
 
   return (
@@ -45,7 +54,8 @@ function AudioEnhancer() {
           </div>
         </div>
       </AudioEnhancerBtn>
-      <VolumeModal open={openVolumeModal} setOpen={setOpenVolumeModal} />
+      <BackdropModal {...backdropModalProps} />
+      <VolumeModal {...volumeModalProps} />
     </div>
   );
 }
@@ -55,7 +65,6 @@ export default AudioEnhancer;
 const AudioEnhancerBtn = styled.button<{ $mode: string[] }>`
   .audio-enhance {
     background: ${({ $mode }) => $mode[1]};
-    /* transition: all 0.2s ease-in-out; */
     &::before {
       content: '';
       position: absolute;

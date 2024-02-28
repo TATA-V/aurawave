@@ -30,13 +30,13 @@ function VolumeModal({ open, setOpen } : Props) {
       {open
       && (
         <VolumeModalBlock
-          initial={{ opacity: 0, scale: 0, transformOrigin: '100% 100%' }}
-          animate={{ opacity: 1, scale: 1, transition: { type: 'spring', duration: 0.5 } }}
+          initial={{ opacity: 0, scale: 0.5, transformOrigin: '100% 100%' }}
+          animate={{ opacity: 1, scale: 1, transition: { type: 'spring', duration: 0.35 } }}
           exit={{ opacity: 0, transition: { duration: 0.1 } }}
           ref={modalRef}
           className="bottom-[75px] right-[16px] w-[105px] px-[5px]"
         >
-          <p className="title h-[33px] w-full flex items-center justify-center font-medium text-[0.6rem] text-darkBlue800">
+          <p className="h-[33px] w-full flex items-center justify-center font-medium text-[0.6rem] text-darkBlue800">
             현재 음악 음량 조절
           </p>
           <div className="range h-[45px] flex justify-center items-center">

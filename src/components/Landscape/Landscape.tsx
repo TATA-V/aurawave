@@ -58,5 +58,6 @@ const LandscapeBlock = styled.div`
     display: flex;
     justify-content: center;
     object-fit: cover;
+    object-position: 15% 50%;
   }
 `;

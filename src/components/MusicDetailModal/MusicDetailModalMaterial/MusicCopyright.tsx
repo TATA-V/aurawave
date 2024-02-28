@@ -65,6 +65,7 @@ const MusicCopyrightBlock = styled.div`
   }
 
   .copyright-actual {
+    height: 29px;
     min-height: 29px;
     max-width: 268px;
     border: 1px solid var(--gray-100);

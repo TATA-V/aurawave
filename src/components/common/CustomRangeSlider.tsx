@@ -5,24 +5,41 @@ import styled from 'styled-components';
 
 interface Props {
   handleRange: (values: number[]) => void;
+  mode?: 'horizontal' | 'vertical';
 }
 
-function CustomRangeSlider({ handleRange } : Props) {
+function CustomRangeSlider({ handleRange, mode = 'horizontal' } : Props) {
   return (
-    <RangeSliderBlock>
-      <RangeSlider
-        defaultValue={[0, 50]}
-        thumbsDisabled={[true, false]}
-        rangeSlideDisabled
-        onInput={handleRange}
-      />
-    </RangeSliderBlock>
+    <>
+      {mode === 'horizontal' && (
+        <HorizontalRange>
+          <RangeSlider
+            defaultValue={[0, 50]}
+            thumbsDisabled={[true, false]}
+            rangeSlideDisabled
+            onInput={handleRange}
+          />
+        </HorizontalRange>
+      )}
+      {mode === 'vertical' && (
+        <VerticalRange>
+          <RangeSlider
+            orientation="vertical"
+            defaultValue={[50, 100]}
+            thumbsDisabled={[false, true]}
+            rangeSlideDisabled
+            onInput={handleRange}
+          />
+        </VerticalRange>
+      )}
+
+    </>
   );
 }
 
 export default CustomRangeSlider;
 
-const RangeSliderBlock = styled.div`
+const HorizontalRange = styled.div`
   .single-thumb .range-slider__thumb[data-lower] {
     width: 0;
   }
@@ -45,6 +62,33 @@ const RangeSliderBlock = styled.div`
     display: none;
   }
   .range-slider__thumb[data-upper] {
+    background: radial-gradient(#7A99A4, #2F7381)
+  }
+`;
+
+const VerticalRange = styled.div`
+  .single-thumb .range-slider__thumb[data-upper] {
+    height: 0;
+  }
+  .range-slider {
+    width: 3.8px;
+    height: 85px;
+  }
+  .range-slider__range {
+    height: 50%;
+    background: linear-gradient(to bottom, #7A99A4, #2F7381);
+    border-radius: 0 0 30px 30px;
+  }
+  .range-slider__thumb {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .range-slider__thumb[data-upper] {
+    height: 0;
+    display: none;
+  }
+  .range-slider__thumb[data-lower] {
     background: radial-gradient(#7A99A4, #2F7381)
   }
 `;
