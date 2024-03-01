@@ -28,7 +28,6 @@ export default AwPlaylistItem;
 
 const PlaylistItem = styled.li`
   width: 100%;
-  height: 188px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,7 +42,7 @@ const PlaylistItem = styled.li`
 
   .details {
     height: 33px;
-    padding-left: 2px;
+    margin: 11px 0 0 2px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

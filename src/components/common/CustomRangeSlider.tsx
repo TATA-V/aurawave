@@ -12,8 +12,6 @@ interface Props {
 
 function CustomRangeSlider({ handleRange, mode = 'horizontal' } : Props) {
   const { volumeValues, bgVolumeValues } = useRecoilValue(audioEnhanceState)
-  console.log(volumeValues)
-  console.log(bgVolumeValues)
 
   return (
     <>

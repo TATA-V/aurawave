@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CustomRangeSlider from 'src/components/common/CustomRangeSlider';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { useClickOutside } from '@reactuses/core';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import audioEnhanceState from 'src/atom/audioEnhance';
 
 interface Props {
@@ -12,8 +12,8 @@ interface Props {
 }
 
 function BackdropModal({ open, setOpen }: Props) {
-  const [bgAudioText, setBgAudioText] = useState('');
-  const setAudioEnhance = useSetRecoilState(audioEnhanceState);
+  // const [bgAudioText, setBgAudioText] = useState('');
+  const [{ bgAudioText }, setAudioEnhance] = useRecoilState(audioEnhanceState)
   const audioRef = useRef<HTMLAudioElement>(null);
   const audio = audioRef.current;
 
@@ -36,7 +36,6 @@ function BackdropModal({ open, setOpen }: Props) {
 
   const audioSrc = (value: string) => {
     if (!audio) return;
-    console.log('bgAudioText:', bgAudioText)
     switch (value) {
       case '모닥불':
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F1_%E1%84%86%E1%85%A9%E1%84%83%E1%85%A1%E1%86%A8%E1%84%87%E1%85%AE%E1%86%AF.mp3?alt=media&token=6a5a134f-ed5a-45ba-b487-7ac71c5bfea8';
@@ -57,12 +56,12 @@ function BackdropModal({ open, setOpen }: Props) {
   const handleOptionClick = (value: string) => {
     if (!audio) return;
     if (bgAudioText === value) {
-      setBgAudioText('');
+      setAudioEnhance((prev) => ({...prev, bgAudioText: '' }));
       audio.pause();
       audio.currentTime = 0;
       return;
     }
-    setBgAudioText(value);
+    setAudioEnhance((prev) => ({...prev, bgAudioText: value }));
     audioSrc(value);
   };
 

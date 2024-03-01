@@ -3,6 +3,7 @@ import { recoilPersist } from 'recoil-persist';
 
 interface AudioEnhanceState {
   mode: string[];
+  bgAudioText: string;
   volume: number;
   volumeValues: number[];
   bgVolumeValues: number[];
@@ -10,6 +11,7 @@ interface AudioEnhanceState {
 
 export const audioEnhanceDefault = {
   mode: ['default', 'linear-gradient(145deg, #8ECECE 10%, #DDC4C8, #FF99A7)'],
+  bgAudioText: '',
   volume: 0.5,
   volumeValues: [0, 50],
   bgVolumeValues: [50, 100],
