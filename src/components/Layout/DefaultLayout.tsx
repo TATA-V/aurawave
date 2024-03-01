@@ -18,7 +18,7 @@ interface Props {
 }
 
 function DefaultLayout({ children }: Props) {
-  const [{ isShow, showMusicDetail }, _] = useCurrentTrackSSR();
+  const [{ isShow, showMusicDetail, isPlaying }, setCurrentTrack] = useCurrentTrackSSR();
   useAudioEnhanceSSR();
   const setPlaylistData = useSetRecoilState(playlistDataState);
   const pathname = usePathname();
@@ -31,6 +31,18 @@ function DefaultLayout({ children }: Props) {
     const formattedDate = formatDateToYYYYMMDD(); // 현재 날짜
     setPlaylistData((prev) => ({ ...prev, uuid: id, playlistTitle: formattedDate }));
   }, [setPlaylistData]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === 'Space') {
+        setCurrentTrack((prev) => ({...prev, isPlaying: !isPlaying }));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown); 
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown); 
+    };
+  }, [isPlaying]);
 
   return (
     <LayoutBlock>

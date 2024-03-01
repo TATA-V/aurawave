@@ -12,7 +12,6 @@ interface Props {
 }
 
 function BackdropModal({ open, setOpen }: Props) {
-  // const [bgAudioText, setBgAudioText] = useState('');
   const [{ bgAudioText }, setAudioEnhance] = useRecoilState(audioEnhanceState)
   const audioRef = useRef<HTMLAudioElement>(null);
   const audio = audioRef.current;

@@ -131,7 +131,6 @@ export const BottomTabMusicPlayer = styled.div`
 
 export const LeftBox = styled.div`
   display: flex;
-  align-items: center;
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -147,6 +146,7 @@ export const LeftBox = styled.div`
 
   .details {
     width: 100%;
+    height: 38px;
     padding-left: 13px;
     display: flex;
     justify-content: space-between;
