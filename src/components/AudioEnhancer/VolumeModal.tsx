@@ -4,7 +4,7 @@ import { useClickOutside } from '@reactuses/core';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import currentTrackState from 'src/atom/currentTrackState';
-import audioEnhanceState from 'src/atom/audioEnhance';
+import audioEnhanceState from 'src/atom/audioEnhanceState';
 import CustomRangeSlider from '../common/CustomRangeSlider';
 
 interface Props {

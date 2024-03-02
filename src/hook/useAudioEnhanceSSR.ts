@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import audioEnhanceState, { audioEnhanceDefault } from 'src/atom/audioEnhance';
+import audioEnhanceState, { audioEnhanceDefault } from 'src/atom/audioEnhanceState';
 
 const useAudioEnhanceSSR = () => {
   const [isInitial, setIsInitial] = useState(true);

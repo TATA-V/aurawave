@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Image from 'next/image';
 import { DocumentData } from 'firebase/firestore';
 import { usePathname } from 'next/navigation';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface Props {
   data: DocumentData;
@@ -15,8 +15,10 @@ function PlaylistDetailInfo({ data } : Props) {
   return (
     <>
       <ImageAndTitle>
-        {data.playlistImageUri
-          && <Image src={String(data?.playlistImageUri)} width={152} height={130} alt="aw-playlist" className="image" />}
+        {data.playlistImageUri && (
+          <div className='w-[152px] h-[130px] rounded-[15px] overflow-hidden'>
+            <LazyLoadImage effect="blur" src={String(data?.playlistImageUri)} width={152} height={130} alt="aw-playlist" className="image" />
+          </div>)}
         <div className="pt-[9px]">
           <h2 className="text-base text-darkBlue900 font-medium">{data.playlistTitle}</h2>
           <div className="flex flex-col justify-between h-[85px]">

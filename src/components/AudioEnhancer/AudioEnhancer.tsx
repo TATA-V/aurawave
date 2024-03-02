@@ -7,7 +7,7 @@ import { useState } from 'react';
 import VolumeModal from 'src/components/AudioEnhancer/VolumeModal';
 import BackdropModal from 'src/components/AudioEnhancer/BackdropModal';
 import { useRecoilState } from 'recoil';
-import audioEnhanceState from 'src/atom/audioEnhance';
+import audioEnhanceState from 'src/atom/audioEnhanceState';
 
 function AudioEnhancer() {
   const [{ mode }, setAudioEnhance ] = useRecoilState(audioEnhanceState)

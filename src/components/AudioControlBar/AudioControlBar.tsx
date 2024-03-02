@@ -13,7 +13,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import PlayModeModal from 'src/components/AudioControlBar/PlayModeModal';
 import MusicDetailModal from 'src/components/MusicDetailModal/MusicDetailModal';
 import AudioEnhancer from 'src/components/AudioEnhancer/AudioEnhancer';
-import audioEnhanceState from 'src/atom/audioEnhance';
+import audioEnhanceState from 'src/atom/audioEnhanceState';
 import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
 
 function AudioControlBar() {

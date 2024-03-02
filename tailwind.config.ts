@@ -42,7 +42,7 @@ const config: Config = {
       blueGray750: '#556265',
       blueGray800: '#535d60',
       skyBlue300: '#c2ced2',
-      skyBblue400: '#3caab8',
+      skyBlue400: '#3caab8',
       skyBlue450: '#2f99a7',
       skyBlue500: '#26a0b0',
       skyBlue600: '#71aaaa',

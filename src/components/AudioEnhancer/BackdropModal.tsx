@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import CustomRangeSlider from 'src/components/common/CustomRangeSlider';
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 import { useClickOutside } from '@reactuses/core';
-import { useRecoilState } from 'recoil';
-import audioEnhanceState from 'src/atom/audioEnhance';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import audioEnhanceState from 'src/atom/audioEnhanceState';
+import recWeatherState from 'src/atom/recWeatherState';
 
 interface Props {
   open: boolean;
@@ -12,7 +13,9 @@ interface Props {
 }
 
 function BackdropModal({ open, setOpen }: Props) {
-  const [{ bgAudioText }, setAudioEnhance] = useRecoilState(audioEnhanceState)
+  const [{ bgAudioText }, setAudioEnhance] = useRecoilState(audioEnhanceState);
+  const { recEffect } = useRecoilValue(recWeatherState);
+  const resetRecWeather = useResetRecoilState(recWeatherState);
   const audioRef = useRef<HTMLAudioElement>(null);
   const audio = audioRef.current;
 
@@ -33,7 +36,7 @@ function BackdropModal({ open, setOpen }: Props) {
     audio.volume = volume;
   };
 
-  const audioSrc = (value: string) => {
+  const getAudioSrc = (value: string) => {
     if (!audio) return;
     switch (value) {
       case '모닥불':
@@ -61,11 +64,13 @@ function BackdropModal({ open, setOpen }: Props) {
       return;
     }
     setAudioEnhance((prev) => ({...prev, bgAudioText: value }));
-    audioSrc(value);
+    getAudioSrc(value);
+    if (!recEffect) return;
+    resetRecWeather();
   };
 
   const handleEnded = () => {
-    audioSrc(bgAudioText);
+    getAudioSrc(bgAudioText);
   }
 
   return (

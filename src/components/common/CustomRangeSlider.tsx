@@ -2,7 +2,7 @@
 
 import RangeSlider from 'react-range-slider-input';
 import { useRecoilValue } from 'recoil';
-import audioEnhanceState from 'src/atom/audioEnhance';
+import audioEnhanceState from 'src/atom/audioEnhanceState';
 import styled from 'styled-components';
 
 interface Props {

@@ -59,8 +59,6 @@ export const ProgressBarBox = styled.div<CurrentTimeWidth>`
 `;
 
 export const ProgressBarAndTime = styled.div<CurrentTimeWidth>`
-  /* position: relative; */
-
   .hover-time {
     width: 42px;
     height: 22px;
@@ -132,6 +130,7 @@ export const BottomTabMusicPlayer = styled.div`
 export const LeftBox = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -147,7 +146,7 @@ export const LeftBox = styled.div`
   .details {
     width: 100%;
     height: 38px;
-    padding-left: 13px;
+    padding: 2px 0 1px 13px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
