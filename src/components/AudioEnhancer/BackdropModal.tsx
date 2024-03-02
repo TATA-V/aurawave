@@ -1,3 +1,5 @@
+'use client'
+
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import CustomRangeSlider from 'src/components/common/CustomRangeSlider';
