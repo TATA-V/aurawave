@@ -31,12 +31,15 @@ function RecWeatherToast({ open, handlePlay }: Props) {
       case '비':
         temp = '잔잔한 빗소리'
         break;
+      case '실 비':
+        temp = '잔잔한 빗소리'
+        break;
       case '눈':
         temp = '펑펑 쏟아지는 함박눈'
         break;
-        default:
-          temp = list[Math.floor(Math.random() * list.length)];
-          break;
+      default:
+        temp = list[Math.floor(Math.random() * list.length)];
+        break;
     }
     setBgAudioText(temp);
   }, [weather])
