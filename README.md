@@ -8,6 +8,7 @@
 </div>
 
 <br>
+<br>
 
 - 배포 링크: _**<a href="https://aurawave.vercel.app/">aurawave deploy link</a>**_<br>
 - 기술 스택: **`Next14`** **`Recoil`**  **`TypeScript`** **`Styled-Components`** **`react-hook-form`** **`Firebase`** **`frame-motion`** **`Vercel`** **`Figma`**
