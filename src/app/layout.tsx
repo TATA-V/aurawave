@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
   },
   openGraph: {
-    images: ['/share.png']
+    images: ['https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/common%2Fshare.png?alt=media&token=637d2689-c649-4241-94a9-c038ec260104']
   },
 };
 
