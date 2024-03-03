@@ -9,7 +9,7 @@
 - 배포 링크: _**<a href="https://aurawave.vercel.app/">aurawave deploy link</a>**_<br>
 - 기술 스택: **`Next14`** **`Recoil`**  **`TypeScript`** **`Styled-Components`** **`react-hook-form`** **`Firebase`** **`frame-motion`** **`Vercel`** **`Figma`**
 
-### 🍧 Page
+## 🍧 Page
 ![11](https://github.com/TATA-V/aurawave/assets/113578923/9377010c-d62b-48f6-8634-617b0398e313)
 ![22](https://github.com/TATA-V/aurawave/assets/113578923/0a0586a3-0742-4834-abe1-87638251d688)
 ![33](https://github.com/TATA-V/aurawave/assets/113578923/8abb8a45-d838-4e0f-83f5-c27b8029d620)
