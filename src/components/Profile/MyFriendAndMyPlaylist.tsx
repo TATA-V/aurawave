@@ -23,7 +23,7 @@ function MyFriendAndMyPlaylist() {
           {/* andmin 계정일 때 */}
           {isAdmin && (
             <>
-              <li className="list-box">
+              <li className="h-[48px] flex items-center">
                 <StyledLink href="/admin-music">
                   <i className="i-plus-circle" />
                   <p className="list-text">음악 등록 & 삭제</p>

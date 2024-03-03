@@ -16,7 +16,7 @@ function RecWeatherToast({ open, handlePlay }: Props) {
   const description = weather?.weather[0].description;
 
   let temp = '';
-  const list = ['모닥불', '시골 여름 밤', '잔잔한 빗소리', '펑펑 쏟아지는 함박눈'];
+  const list = ['모닥불', '시골 여름밤', '잔잔한 빗소리', '펑펑 쏟아지는 함박눈'];
   useEffect(() => {
     switch(description) {
       case '맑음':
@@ -26,7 +26,7 @@ function RecWeatherToast({ open, handlePlay }: Props) {
         temp = '모닥불'
         break;
       case '온흐림':
-        temp = '시골 여름 밤'
+        temp = '시골 여름밤'
         break;
       case '비':
         temp = '잔잔한 빗소리'

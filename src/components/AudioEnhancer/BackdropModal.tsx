@@ -23,7 +23,7 @@ function BackdropModal({ open, setOpen }: Props) {
 
   const options = [
     { id: 1, icon: <i className="i-bonfire" />, value: '모닥불' },
-    { id: 2, icon: <i className="i-moon-line" />, value: '시골 여름 밤' },
+    { id: 2, icon: <i className="i-moon-line" />, value: '시골 여름밤' },
     { id: 3, icon: <i className="i-cloud-rain" />, value: '잔잔한 빗소리' },
     { id: 4, icon: <i className="i-snow" />, value: '펑펑 쏟아지는 함박눈' },
   ];
@@ -44,7 +44,7 @@ function BackdropModal({ open, setOpen }: Props) {
       case '모닥불':
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F1_%E1%84%86%E1%85%A9%E1%84%83%E1%85%A1%E1%86%A8%E1%84%87%E1%85%AE%E1%86%AF.mp3?alt=media&token=6a5a134f-ed5a-45ba-b487-7ac71c5bfea8';
         break;
-      case '시골 여름 밤':
+      case '시골 여름밤':
         audio.src ='https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F2_%E1%84%89%E1%85%B5%E1%84%80%E1%85%A9%E1%86%AF%20%E1%84%8B%E1%85%A7%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%87%E1%85%A1%E1%86%B7.mp3?alt=media&token=d7563feb-0d1c-420a-a3c5-5e06fc6ad642';
         break;
       case '잔잔한 빗소리':
@@ -58,6 +58,9 @@ function BackdropModal({ open, setOpen }: Props) {
   }
 
   const handleOptionClick = (value: string) => {
+    if (recEffect) {
+      resetRecWeather();
+    }
     if (!audio) return;
     if (bgAudioText === value) {
       setAudioEnhance((prev) => ({...prev, bgAudioText: '' }));
@@ -67,8 +70,6 @@ function BackdropModal({ open, setOpen }: Props) {
     }
     setAudioEnhance((prev) => ({...prev, bgAudioText: value }));
     getAudioSrc(value);
-    if (!recEffect) return;
-    resetRecWeather();
   };
 
   const handleEnded = () => {
@@ -130,7 +131,7 @@ const BackdropModalBlock = styled(motion.div)<{ $mode: string }>`
     }
   }
   .i-moon-line::before {
-    color: ${({ $mode }) => ($mode === '시골 여름 밤' ? 'var(--sky-blue-500)' : 'var(--dark-blue-700)')};
+    color: ${({ $mode }) => ($mode === '시골 여름밤' ? 'var(--sky-blue-500)' : 'var(--dark-blue-700)')};
   }
   .i-cloud-rain::before {
     color: ${({ $mode }) => ($mode === '잔잔한 빗소리' ? 'var(--sky-blue-500)' : 'var(--dark-blue-700)')};

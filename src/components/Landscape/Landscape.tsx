@@ -30,7 +30,7 @@ function Landscape() {
         effect = fire;
         text = 'Bonfire';
         break;
-      case '시골 여름 밤' :
+      case '시골 여름밤' :
         effect = firefly;
         text = 'Firefly';
         break;

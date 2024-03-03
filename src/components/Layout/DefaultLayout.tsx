@@ -70,7 +70,7 @@ function DefaultLayout({ children }: Props) {
       case '모닥불':
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F1_%E1%84%86%E1%85%A9%E1%84%83%E1%85%A1%E1%86%A8%E1%84%87%E1%85%AE%E1%86%AF.mp3?alt=media&token=6a5a134f-ed5a-45ba-b487-7ac71c5bfea8';
         break;
-      case '시골 여름 밤':
+      case '시골 여름밤':
         audio.src ='https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F2_%E1%84%89%E1%85%B5%E1%84%80%E1%85%A9%E1%86%AF%20%E1%84%8B%E1%85%A7%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%87%E1%85%A1%E1%86%B7.mp3?alt=media&token=d7563feb-0d1c-420a-a3c5-5e06fc6ad642';
         break;
       case '잔잔한 빗소리':
