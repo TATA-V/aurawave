@@ -39,6 +39,14 @@ function PlaylistEditor() {
     setPlaylistData((prev) => ({ ...prev, isPublic: !isPublic }));
   };
 
+  const handleAddMusic = () => {
+    if (myPlaylistId) {
+      router.replace(`/playlist-editor/add-music?id=${uuid}`)
+      return;
+    }
+    router.replace(`/playlist-editor/add-music`)
+  }
+
   return (
     <>
       <>
@@ -98,7 +106,7 @@ function PlaylistEditor() {
                   <i className="i-plus-small" />
                 </div>
               </button>
-              <button onClick={() => router.replace(`/playlist-editor/add-music?id=${uuid}`)} className="add-music">
+              <button onClick={handleAddMusic} className="add-music">
                 <p>새로운 곡 추가</p>
               </button>
             </S.AddNewMusic>
