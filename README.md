@@ -1,9 +1,11 @@
 ## 🌙 AuraWave - 음악에 감성 한 스푼🥄
 
-
+<br>
 
 - 배포 링크: _**<a href="https://aurawave.vercel.app/">aurawave deploy link</a>**_<br>
-- 기술 스택: **`Next14`** **`Recoil`**  **`TypeScript`** **`Styled-Components`** **`react-hook-form`** **`Firebase`** **`frame-motion`** **`Vercel`** **`Figma`**
+- 기술 스택<br>
+  **`Next14`** **`Recoil`**  **`TypeScript`** **`Styled-Components`** **`react-hook-form`**<br>
+  **`Firebase`** **`frame-motion`** **`Vercel`** **`Figma`**
 
 <br>
 <br>
