@@ -24,4 +24,5 @@
 ![22](https://github.com/TATA-V/aurawave/assets/113578923/0a0586a3-0742-4834-abe1-87638251d688)
 ![33](https://github.com/TATA-V/aurawave/assets/113578923/8abb8a45-d838-4e0f-83f5-c27b8029d620)
 ![44](https://github.com/TATA-V/aurawave/assets/113578923/c519f1ef-ebe0-4979-9df1-27b9fe23e4ed)
-![55](https://github.com/TATA-V/aurawave/assets/113578923/ca9fc714-232b-4cb9-9894-0266d8d749cb)
+![55](https://github.com/TATA-V/aurawave/assets/113578923/a48db070-5573-4048-840d-c2ab424d8845)
+![66](https://github.com/TATA-V/aurawave/assets/113578923/a45475f8-3c8c-448d-bfba-f9d4ae8b1084)

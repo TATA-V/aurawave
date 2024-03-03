@@ -191,8 +191,8 @@ function AddMusic() {
           </FileBtn>
         </div>
         <Image
-          width={147}
-          height={147}
+          width={150}
+          height={150}
           src={imageUri !== '' ? imageUri : albumDefaultImg}
           alt="album image"
           className="album-img"
@@ -235,6 +235,8 @@ const AlbumFile = styled.div`
   }
 
   .album-img {
+    width: 147px;
+    height: 147px;
     border: 1.5px solid var(--gray-100);
     border-radius: 5px;
     transform: translateX(45px);

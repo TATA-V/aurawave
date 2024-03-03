@@ -30,7 +30,7 @@ function DefaultLayout({ children }: Props) {
 
   const pathname = usePathname();
   const pathnameArr = pathname.split('/');
-  const hideBottomTab = showMusicDetail || ['soundtrack', 'login', 'signup', 'music-collection', 'playlist-editor'].includes(pathnameArr[1]);
+  const hideBottomTab = showMusicDetail || ['soundtrack', 'login', 'signup', 'music-collection', 'playlist-editor', 'admin-music', 'admin-awplaylist-editor'].includes(pathnameArr[1]);
 
   useAuthentication();
   useEffect(() => {
