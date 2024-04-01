@@ -38,8 +38,8 @@ function DefaultLayout({ children }: Props) {
     setShowRecWeather(true);
     setTimeout(() => {
       setShowRecWeather(false);
-    }, 5000)
-  }, [weather])
+    }, 3000)
+  }, [weather]);
 
   useEffect(() => {
     const id = uuidv4(); // uuid 생성
@@ -103,7 +103,7 @@ function DefaultLayout({ children }: Props) {
     <LayoutBlock>
       <LayoutStyle $isShow={isShow}>
         <audio onEnded={handleEnded} ref={audioRef} controls className='hidden'><source /></audio>
-        <RecWeatherToast open={showRecWeather} handlePlay={handlePlay} />
+        <RecWeatherToast open={showRecWeather} setOpen={setShowRecWeather} handlePlay={handlePlay} />
         {children}
         {isShow && <AudioControlBar />}
         {!hideBottomTab && <BottomTab />}

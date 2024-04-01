@@ -1,48 +1,46 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState, Dispatch } from "react";
 import useGetWeather from "src/hook/useGetWeather";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   handlePlay: (bgAudioText: string) => void;
 }
 
-function RecWeatherToast({ open, handlePlay }: Props) {
+function RecWeatherToast({ open, setOpen, handlePlay }: Props) {
   const [bgAudioText, setBgAudioText] = useState('');
   const { weather } = useGetWeather();
   const description = weather?.weather[0].description;
+  const descArr = description?.split(" ")
 
   let temp = '';
   const list = ['모닥불', '시골 여름밤', '잔잔한 빗소리', '펑펑 쏟아지는 함박눈'];
   useEffect(() => {
-    switch(description) {
-      case '맑음':
-        temp = '모닥불'
-        break;
-      case '튼구름':
-        temp = '모닥불'
-        break;
-      case '온흐림':
-        temp = '시골 여름밤'
-        break;
-      case '비':
-        temp = '잔잔한 빗소리'
-        break;
-      case '실 비':
-        temp = '잔잔한 빗소리'
-        break;
-      case '눈':
-        temp = '펑펑 쏟아지는 함박눈'
-        break;
-      default:
-        temp = list[Math.floor(Math.random() * list.length)];
-        break;
+    if (!descArr) return;
+    if (descArr.includes('맑음')) {
+      temp = '모닥불'
+    } else if (descArr.includes('튼구름' || '구름')) {
+      temp = '모닥불'
+    } else if (descArr.includes('온흐림' || '흐림')) {
+      temp = '모닥불'
+    } else if (descArr.includes('비')) {
+      temp = '잔잔한 빗소리'
+    } else if (descArr.includes('눈')) {
+      temp = '펑펑 쏟아지는 함박눈'
+    } else {
+      temp = list[Math.floor(Math.random() * list.length)];
     }
     setBgAudioText(temp);
-  }, [weather])
+  }, [weather]);
+
+  const handleAddBackMusic = () => {
+    setOpen(false);
+    handlePlay(bgAudioText);
+  }
 
   return (
     <AnimatePresence>
@@ -59,7 +57,9 @@ function RecWeatherToast({ open, handlePlay }: Props) {
                   오늘 날씨는  <span className="font-semibold">{`${description}`}</span>이에요.<br/>
                   배경음으로 <span className='font-semibold text-skyBlue400'>{`${bgAudioText}`}</span>은 어떠신가요?
                 </p>
-                <button onClick={() => handlePlay(bgAudioText)} className="text-[#fff] w-full text-xs py-[0.6rem] px-[1.1rem] rounded-[6px] bg-gradient-to-r from-[#7ec5ed] to-[#5fc0c0] mt-[1.2rem]">배경음 추가</button>
+                <button onClick={handleAddBackMusic} className="text-[#fff] w-full text-xs py-[0.6rem] px-[1.1rem] rounded-[6px] bg-gradient-to-r from-[#7ec5ed] to-[#5fc0c0] mt-[1.2rem]">
+                  배경음 추가
+                </button>
             </RecWeatherToastBlock>
           </div>
         </>
@@ -71,6 +71,7 @@ function RecWeatherToast({ open, handlePlay }: Props) {
 export default RecWeatherToast;
 
 const RecWeatherToastBlock = styled(motion.div)`
+  max-width: 270px;
   padding: 20px 30px;
   border: 1px solid var(--gray-100);
   border-radius: 15px;

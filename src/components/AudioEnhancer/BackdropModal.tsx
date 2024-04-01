@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import CustomRangeSlider from 'src/components/common/CustomRangeSlider';
-import { Dispatch, SetStateAction, useRef } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { useClickOutside } from '@reactuses/core';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import audioEnhanceState from 'src/atom/audioEnhanceState';
