@@ -31,10 +31,6 @@ export const metadata: Metadata = {
       'naver-site-verification': `${process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION}`,
     }
   },
-  robots: {
-    index: true,
-    follow: true
-  }
 };
 
 export default function RootLayout({
