@@ -27,9 +27,6 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-    other: {
-      'naver-site-verification': `${process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION}`,
-    }
   },
 };
 
@@ -42,6 +39,9 @@ export default function RootLayout({
     <RecoilProvider>
       <StyledComponentsRegistry>
         <html lang="ko">
+          <head>
+            <meta name="naver-site-verification" content={process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION} />
+          </head>
           <body className={inter.className}>
             <DefaultLayout>
               {children}
