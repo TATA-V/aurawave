@@ -22,6 +22,19 @@ export const metadata: Metadata = {
   openGraph: {
     images: ['https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/common%2Fshare.png?alt=media&token=0235fbe2-a237-4598-b9f0-a202f70034b7']
   },
+  alternates: {
+    canonical: 'https://www.aurawave.site',
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: {
+      'naver-site-verification': `${process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION}`,
+    }
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
 };
 
 export default function RootLayout({

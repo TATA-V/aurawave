@@ -71,8 +71,11 @@ function RecWeatherToast({ open, setOpen, handlePlay }: Props) {
 export default RecWeatherToast;
 
 const RecWeatherToastBlock = styled(motion.div)`
-  max-width: 270px;
   padding: 20px 30px;
   border: 1px solid var(--gray-100);
   border-radius: 15px;
+
+  @media all and (max-width: 530px) {
+    max-width: 270px;
+  }
 `

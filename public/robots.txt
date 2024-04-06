@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.aurawave.site/
+
+# Sitemaps
+Sitemap: https://www.aurawave.site/sitemap.xml
