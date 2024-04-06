@@ -7,3 +7,4 @@ Host: https://www.aurawave.site/
 
 # Sitemaps
 Sitemap: https://www.aurawave.site/sitemap.xml
+Sitemap: https://www.aurawave.site/server-sitemap-index.xml

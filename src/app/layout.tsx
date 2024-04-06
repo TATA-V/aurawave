@@ -14,8 +14,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   manifest: '/manifest.json',
-  title: 'AuraWave - 음악에 감성 한 스푼🥄',
-  description: '소리로 그리는 풍경, 음악으로 힐링하는 공간',
+  title: 'AuraWave | 음악에 감성 한 스푼🥄',
+  description: '음악에 배경음을 얹어 들어보세요',
   icons: {
     icon: '/favicon.ico',
   },
