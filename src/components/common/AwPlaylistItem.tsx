@@ -41,7 +41,6 @@ const PlaylistItem = styled.li`
   }
 
   .details {
-    height: 33px;
     margin: 11px 0 0 2px;
     display: flex;
     flex-direction: column;
@@ -55,7 +54,7 @@ const PlaylistItem = styled.li`
   }
 
   .description {
-    height: 12px;
+    margin-top: 5px;
     color: var(--dark-blue-700);
     font-size: 0.6875rem;
     font-weight: 400;
