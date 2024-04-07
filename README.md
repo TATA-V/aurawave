@@ -2,7 +2,7 @@
 
 <br>
 
-- 배포 링크: _**<a href="https://aurawave.vercel.app/">aurawave deploy link</a>**_<br>
+- 배포 링크: _**<a href="https://www.aurawave.site/">aurawave deploy link</a>**_<br>
 - 프로젝트 기간: 2023.09.18 ~ 2024.03.03
 - 기술 스택<br>
   **`Next14`** **`Recoil`**  **`TypeScript`** **`Styled-Components`** **`react-hook-form`**<br>
