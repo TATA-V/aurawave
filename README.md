@@ -6,7 +6,7 @@
 - 프로젝트 기간: 2023.09.18 ~ 2024.03.03
 - 기술 스택<br>
   **`Next14`** **`Recoil`**  **`TypeScript`** **`Styled-Components`** **`react-hook-form`**<br>
-  **`Firebase`** **`frame-motion`** **`Vercel`** **`Figma`**
+  **`Firebase`** **`framer-motion`** **`Vercel`** **`Figma`**
 
 <br>
 <br>
