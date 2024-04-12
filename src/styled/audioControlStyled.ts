@@ -145,16 +145,11 @@ export const LeftBox = styled.div`
 
   .details {
     width: 100%;
-    height: 38px;
-    padding: 2px 0 1px 13px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    padding: 0 0 1px 13px;
   }
 
   .title {
     width: calc(100% - 20px);
-    height: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -162,6 +157,7 @@ export const LeftBox = styled.div`
     font-size: 0.9375rem;
     font-weight: 400;
     white-space: nowrap;
+    margin-top: 1px;
     cursor: pointer;
   }
 
@@ -169,6 +165,7 @@ export const LeftBox = styled.div`
     color: var(--blue-gray-400);
     font-size: 0.8125rem;
     font-weight: 400;
+    margin-top: 5px;
     cursor: pointer;
   }
 `;
