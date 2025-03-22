@@ -1,9 +1,11 @@
 'use client';
 
-import Lottie from 'react-lottie-player';
 import notfoundJson from '../../../public/lottie/notfound.json';
+import dynamic from 'next/dynamic';
 
 function NotFoundLottie() {
+  const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
+  
   return (
     <div className="w-[250px] md:w-[370px]">
       <Lottie loop animationData={notfoundJson} play />

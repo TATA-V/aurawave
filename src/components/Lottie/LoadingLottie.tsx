@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import Lottie from 'react-lottie-player';
 import loadingJson from '../../../public/lottie/animation_loading.json';
+import dynamic from 'next/dynamic';
 
 function LoadingLottie() {
+  const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
+  
   return (
     <LoadingLottieBlock>
       <Lottie className="lottie" loop animationData={loadingJson} play />

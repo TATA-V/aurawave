@@ -50,10 +50,11 @@ interface IsShow {
 
 export const BottomTabNav = styled(motion.nav)<IsShow>`
   width: 100%;
-  max-width: 540px;
+  max-width: 600px;
   background-color: var(--white-100);
   box-shadow: ${({ $isShow }) => ($isShow ? null : '0 0 7px rgba(0, 0, 0, 0.12)')};
   position: fixed;
+  overflow: hidden;
   bottom: 0;
   z-index: 1;
 

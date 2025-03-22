@@ -123,7 +123,7 @@ const GoBackHeadBlok = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: 540px;
+  max-width: 600px;
   height: 61px;
   background-color: var(--white-100);
   z-index: 2;

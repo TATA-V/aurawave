@@ -34,7 +34,7 @@ export const StyledAudio = styled.audio`
 export const AudioControlBarBlock = styled.div<HasBottomTab>`
   animation: ${fadeInUp} 0.2s ease-out;
   width: 100%;
-  max-width: 540px;
+  max-width: 600px;
   height: ${({ $hasBottomTab }) => ($hasBottomTab ? '60px' : '71px')};
   border-radius: 10px 10px 0 0;
   background: linear-gradient(to right, #648b8b, #e38989);
@@ -42,7 +42,7 @@ export const AudioControlBarBlock = styled.div<HasBottomTab>`
   bottom: ${({ $hasBottomTab }) => ($hasBottomTab ? '55px' : '0')};
   z-index: 1;
 
-  @media all and (max-width: 539px) {
+  @media all and (max-width: 600px) {
     bottom: ${({ $hasBottomTab }) => ($hasBottomTab ? '50px' : '0')};
   }
 `;
@@ -52,7 +52,7 @@ export const ProgressBarBox = styled.div<CurrentTimeWidth>`
   justify-content: center;
   position: relative;
   width: 100%;
-  max-width: 540px;
+  max-width: 600px;
   height: 10px;
   border-radius: 50px 50px 0 0;
   overflow: hidden;

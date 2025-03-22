@@ -176,7 +176,7 @@ const ModalBlock = styled(motion.div)`
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: 540px;
+  max-width: 600px;
   height: 100%;
   display: flex;
   justify-content: center;

@@ -38,7 +38,7 @@ function DefaultLayout({ children }: Props) {
     setShowRecWeather(true);
     setTimeout(() => {
       setShowRecWeather(false);
-    }, 3000)
+    }, 3000);
   }, [weather]);
 
   useEffect(() => {
@@ -50,12 +50,12 @@ function DefaultLayout({ children }: Props) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === 'Space') {
-        setCurrentTrack((prev) => ({...prev, isPlaying: !isPlaying }));
+        setCurrentTrack((prev) => ({ ...prev, isPlaying: !isPlaying }));
       }
     };
-    window.addEventListener('keydown', handleKeyDown); 
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown); 
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isPlaying]);
 
@@ -71,7 +71,7 @@ function DefaultLayout({ children }: Props) {
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F1_%E1%84%86%E1%85%A9%E1%84%83%E1%85%A1%E1%86%A8%E1%84%87%E1%85%AE%E1%86%AF.mp3?alt=media&token=6a5a134f-ed5a-45ba-b487-7ac71c5bfea8';
         break;
       case '시골 여름밤':
-        audio.src ='https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F2_%E1%84%89%E1%85%B5%E1%84%80%E1%85%A9%E1%86%AF%20%E1%84%8B%E1%85%A7%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%87%E1%85%A1%E1%86%B7.mp3?alt=media&token=d7563feb-0d1c-420a-a3c5-5e06fc6ad642';
+        audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F2_%E1%84%89%E1%85%B5%E1%84%80%E1%85%A9%E1%86%AF%20%E1%84%8B%E1%85%A7%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%87%E1%85%A1%E1%86%B7.mp3?alt=media&token=d7563feb-0d1c-420a-a3c5-5e06fc6ad642';
         break;
       case '잔잔한 빗소리':
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F3_%E1%84%8C%E1%85%A1%E1%86%AB%E1%84%8C%E1%85%A1%E1%86%AB%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%87%E1%85%B5%E1%86%BA%E1%84%89%E1%85%A9%E1%84%85%E1%85%B5.mp3?alt=media&token=4d12637e-cba5-4d60-85a4-f1a7465d3717';
@@ -81,28 +81,28 @@ function DefaultLayout({ children }: Props) {
         break;
     }
     audio.play();
-  }
+  };
 
   const handlePlay = (bgAudioText: string) => {
     getAudioSrc(bgAudioText);
-    setRecWeather((prev) => ({ ...prev, recEffect: bgAudioText }))
-    setAudioEnhance((prev) => ({ ...prev, bgAudioText }))
-  }
+    setRecWeather((prev) => ({ ...prev, recEffect: bgAudioText }));
+    setAudioEnhance((prev) => ({ ...prev, bgAudioText }));
+  };
   const handleEnded = () => {
     if (!recEffect) return;
     getAudioSrc(recEffect);
-  }
+  };
   useEffect(() => {
     if (!audio) return;
     if (recEffect !== '') return;
     audio.pause();
     audio.currentTime = 0;
-  }, [recEffect])
+  }, [recEffect]);
 
   return (
     <LayoutBlock>
       <LayoutStyle $isShow={isShow}>
-        <audio onEnded={handleEnded} ref={audioRef} controls className='hidden'><source /></audio>
+        <audio onEnded={handleEnded} ref={audioRef} controls className="hidden"><source /></audio>
         <RecWeatherToast open={showRecWeather} setOpen={setShowRecWeather} handlePlay={handlePlay} />
         {children}
         {isShow && <AudioControlBar />}
@@ -120,7 +120,6 @@ interface IsShow {
 
 const LayoutBlock = styled.div`
   min-height: 100vh;
-  background-color: rgb(233, 236, 239);
   font-family: 'Noto Sans KR', sans-serif;
 
   display: flex;
@@ -129,7 +128,7 @@ const LayoutBlock = styled.div`
 `;
 
 const LayoutStyle = styled.div<IsShow>`
-  width: 540px;
+  width: 600px;
   height: 100vh;
   overflow-y: scroll;
   background-color: #fff;

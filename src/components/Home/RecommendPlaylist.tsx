@@ -62,14 +62,14 @@ function RecommendPlaylist() {
 
       {loaded && (
         <StyledSwiper
-          spaceBetween={22}
+          spaceBetween={15}
           slidesPerView={1.7}
           breakpoints={{
             539: {
               slidesPerView: 1.7,
             },
             540: {
-              slidesPerView: 2.3,
+              slidesPerView: 2.5,
             },
           }}
         >
