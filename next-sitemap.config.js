@@ -1,10 +1,10 @@
 module.exports = {
-  siteUrl: 'https://www.aurawave.site/',
+  siteUrl: 'https://aurawave.vercel.app',
   generateRobotsTxt: true,
   exclude: ['/server-sitemap-index.xml'], 
   robotsTxtOptions: {
     additionalSitemaps: [
-      `https://www.aurawave.site/server-sitemap-index.xml`,
+      `https://aurawave.vercel.app/server-sitemap-index.xml`,
     ],
   },
 }

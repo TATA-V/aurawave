@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      'min-w540': { min: '540px' },
+      'min-w540': { min: '600px' },
     },
     extend: {
       backgroundImage: {

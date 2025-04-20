@@ -3,8 +3,8 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.aurawave.site/
+Host: https://aurawave.vercel.app
 
 # Sitemaps
-Sitemap: https://www.aurawave.site/sitemap.xml
-Sitemap: https://www.aurawave.site/server-sitemap-index.xml
+Sitemap: https://aurawave.vercel.app/sitemap.xml
+Sitemap: https://aurawave.vercel.app/server-sitemap-index.xml

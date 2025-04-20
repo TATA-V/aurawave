@@ -8,6 +8,8 @@ interface Props {
 }
 
 function FadeInMotion({ children } : Props) {
+  
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

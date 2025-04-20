@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://aurawave.vercel.app/music-collection</loc><lastmod>2025-03-22T02:12:41.058Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/aw-playlist</loc><lastmod>2025-03-22T02:12:41.058Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/music</loc><lastmod>2025-03-22T02:12:41.058Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app</loc><lastmod>2025-03-22T02:12:41.058Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/my-playlist</loc><lastmod>2025-03-22T02:12:41.058Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/playlist-editor/add-music</loc><lastmod>2025-03-22T02:12:41.058Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/admin-awplaylist-editor/add-music</loc><lastmod>2025-03-22T02:12:41.058Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/profile</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/playlist-editor</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/soundtrack</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/user-playlist</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/signup</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/admin-awplaylist-editor</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/login</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://aurawave.vercel.app/admin-music</loc><lastmod>2025-03-22T02:12:41.059Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>

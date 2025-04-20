@@ -30,7 +30,7 @@ export const fadeInUp = keyframes`
 
 export const MusicDetailModalBlock = styled.div`
   width: 100%;
-  max-width: 540px;
+  max-width: 600px;
   height: 100%;
   overflow: hidden;
   position: fixed;
@@ -40,7 +40,7 @@ export const MusicDetailModalBlock = styled.div`
 
 export const MusicDetailBox = styled(motion.div)<OpenModal>`
   width: 100%;
-  max-width: 540px;
+  max-width: 600px;
   height: 100%;
   background-color: var(--white-100);
   border-radius: 20px 20px 0 0;
@@ -55,7 +55,7 @@ export const MusicDetailBox = styled(motion.div)<OpenModal>`
 
   .image {
     width: 100%;
-    max-width: 540px;
+    max-width: 600px;
     height: 340px;
     border: 1px solid var(--gray-100);
     border-radius: 15px;

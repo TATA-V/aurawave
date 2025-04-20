@@ -52,7 +52,7 @@ function Landscape() {
       <div className="landscape">
         <Image
           width={539.87}
-          height={167}
+          height={177}
           className="image"
           src={LandscapeJpg}
           placeholder="blur"
@@ -61,7 +61,7 @@ function Landscape() {
         />
         <Image
           width={539.87}
-          height={167}
+          height={177}
           className="image effect"
           src={effectSrc}
           alt="effect"
@@ -82,12 +82,12 @@ const LandscapeBlock = styled.div<{ $effect: string }>`
     position: absolute;
     top: 0;
     left: 0;
-    mix-blend-mode: ${({$effect}) => $effect === ('잔잔한 빗소리' || '펑펑 쏟아지는 함박눈') ? 'color-dodge' : 'lighten'};
+    mix-blend-mode: ${({$effect}) => $effect === '잔잔한 빗소리' || $effect === '펑펑 쏟아지는 함박눈' ? 'color-dodge' : 'lighten'};
   }
 
   .landscape {
     width: 100%;
-    height: 167px;
+    height: 177px;
     border: 1px solid var(--gray-100);
     border-radius: 7px;
     display: flex;
@@ -107,11 +107,17 @@ const LandscapeBlock = styled.div<{ $effect: string }>`
 
   .image {
     width: 100%;
-    height: 167px;
+    height: 177px;
     border-radius: 6px;
     display: flex;
     justify-content: center;
     object-fit: cover;
     object-position: 15% 50%;
+  }
+
+  @media (max-width: 600px) {
+    .landscape, .image {
+      height: 167px;
+    }
   }
 `;

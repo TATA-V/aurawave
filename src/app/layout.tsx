@@ -13,6 +13,7 @@ import './reset.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://aurawave.vercel.app'),
   manifest: '/manifest.json',
   title: 'AuraWave | 음악에 감성 한 스푼🥄',
   description: '음악에 배경음을 얹어 들어보세요',
@@ -21,9 +22,6 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/common%2Fshare.png?alt=media&token=0235fbe2-a237-4598-b9f0-a202f70034b7']
-  },
-  alternates: {
-    canonical: 'https://www.aurawave.site',
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
