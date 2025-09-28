@@ -1,0 +1,19 @@
+{
+  "name": "cloud-functions-billing",
+  "private": true,
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "functions-framework --target=stopBilling --source=dist/index.js"
+  },
+  "dependencies": {
+    "@google-cloud/billing": "^4.0.0"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -7,8 +7,8 @@ import Link from 'next/link';
 import userState from 'src/atom/userState';
 import defaultProfileJpg from 'src/assets/jpg-file/default-profile.jpg';
 import { motion } from 'framer-motion';
-import LogoMoonSvg from '../../../public/logoMoonSvg.svg';
-import LogoSvg from '../../../public/logoSvg.svg';
+import LogoMoonSvg from '@/public/logoMoonSvg.svg';
+import LogoSvg from '@/public/logoSvg.svg';
 
 function HomeHead() {
   const { photoURL, isLoggedIn } = useRecoilValue(userState);

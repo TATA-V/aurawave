@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import currentTrackState, { currentTrackDefault } from 'src/atom/currentTrackState';

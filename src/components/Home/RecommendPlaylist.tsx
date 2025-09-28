@@ -12,7 +12,7 @@ import SkelPlaylist from 'src/components/Skeleton/SkelPlaylist';
 import FadeInMotion from 'src/components/Layout/FadeInMotion';
 import Link from 'next/link';
 import Image from 'next/image';
-import PlayBlue from '../../../public/playBlueSvg.svg';
+import PlayBlue from '@/public/playBlueSvg.svg';
 import 'swiper/css';
 
 function RecommendPlaylist() {

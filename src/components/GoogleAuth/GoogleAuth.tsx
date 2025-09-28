@@ -8,7 +8,7 @@ import { auth } from 'src/firebase/config';
 import { setUserDoc } from 'src/firebase/user';
 import userState from 'src/atom/userState';
 import useToast from 'src/hook/useToast';
-import GoogleSvg from '../../../public/googleSvg.svg';
+import GoogleSvg from '@/public/googleSvg.svg';
 
 function GoogleAuth() {
   const provider = new GoogleAuthProvider();

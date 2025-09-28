@@ -7,20 +7,21 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import userState from 'src/atom/userState';
 import * as S from 'src/styled/playlistEditorStyled';
 import playlistDataState from 'src/atom/playlistDataState';
+import { MusicData } from 'src/types/musicTypes';
 
 import PlaylistEditorMusicLi from 'src/components/PlaylistEditor/PlaylistEditorMusicLi';
 import AwPlaylistGoBackHead from 'src/components/GoBackHead/AwPlaylistGoBackHead';
 import dynamic from 'next/dynamic';
-import { MusicData } from 'src/types/musicTypes';
+
+const PlaylistImage = dynamic(() => import('src/components/PlaylistEditor/PlaylistImage'), {
+  ssr: false,
+});
 
 function AdminAwplaylistEditor() {
   const [playlistData, setPlaylistData] = useRecoilState(playlistDataState); // 리코일
   const { playlistTitle, description, musicList } = playlistData;
   const { isAdmin } = useRecoilValue(userState); // 리코일
   const router = useRouter();
-  const PlaylistImage = dynamic(() => import('src/components/PlaylistEditor/PlaylistImage'), {
-    ssr: false,
-  });
 
   useEffect(() => {
     if (!isAdmin) {

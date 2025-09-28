@@ -6,12 +6,12 @@ import { usePathname } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { motion } from 'framer-motion';
 import currentTrackState from 'src/atom/currentTrackState';
-import MoonBlueSvg from '../../../public/moonBlueSvg.svg';
-import MoonGraySvg from '../../../public/moonGraySvg.svg';
-import MusicBlueSvg from '../../../public/musicBlueSvg.svg';
-import MusicGraySvg from '../../../public/musicGraySvg.svg';
-import PeopleBlueSvg from '../../../public/peopleBlueSvg.svg';
-import PeopleGraySvg from '../../../public/peopleGraySvg.svg';
+import MoonBlueSvg from '@/public/moonBlueSvg.svg';
+import MoonGraySvg from '@/public/moonGraySvg.svg';
+import MusicBlueSvg from '@/public/musicBlueSvg.svg';
+import MusicGraySvg from '@/public/musicGraySvg.svg';
+import PeopleBlueSvg from '@/public/peopleBlueSvg.svg';
+import PeopleGraySvg from '@/public/peopleGraySvg.svg';
 
 function BottomTab() {
   const { isShow } = useRecoilValue(currentTrackState);

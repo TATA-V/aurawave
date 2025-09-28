@@ -18,7 +18,7 @@ import {
   PlaylistData,
   SetUserPlaylistDoc,
   UpdateAWPlaylistDoc,
-  setAwPlaylistDoc,
+  setAwPlaylistDoc as SetAwPlaylistDocArgs,
   UpdatePlaylistDoc,
   GetPlaylistDocs,
 } from 'src/types/playlistTypes';
@@ -27,7 +27,7 @@ import { auth, firestore } from './config';
 
 // 새로운 AuraWave 플레이리스트 정보 등록
 // eslint-disable-next-line no-redeclare
-export async function setAwPlaylistDoc({ uuid, awplaylistData }: setAwPlaylistDoc) {
+export async function setAwPlaylistDoc({ uuid, awplaylistData }: SetAwPlaylistDocArgs) {
   if (uuid && awplaylistData) {
     const musicRef = doc(firestore, 'aw_playlist', uuid);
     await setDoc(musicRef, awplaylistData);

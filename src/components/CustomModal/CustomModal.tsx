@@ -15,7 +15,7 @@ import useCloseModal from 'src/hook/useCloseModal';
 import useToast from 'src/hook/useToast';
 import useA2HS from 'src/hook/useA2HS';
 import Image from 'next/image';
-import iconLogoPng from '../../../public/icon-512.png';
+import iconLogoPng from '@/public/icon-512.png';
 
 interface Props {
   open: boolean;

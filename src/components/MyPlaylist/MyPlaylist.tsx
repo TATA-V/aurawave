@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 import MyPlaylistItem from 'src/components/MyPlaylist/MyPlaylistItem';
 import Link from 'next/link';
 import { UserPlaylistData } from 'src/types/playlistTypes';
-import CheckSvg from '../../../public/checkSvg.svg';
+import CheckSvg from '@/public/checkSvg.svg';
 
 function MyPlaylist() {
   const [playlists, setPlaylists] = useState<UserPlaylistData[]>([]);

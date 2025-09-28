@@ -1,7 +1,7 @@
 interface Props {
   e: React.MouseEvent<HTMLDivElement>;
   type: string;
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
   setProgressBarWidth: React.Dispatch<React.SetStateAction<number>>;
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
   setCurrentTimeWidth: React.Dispatch<React.SetStateAction<number>>;

@@ -8,7 +8,7 @@ import userState from 'src/atom/userState';
 import * as S from 'src/styled/musicLiStyled';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import MoreSvg from '../../../public/more.svg';
+import MoreSvg from '@/public/more.svg';
 
 import AddToPlaylistModal from './AddToPlaylistModal';
 

@@ -8,7 +8,7 @@ import formatTime from 'src/utils/formatTime';
 import useCloseModal from 'src/hook/useCloseModal';
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
+import MusicPauseSvg from '@/public/musicPauseSvg.svg';
 
 import MusicTitle from './MusicDetailModalMaterial/MusicTitle';
 import MusicCopyright from './MusicDetailModalMaterial/MusicCopyright';

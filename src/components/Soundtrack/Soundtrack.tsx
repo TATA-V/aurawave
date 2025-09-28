@@ -10,7 +10,7 @@ import { Reorder, motion } from 'framer-motion';
 import GoBackHead from 'src/components/GoBackHead/GoBackHead';
 import SoundtrackMusicLi from 'src/components/Soundtrack/SoundtrackMusicLi';
 import SkelMusicLi from 'src/components/Skeleton/SkelMusicLi';
-import CheckSvg from '../../../public/checkSvg.svg';
+import CheckSvg from '@/public/checkSvg.svg';
 
 function Soundtrack() {
   const [loaded, setLoaded] = useState(false);

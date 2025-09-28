@@ -14,7 +14,7 @@ import PlayModeModal from 'src/components/AudioControlBar/PlayModeModal';
 import MusicDetailModal from 'src/components/MusicDetailModal/MusicDetailModal';
 import AudioEnhancer from 'src/components/AudioEnhancer/AudioEnhancer';
 import audioEnhanceState from 'src/atom/audioEnhanceState';
-import MusicPauseSvg from '../../../public/musicPauseSvg.svg';
+import MusicPauseSvg from '@/public/musicPauseSvg.svg';
 
 function AudioControlBar() {
   // 음악 총 시간, 현재 시간
@@ -49,7 +49,7 @@ function AudioControlBar() {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !audioRef.current) return;
     audioRef.current.volume = volume;
   }, [volume]);
 
@@ -126,6 +126,7 @@ function AudioControlBar() {
   // ProgressBar를 클릭하면 클릭한 위치에서 음악을 재생(onClick)
   // ProgressBar위에 마우스 올리면 해당 위치의 음악 시간 표시(onMouseMove)
   const handleProgressBar = (e: React.MouseEvent<HTMLDivElement>, type: string) => {
+    if (!audioRef.current) return;
     updateProgressBarWidth({
       e,
       type,

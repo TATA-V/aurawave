@@ -20,6 +20,7 @@ swe-worker-*
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store

@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useState } from 'react';
-import a2hsBg from '../../../public/png/a2hs-bg.png';
+import a2hsBg from '@/public/png/a2hs-bg.png';
 import CustomModal from '../CustomModal/CustomModal';
 
 function AddToHomeScreen() {

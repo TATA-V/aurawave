@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import currentTrackState from 'src/atom/currentTrackState';
 import userState from 'src/atom/userState';
-import MoreSvg from '../../../../public/more.svg';
+import MoreSvg from '@/public/more.svg';
 
 import AddToPlaylistModal from '../../MusicLi/AddToPlaylistModal';
 
