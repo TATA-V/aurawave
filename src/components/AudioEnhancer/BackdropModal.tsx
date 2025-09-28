@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
@@ -33,7 +33,7 @@ function BackdropModal({ open, setOpen }: Props) {
   });
   const handleRange = (values: number[]) => {
     if (!audio) return;
-    setAudioEnhance((prev) => ({...prev, bgVolumeValues: values }));
+    setAudioEnhance((prev) => ({ ...prev, bgVolumeValues: values }));
     const volume = (100 - values[0]) / 100;
     audio.volume = volume;
   };
@@ -45,7 +45,7 @@ function BackdropModal({ open, setOpen }: Props) {
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F1_%E1%84%86%E1%85%A9%E1%84%83%E1%85%A1%E1%86%A8%E1%84%87%E1%85%AE%E1%86%AF.mp3?alt=media&token=6a5a134f-ed5a-45ba-b487-7ac71c5bfea8';
         break;
       case '시골 여름밤':
-        audio.src ='https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F2_%E1%84%89%E1%85%B5%E1%84%80%E1%85%A9%E1%86%AF%20%E1%84%8B%E1%85%A7%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%87%E1%85%A1%E1%86%B7.mp3?alt=media&token=d7563feb-0d1c-420a-a3c5-5e06fc6ad642';
+        audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F2_%E1%84%89%E1%85%B5%E1%84%80%E1%85%A9%E1%86%AF%20%E1%84%8B%E1%85%A7%E1%84%85%E1%85%B3%E1%86%B7%20%E1%84%87%E1%85%A1%E1%86%B7.mp3?alt=media&token=d7563feb-0d1c-420a-a3c5-5e06fc6ad642';
         break;
       case '잔잔한 빗소리':
         audio.src = 'https://firebasestorage.googleapis.com/v0/b/aurawave-nextjs-cd0c8.appspot.com/o/background_music%2F3_%E1%84%8C%E1%85%A1%E1%86%AB%E1%84%8C%E1%85%A1%E1%86%AB%E1%84%92%E1%85%A1%E1%86%AB%20%E1%84%87%E1%85%B5%E1%86%BA%E1%84%89%E1%85%A9%E1%84%85%E1%85%B5.mp3?alt=media&token=4d12637e-cba5-4d60-85a4-f1a7465d3717';
@@ -55,7 +55,7 @@ function BackdropModal({ open, setOpen }: Props) {
         break;
     }
     audio.play();
-  }
+  };
 
   const handleOptionClick = (value: string) => {
     if (recEffect) {
@@ -63,22 +63,22 @@ function BackdropModal({ open, setOpen }: Props) {
     }
     if (!audio) return;
     if (bgAudioText === value) {
-      setAudioEnhance((prev) => ({...prev, bgAudioText: '' }));
+      setAudioEnhance((prev) => ({ ...prev, bgAudioText: '' }));
       audio.pause();
       audio.currentTime = 0;
       return;
     }
-    setAudioEnhance((prev) => ({...prev, bgAudioText: value }));
+    setAudioEnhance((prev) => ({ ...prev, bgAudioText: value }));
     getAudioSrc(value);
   };
 
   const handleEnded = () => {
     getAudioSrc(bgAudioText);
-  }
+  };
 
   return (
     <AnimatePresence>
-      <audio onEnded={handleEnded} ref={audioRef} controls className='hidden'><source /></audio>
+      <audio onEnded={handleEnded} ref={audioRef} controls className="hidden"><source /></audio>
 
       {open
         && (

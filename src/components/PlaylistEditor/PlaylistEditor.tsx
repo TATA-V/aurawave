@@ -41,11 +41,11 @@ function PlaylistEditor() {
 
   const handleAddMusic = () => {
     if (myPlaylistId) {
-      router.replace(`/playlist-editor/add-music?id=${uuid}`)
+      router.replace(`/playlist-editor/add-music?id=${uuid}`);
       return;
     }
-    router.replace(`/playlist-editor/add-music`)
-  }
+    router.replace('/playlist-editor/add-music');
+  };
 
   return (
     <>

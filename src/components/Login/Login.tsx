@@ -75,7 +75,7 @@ function Login() {
   // 다음 input으로 focus
   const handleInputKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    nextInputRef: React.RefObject<HTMLInputElement> | React.RefObject<HTMLButtonElement>,
+    nextInputRef: React.RefObject<HTMLInputElement | null> | React.RefObject<HTMLButtonElement | null>,
   ) => {
     e.preventDefault();
     if (e.key === 'Enter') {

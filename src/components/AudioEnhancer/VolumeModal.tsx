@@ -22,7 +22,7 @@ function VolumeModal({ open, setOpen } : Props) {
   });
   const handleRange = (values: number[]) => {
     const volume = values[1] / 100;
-    setAudioEnhance((prev) => ({...prev, volumeValues: values }));
+    setAudioEnhance((prev) => ({ ...prev, volumeValues: values }));
     setAudioEnhance((prev) => ({ ...prev, volume }));
   };
 
